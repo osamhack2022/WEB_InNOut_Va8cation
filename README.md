@@ -35,6 +35,7 @@
 
 
 ## 팀 정보 (Team Information)
+Team Va8cation
 - lee dong hyeop (leedong1003@naver.com), Github Id: labyrinth03
 - moon gyu seong (mgs4786@naver.com), Github Id: Betadoggy
 
