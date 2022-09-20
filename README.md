@@ -36,7 +36,7 @@
 
 ## 팀 정보 (Team Information)
 - lee dong hyeop (leedong1003@naver.com), Github Id: labyrinth03
-- moon gyu seong (*), Github Id: Betadoggy
+- moon gyu seong (mgs4786@naver.com), Github Id: Betadoggy
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
 
