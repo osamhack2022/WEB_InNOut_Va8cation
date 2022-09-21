@@ -1,6 +1,6 @@
 
 
-# Project name or Logo
+# Project name
 유동병력현황 자동화 체계
 
 
@@ -36,8 +36,8 @@
 
 ## 팀 정보 (Team Information)
 Team Va8cation
-- lee dong hyeop (leedong1003@naver.com), Github Id: labyrinth03
-- moon gyu seong (mgs4786@naver.com), Github Id: Betadoggy
+- Lee Dong Hyeop (leedong1003@naver.com), Github Id: labyrinth03
+- Moon Gyu Seong (mgs4786@naver.com), Github Id: Betadoggy
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
 
