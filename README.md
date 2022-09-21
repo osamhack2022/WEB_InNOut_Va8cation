@@ -1,7 +1,7 @@
 
 
 # Project name
-유동병력현황 자동화 체계
+유동병력현황 자동화 체계(가제)
 
 
 ## 프로잭트 소개
@@ -18,20 +18,21 @@
 -출타율을 공유하는 용사들간에 공유되는 캘린더로 서로의 휴가 계획을 확인 가능
 
 ## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
-
+TBA
 
 ## 기술 스택 (Technique Used) 
 ### Server(back-end)
-
+TBA
  
 ### Front-end
+TBA
 
 
 ## 설치 안내 (Installation Process)
-
+TBA
 
 ## 프로젝트 사용법 (Getting Started)
-
+TBA
 
 
 ## 팀 정보 (Team Information)
@@ -41,4 +42,4 @@ Team Va8cation
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
 
-
+TBA
