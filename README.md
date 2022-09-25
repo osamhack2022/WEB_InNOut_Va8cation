@@ -1,6 +1,8 @@
 
 
 # Project name
+![InNOut_Logo](https://user-images.githubusercontent.com/55483479/192125219-be6ffaf6-be2e-45e3-83bf-151a7b86decf.png)
+
 유동병력현황 자동화 체계 InNOut(가제)
 
 
