@@ -1,9 +1,9 @@
 
 
-# Project name
-![InNOut_Logo](https://user-images.githubusercontent.com/55483479/192125219-be6ffaf6-be2e-45e3-83bf-151a7b86decf.png)
+# IN&OUT
+![Logo](https://user-images.githubusercontent.com/55483479/192314612-2734729e-9ff9-4002-927f-2aeb55418a77.png)
 
-온라인 장병출타현황 In&Out
+온라인 장병출타현황 IN&OUT
 
 🔗[프로토타입 링크](https://www.figma.com/proto/ZBQGCSNfXec9rmCk9Wa9fe/Untitled?node-id=9%3A3&scaling=min-zoom&page-id=0%3A1)
 
