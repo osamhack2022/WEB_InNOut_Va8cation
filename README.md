@@ -3,7 +3,9 @@
 # Project name
 ![InNOut_Logo](https://user-images.githubusercontent.com/55483479/192125219-be6ffaf6-be2e-45e3-83bf-151a7b86decf.png)
 
-유동병력현황 자동화 체계 InNOut(가제)
+온라인 장병출타현황 In&Out
+
+🔗[프로토타입 링크](https://www.figma.com/proto/ZBQGCSNfXec9rmCk9Wa9fe/Untitled?node-id=9%3A3&scaling=min-zoom&page-id=0%3A1)
 
 
 ## 프로젝트 소개
@@ -47,6 +49,8 @@ TBA
 ### Front-end
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white">
 
+### Design
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 ## 설치 안내 (Installation Process)
 TBA
