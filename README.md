@@ -5,7 +5,7 @@
 
 온라인 장병출타현황 IN&OUT
 
-🔗[프로토타입 링크](https://www.figma.com/proto/ZBQGCSNfXec9rmCk9Wa9fe/IN%26OUT?node-id=20%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=20%3A2)
+🔗[프로토타입 링크](https://www.figma.com/proto/ZBQGCSNfXec9rmCk9Wa9fe/IN%26OUT?node-id=31%3A84&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=20%3A2)
 
 
 ## 프로젝트 소개
