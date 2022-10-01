@@ -65,7 +65,7 @@ Team Va8cation
 #### 팀장 | Lee Dong Hyeop([labyrinth03](https://github.com/labyrinth03)) 
 - Team leader, Server(back-end)
 - Contact : (leedong1003@naver.com)
-#### 팀원 | Moon Gyu Seong([Betadoggy](https://github.com/Betadiggy))
+#### 팀원 | Moon Gyu Seong([Betadoggy](https://github.com/Betadggy))
 - Front-end, Design
 - Contact : (mgs4786@naver.com)
 
