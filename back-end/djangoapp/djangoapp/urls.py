@@ -16,6 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from login.views import LoginLV, LoginDV
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('admin/', admin.site.urls),
+    
+    path('login/', LoginLV.as_view(), name='index'),
+    path('login/<int:pk>/', LoginDV.as_view(), name='detail'),
 ]
+
