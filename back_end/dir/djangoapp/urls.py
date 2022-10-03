@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path
 
 from login.views import LoginLV, LoginDV
-
+from login import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('login/', LoginLV.as_view(), name='index'),
     path('login/<int:pk>/', LoginDV.as_view(), name='detail'),
+
+    path('Login/', views.index),
 ]
 
