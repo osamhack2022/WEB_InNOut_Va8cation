@@ -1,9 +1,11 @@
 
 
-# Project name
-![InNOut_Logo](https://user-images.githubusercontent.com/55483479/192125219-be6ffaf6-be2e-45e3-83bf-151a7b86decf.png)
+# IN&OUT
+![Logo](https://user-images.githubusercontent.com/55483479/192314612-2734729e-9ff9-4002-927f-2aeb55418a77.png)
 
-유동병력현황 자동화 체계 InNOut(가제)
+온라인 장병출타현황 IN&OUT
+
+🔗[프로토타입 링크](https://www.figma.com/proto/ZBQGCSNfXec9rmCk9Wa9fe/IN%26OUT?node-id=20%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=20%3A2)
 
 
 ## 프로젝트 소개
@@ -47,6 +49,8 @@ TBA
 ### Front-end
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white">
 
+### Design
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 ## 설치 안내 (Installation Process)
 TBA
@@ -61,7 +65,7 @@ Team Va8cation
 #### 팀장 | Lee Dong Hyeop([labyrinth03](https://github.com/labyrinth03)) 
 - Team leader, Server(back-end)
 - Contact : (leedong1003@naver.com)
-#### 팀원 | Moon Gyu Seong([Betadoggy](https://github.com/Betadiggy))
+#### 팀원 | Moon Gyu Seong([Betadoggy](https://github.com/Betadoggy))
 - Front-end, Design
 - Contact : (mgs4786@naver.com)
 
