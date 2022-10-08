@@ -1,15 +1,18 @@
 <template>
-  <HelloWorld/>
+  <!-- <HelloWorld/> -->
+  <MyLogin/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import MyLogin from './components/MyLogin.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    // HelloWorld
+    MyLogin
+}
 }
 </script>
 
