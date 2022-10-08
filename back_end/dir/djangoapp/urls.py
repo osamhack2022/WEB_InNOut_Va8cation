@@ -26,6 +26,8 @@ urlpatterns = [
     path('login/', LoginLV.as_view(), name='index'),
     path('login/<int:pk>/', LoginDV.as_view(), name='detail'),
 
-    path('Login/', views.index),
+    #path('Login/', views.index),
+    path('<int:question_id>/', views.detail, name='detail'),
+    path('', views.index, name='index'),
 ]
 
