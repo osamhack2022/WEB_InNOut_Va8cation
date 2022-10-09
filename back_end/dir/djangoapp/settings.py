@@ -26,8 +26,37 @@ SECRET_KEY = "django-insecure-q29j=rx05tza#&h8cg*(_4rnm@d@k5njug!xtvezbnea8$b^xv
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1','https://osamhack2022-web-innout-va8cation-4r9xjx9gjr5274x5-8000.githubpreview.dev/admin']
-
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'https://*.githubpreview.dev'
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'https://*.githubpreview.dev'
+)
+CORS_ALLOW_HEADERS = (
+    'access-control-allow-credentials',
+    'access-control-allow-origin',
+    'access-control-request-method',
+    'access-control-request-headers',
+    'accept',
+    'accept-encoding',
+    'accept-language',
+    'authorization',
+    'connection',
+    'content-type',
+    'dnt',
+    'credentials',
+    'host',
+    'origin',
+    'user-agent',
+    'X-CSRFToken',
+    'csrftoken',
+    'x-requested-with',
+)
 
 # Application definition
 
@@ -38,7 +67,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "login.apps.LoginConfig"
+    "login.apps.LoginConfig",
+    "blog.apps.BlogConfig"
 ]
 
 MIDDLEWARE = [
@@ -105,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ko-kr'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Seoul'
 
@@ -127,39 +157,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_CREDENTIALS = True
-
-CSRF_TRUSTED_ORIGINS = (
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-)
-
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-)
-
-CORS_ALLOW_HEADERS = (
-    'access-control-allow-credentials',
-    'access-control-allow-origin',
-    'access-control-request-method',
-    'access-control-request-headers',
-    'accept',
-    'accept-encoding',
-    'accept-language',
-    'authorization',
-    'connection',
-    'content-type',
-    'dnt',
-    'credentials',
-    'host',
-    'origin',
-    'user-agent',
-    'X-CSRFToken',
-    'csrftoken',
-    'x-requested-with',
-)
