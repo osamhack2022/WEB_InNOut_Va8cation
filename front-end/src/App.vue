@@ -1,19 +1,19 @@
 <template>
-  <!-- <HelloWorld/> -->
-  <MyLogin/>
+  <div id="app">
+    <nav>
+      <router-link to="/">HomePage</router-link> |
+      <router-link to="/login">MyLogin</router-link> |
+    </nav>
+    <router-view />
+  </div>
+  <!-- <MyLogin/> -->
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import MyLogin from './components/MyLogin.vue'
+// import HomePage from './components/HomePage.vue';
+// import MyLogin from './components/MyLogin.vue'
 
-export default {
-  name: 'App',
-  components: {
-    // HelloWorld
-    MyLogin
-}
-}
+export default {}
 </script>
 
 <style>

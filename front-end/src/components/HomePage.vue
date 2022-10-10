@@ -142,7 +142,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "HomePage",
   data() {
     return {
       value_outing: 4,
@@ -162,7 +162,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
   a{
     text-decoration: none;
     color: black
