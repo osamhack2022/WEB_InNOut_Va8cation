@@ -19,7 +19,10 @@
             <a class="nav-link" href="#">기본설정</a>
           </li>
         </ul>
-        <b-avatar variant="secondary" size="2rem"></b-avatar>
+        <div class="Header-item position-relative">
+          <b-avatar variant="secondary" size="2rem"></b-avatar>
+          <a :style="{color:'white'}" class="ps-2">간부</a>
+        </div>
       </div>
     </nav>
   </header>
@@ -98,9 +101,37 @@
                   d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
               </svg>
             </div>
-            <b-card-text class="text-warning fs-3">
-              <b>26%</b>
-            </b-card-text>
+            <b-progress class="mt-2" :max="max">
+              <b-progress-bar :style="{ 'background-color': '#FF7262' }" :value="value_vacation"></b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#A259FF' }" :value="value_stayovn"></b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#34AFF7' }" :value="value_outing"></b-progress-bar>
+            </b-progress>
+            <div class="px-0 pt-4 d-flex flex-column">
+              <a class="mr-3">
+                <svg :style="{'fill': '#FF7262'}" height="16" viewBox="0 0 16 16" width="16"
+                  class="octicon octicon-dot-fill my-1 mr-2">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
+                </svg>
+                <span class=mx-2>휴가</span>
+                <span>{{getValue(value_vacation)}}</span>
+              </a>
+              <a class="mr-3">
+                <svg :style="{'fill': '#A259FF'}" height="16" viewBox="0 0 16 16" width="16"
+                  class="octicon octicon-dot-fill my-1 mr-2">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
+                </svg>
+                <span class=mx-2>외박</span>
+                <span>{{getValue(value_stayovn)}}</span>
+              </a>
+              <a class="mr-3">
+                <svg :style="{'fill': '#34AFF7'}" height="16" viewBox="0 0 16 16" width="16"
+                  class="octicon octicon-dot-fill my-1 mr-2">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
+                </svg>
+                <span class=mx-2>외출</span>
+                <span>{{getValue(value_outing)}}</span>
+              </a>
+            </div>
           </b-card>
         </div>
       </div>
@@ -112,8 +143,28 @@
 <script>
 export default {
   name: "HelloWorld",
+  data() {
+    return {
+      value_outing: 4,
+      value_stayovn: 5,
+      value_vacation: 14,
+      max: 23
+    }
+  },
   props: {
     msg: String,
   },
+  methods: {
+    getValue: function(value){  
+        return value
+    }
+  }
 };
 </script>
+
+<style>
+  a{
+    text-decoration: none;
+    color: black
+  }
+</style>
