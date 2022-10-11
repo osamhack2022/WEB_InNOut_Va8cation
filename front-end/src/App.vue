@@ -1,23 +1,29 @@
 <template>
-  <v-app>
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+  <div id="app">
+    <nav>
+      <router-link to="/">HomePage</router-link> |
+      <router-link to="/login">MyLogin</router-link> |
+    </nav>
+    <router-view />
+  </div>
+  <!-- <MyLogin/> -->
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HomePage from './components/HomePage.vue';
+// import MyLogin from './components/MyLogin.vue'
 
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-}
+export default {}
 </script>
+
+<style>
+
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  color: black;
+}
+</style>
