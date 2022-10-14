@@ -7,16 +7,16 @@
       <div class="container-fluid">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">메인<span class="sr-only"></span></a>
+            <a class="nav-link" href="#">홈<span class="sr-only"></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">용사출타현황</a>
+            <a class="nav-link" href="#">출타현황</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">용사출타수정</a>
+            <a class="nav-link" href="#">휴가/상점입력</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">기본설정</a>
+            <a class="nav-link" href="#">휴가/상점현황</a>
           </li>
         </ul>
         <div class="Header-item position-relative">
@@ -29,12 +29,15 @@
   <div class="container-fluid col-8">
     <main>
       <div>
-        <h1 class="mt-4">
-          <b>5678부대</b>
-        </h1>
-        <h6 class="text-muted mb-4">
-          2022년 10월 10일 월요일
-        </h6>
+        <div class="headline p-4">
+          <h1>
+            <b>5678부대</b>
+          </h1>
+          <h6 class="text-muted">
+            2022년 10월 10일 월요일
+          </h6>
+        </div>
+
         <b-card-group deck>
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">
@@ -107,30 +110,30 @@
               <b-progress-bar :style="{ 'background-color': '#34AFF7' }" :value="value_outing"></b-progress-bar>
             </b-progress>
             <div class="px-0 pt-4 d-flex flex-column">
-              <a class="mr-3">
+              <div class="mr-3">
                 <svg :style="{'fill': '#FF7262'}" height="16" viewBox="0 0 16 16" width="16"
                   class="octicon octicon-dot-fill my-1 mr-2">
                   <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
                 </svg>
                 <span class=mx-2>휴가</span>
                 <span>{{getValue(value_vacation)}}</span>
-              </a>
-              <a class="mr-3">
+              </div>
+              <div class="mr-3">
                 <svg :style="{'fill': '#A259FF'}" height="16" viewBox="0 0 16 16" width="16"
                   class="octicon octicon-dot-fill my-1 mr-2">
                   <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
                 </svg>
                 <span class=mx-2>외박</span>
                 <span>{{getValue(value_stayovn)}}</span>
-              </a>
-              <a class="mr-3">
+              </div>
+              <div class="mr-3">
                 <svg :style="{'fill': '#34AFF7'}" height="16" viewBox="0 0 16 16" width="16"
                   class="octicon octicon-dot-fill my-1 mr-2">
                   <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"></path>
                 </svg>
                 <span class=mx-2>외출</span>
                 <span>{{getValue(value_outing)}}</span>
-              </a>
+              </div>
             </div>
           </b-card>
         </div>
@@ -155,16 +158,20 @@ export default {
     msg: String,
   },
   methods: {
-    getValue: function(value){  
-        return value
+    getValue: function (value) {
+      return value
     }
   }
 };
 </script>
 
 <style scoped lang="scss">
-  a{
-    text-decoration: none;
-    color: black
-  }
+a {
+  text-decoration: none;
+}
+
+.headline {
+  text-align: center;
+  // h3 > b {color: $color-secondary-orange;}
+}
 </style>

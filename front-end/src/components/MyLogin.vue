@@ -6,28 +6,31 @@
   </div>
   <div class="container-fluid col-8">
     <main>
-      <div class="auth-form-header">
-        <h3>
+      <div class="form-header">
+        <h4>
           <b>온라인 출타장병현황 IN&OUT</b>
-        </h3>
+        </h4>
       </div>
-      <div class="auth-form mt-3">
+      <div class="form mt-4 p-4">
         <form class>
           <div class="form-group">
-            <label for="exampleInputEmail1">아이디</label>
+            <label for="exampleInputEmail1"><b>아이디</b></label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
               placeholder="username">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">비밀번호</label>
+            <div class="d-flex justify-content-between">
+              <label for="exampleInputPassword1"><b>비밀번호</b></label>
+              <a href="#!">비밀번호 찾기</a>
+            </div>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
           </div>
-          <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-          </div>
-          <button type="submit" class="btn btn-primary">로그인</button>
+          <button type="submit" class="btn btn-primary btn-block"><b>로그인</b></button>
         </form>
+      </div>
+      <div class="callout mt-3 p-4">
+        처음이신가요?
+        <a href="#!">계정 만들기</a>
       </div>
     </main>
   </div>
@@ -50,27 +53,59 @@ body {
   width: 100%;
 }
 
-.auth-form-header {
-  text-align: center;
-  h3>b{
-    color: $color-secondary-orange;
-  }
+a {
+  text-decoration: none;
 }
 
-.auth-form {
+.callout {
   width: 340px;
   margin: 0 auto;
   padding: 16px;
   border: 1px solid;
   border-radius: 6px;
+  border-color: $color-border;
+  text-align: center;
 }
 
-.auth-form label {
-  margin-bottom: 8px
+.form-header {
+  text-align: center;
+  // h3 > b {color: $color-secondary-orange;}
 }
 
-.auth-form input {
+.form {
+  width: 340px;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid;
+  border-radius: 6px;
+  border-color: $color-border;
+}
+
+.form label {
+  margin-bottom: 8px;
+}
+
+.form input {
   margin-top: 4px;
   margin-bottom: 16px;
+}
+
+// .btn {
+//   transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
+//   transition-property: background-color,box-shadow,border-color;
+// }
+
+.btn-primary {
+  background-color: $color-primiary-blue;
+  border-color: $color-border;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+p {
+  display: block;
 }
 </style>

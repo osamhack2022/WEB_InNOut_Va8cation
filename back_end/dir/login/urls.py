@@ -6,3 +6,4 @@ urlpatterns = [
     path('', LoginLV.as_view(), name='index'),
     path('<int:pk>/', LoginDV.as_view(), name='detail'),
 ]
+
