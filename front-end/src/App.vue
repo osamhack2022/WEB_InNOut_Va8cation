@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/">HomePage</router-link> |
       <router-link to="/login">MyLogin</router-link> |
+      <router-link to="/outstatus">OutStatus</router-link> |
     </nav>
     <router-view />
   </div>
