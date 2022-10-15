@@ -8,42 +8,41 @@
     <main>
       <div class="form-header">
         <h4>
-          <b>온라인 출타장병현황 IN&OUT</b>
+          <b>비밀번호 초기화</b>
         </h4>
       </div>
       <div class="form mt-4 p-4">
         <form class>
-          <div class="form-group">
-            <label for="exampleInputEmail1"><b>아이디</b></label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="username">
-          </div>
-          <div class="form-group">
-            <div class="d-flex justify-content-between">
-              <label for="exampleInputPassword1"><b>비밀번호</b></label>
-              <a href="#!">비밀번호 찾기</a>
+          <div class="form-group mb-4">
+            <label for="exampleInputEmail1"><b>이메일</b></label>
+            <div class="el-input">
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="회원가입 시 등록한 이메일 주소">
             </div>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
+            <span class="text-muted"></span>
+            <button type="submit" class="btn btn-primary btn-block"><b>인증번호 받기</b></button>
           </div>
-          <button type="submit" class="btn btn-primary btn-block"><b>로그인</b></button>
+          <div class="form-group">
+            <label for="exampleInputPassword1"><b>인증번호</b></label>
+            <div class = "el-input">
+              <input type="password" class="form-control" id="exampleInputAuthnumber">
+            </div>
+            <a href="#!" class="txt-btn">인증번호 확인</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><b>비밀번호 초기화</b></button>
         </form>
-      </div>
-      <div class="callout mt-3 p-4">
-        처음이신가요?
-        <a href="#!">계정 만들기</a>
       </div>
     </main>
   </div>
-
 </template>
 
 <script>
 export default {
-  name: "MyLogin",
+  name: "PasswordReset",
   data() {
   }
 };
 </script>
+
 
 <style scoped lang="scss">
 body {
@@ -65,6 +64,14 @@ a {
   border-radius: 6px;
   border-color: $color-border;
   text-align: center;
+}
+
+.txt-btn {
+  display: block;
+  position: absolute;
+  text-align: right;
+  top: 434px;
+  right: 550px;
 }
 
 .form-header {
