@@ -120,7 +120,10 @@
                 </svg>
                 <span style="display:inline-block; width:72px;" class=mx-2><b>휴가 출발</b></span>
                 <span>{{getValue(value_vacation_start)}}</span>
-                <span v-for="item in vacation_start_list" v-bind:key="item" class="text-muted ms-2">{{item.rank+' '+item.name}}</span>
+                <span v-for="item in vacation_start_list" v-bind:key="item" class="text-muted ms-2">
+                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  {{' '+item.name}}
+                </span>
               </div>
               <div class="mr-3">
                 <svg :style="{'fill': '#FF7262'}" height="16" viewBox="0 0 16 16" width="16"
@@ -129,7 +132,10 @@
                 </svg>
                 <span style="display:inline-block; width:72px;" class=mx-2><b>휴가 중</b></span>
                 <span>{{getValue(value_vacation_going)}}</span>
-                <span v-for="item in vacation_going_list" v-bind:key="item" class="text-muted ms-2">{{item.rank+' '+item.name}}</span>
+                <span v-for="item in vacation_going_list" v-bind:key="item" class="text-muted ms-2">
+                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  {{' '+item.name}}
+                </span>
               </div>
               <div class="mr-3">
                 <svg :style="{'fill': '#E84D65'}" height="16" viewBox="0 0 16 16" width="16"
@@ -138,7 +144,10 @@
                 </svg>
                 <span style="display:inline-block; width:72px;" class=mx-2><b>휴가 복귀</b></span>
                 <span>{{getValue(value_vacation_end)}}</span>
-                <span v-for="item in vacation_end_list" v-bind:key="item" class="text-muted ms-2">{{item.rank+' '+item.name}}</span>
+                <span v-for="item in vacation_end_list" v-bind:key="item" class="text-muted ms-2">
+                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  {{' '+item.name}}
+                </span>
               </div>
               <div class="mr-3">
                 <svg :style="{'fill': '#A259FF'}" height="16" viewBox="0 0 16 16" width="16"
@@ -147,7 +156,10 @@
                 </svg>
                 <span style="display:inline-block; width:72px;" class=mx-2><b>외박 출발</b></span>
                 <span>{{getValue(value_stayovn_start)}}</span>
-                <span v-for="item in stayovn_start_list" v-bind:key="item" class="text-muted ms-2">{{item.rank+' '+item.name}}</span>
+                <span v-for="item in stayovn_start_list" v-bind:key="item" class="text-muted ms-2">
+                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  {{' '+item.name}}
+                </span>
               </div>
               <div class="mr-3">
                 <svg :style="{'fill': '#6046E8'}" height="16" viewBox="0 0 16 16" width="16"
@@ -156,7 +168,10 @@
                 </svg>
                 <span style="display:inline-block; width:72px;" class=mx-2><b>외박 복귀</b></span>
                 <span>{{getValue(value_stayovn_end)}}</span>
-                <span v-for="item in stayovn_end_list" v-bind:key="item" class="text-muted ms-2">{{item.rank+' '+item.name}}</span>
+                <span v-for="item in stayovn_end_list" v-bind:key="item" class="text-muted ms-2">
+                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  {{' '+item.name}}
+                </span>
               </div>
               <div class="mr-3">
                 <svg :style="{'fill': '#0ACF83'}" height="16" viewBox="0 0 16 16" width="16"
@@ -165,7 +180,9 @@
                 </svg>
                 <span style="display:inline-block; width:72px;" class=mx-2><b>외출</b></span>
                 <span>{{getValue(value_outing)}}</span>
-                <span v-for="item in outing_list" v-bind:key="item" class="text-muted ms-2">{{item.rank+' '+item.name}}</span>
+                <span v-for="item in outing_list" v-bind:key="item" class="text-muted ms-2">
+                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  {{' '+item.name}}</span>
               </div>
               <div class="mr-3">
                 <svg :style="{'fill': '#57606A'}" height="16" viewBox="0 0 16 16" width="16"
@@ -174,7 +191,10 @@
                 </svg>
                 <span style="display:inline-block; width:72px;" class=mx-2><b>기타</b></span>
                 <span>{{getValue(value_etc)}}</span>
-                <span v-for="item in etc_list" v-bind:key="item" class="text-muted ms-2">{{item.rank+' '+item.name}}</span>
+                <span v-for="item in etc_list" v-bind:key="item" class="text-muted ms-2">
+                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  {{' '+item.name}}
+                </span>
               </div>
             </div>
           </b-card>
@@ -200,58 +220,65 @@ export default {
       value_etc: 2,
       max: 23,
 
+      /* 계급 (영문명)
+      이병 : PVT, 일병 : PFC, 상병 : CPL, 병장 : SGT
+      하사 : SSG, 중사 : SFC, 상사 : FSG, 원사 : SGM
+      소위 : 2LT, 중위 : 1LT, 대위 : CPT
+      소령 : MAJ, 중령 : LCL, 대령 : COL 
+      */
+
       // 휴가 출발
       vacation_start_list: [
-        { rank: '중위', name: '문선재' },
-        { rank: '병장', name: '추시경' },
-        { rank: '상병', name: '송우민' },
-        { rank: '일병', name: '류서준' },
-        { rank: '이병', name: '김지용' }
+        { rank: '1LT', name: '문선재' },
+        { rank: 'SGT', name: '추시경' },
+        { rank: 'CPL', name: '송우민' },
+        { rank: 'PFC', name: '류서준' },
+        { rank: 'PVT', name: '김지용' }
       ],
 
       // 휴가 중
       vacation_going_list: [
-        { rank: '대위', name: '정선우' },
-        { rank: '하사', name: '황현철' },
-        { rank: '상병', name: '장주환' },
-        { rank: '상병', name: '손원주' },
-        { rank: '일병', name: '윤성호' },
-        { rank: '이병', name: '신종현' }
+        { rank: 'CPT', name: '정선우' },
+        { rank: 'SSG', name: '황현철' },
+        { rank: 'CPL', name: '장주환' },
+        { rank: 'CPL', name: '손원주' },
+        { rank: 'PFC', name: '윤성호' },
+        { rank: 'PVT', name: '신종현' }
       ],
 
       // 휴가 복귀
       vacation_end_list: [
-        {rank: '소령', name: '김규연'},
-        {rank: '소위', name: '고철순'},
-        {rank: '병장', name: '박남규'},
+        {rank: 'MAJ', name: '김규연'},
+        {rank: '2LT', name: '고철순'},
+        {rank: 'SGT', name: '박남규'},
       ],
 
       // 외박 출발
       stayovn_start_list: [
-        {rank: '병장', name: '이동건'},
-        {rank: '상병', name: '최장규'},
-        {rank: '일병', name: '김민겸'},
+        {rank: 'SGT', name: '이동건'},
+        {rank: 'CPL', name: '최장규'},
+        {rank: 'PFC', name: '김민겸'},
       ],
 
       // 외박 복귀
       stayovn_end_list: [
-        {rank: '병장', name: '김남우'},
-        {rank: '일병', name: '정철민'},
-        {rank: '일병', name: '민규성'},
+        {rank: 'SGT', name: '김남우'},
+        {rank: 'PFC', name: '정철민'},
+        {rank: 'PFC', name: '민규성'},
       ],
 
       // 외출 
       outing_list:[
-        {rank: '상병', name: '김노을'},
-        {rank: '상병', name: '최장규'},
-        {rank: '일병', name: '정찬민'},
-        {rank: '이병', name: '이정호'}
+        {rank: 'CPL', name: '김노을'},
+        {rank: 'CPL', name: '최장규'},
+        {rank: 'PFC', name: '정찬민'},
+        {rank: 'PVT', name: '이정호'}
       ],
 
       // 기타
       etc_list: [
-        {rank: '상병', name: '류민철'},
-        {rank: '일병', name: '강건호'}
+        {rank: 'CPL', name: '류민철'},
+        {rank: 'PFC', name: '강건호'}
       ],
     }
   },
