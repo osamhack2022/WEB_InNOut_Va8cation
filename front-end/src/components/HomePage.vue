@@ -220,7 +220,7 @@ export default {
       value_etc: 2,
       max: 23,
 
-      /* 계급 영문
+      /* 계급 (영문명)
       이병 : PVT, 일병 : PFC, 상병 : CPL, 병장 : SGT
       하사 : SSG, 중사 : SFC, 상사 : FSG, 원사 : SGM
       소위 : 2LT, 중위 : 1LT, 대위 : CPT
