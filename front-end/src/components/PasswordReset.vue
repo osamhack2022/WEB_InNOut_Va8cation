@@ -21,14 +21,6 @@
             <span class="text-muted"></span>
             <button type="submit" class="btn btn-primary btn-block"><b>인증번호 받기</b></button>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1"><b>인증번호</b></label>
-            <div class = "el-input">
-              <input type="password" class="form-control" id="exampleInputAuthnumber">
-            </div>
-            <a href="#!" class="txt-btn">인증번호 확인</a>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block"><b>비밀번호 초기화</b></button>
         </form>
       </div>
     </main>
