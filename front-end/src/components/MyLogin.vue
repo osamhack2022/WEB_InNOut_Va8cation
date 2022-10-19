@@ -39,43 +39,41 @@
 </template>
 
 <script>
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-
-export default {
-  name: "MyLogin",
-  data() {
-    return{
-      email: '',
-      password: ''
-    }
-  },
-
-  methods: {
-    goUrl() {
-      this.$router.push("")
-    },
-    signIn() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password.');
-        } else {
-          alert(errorMessage);
+    import firebase from 'firebase/compat/app';
+    import 'firebase/compat/auth';
+    import 'firebase/compat/firestore';
+    
+    export default {
+      name: 'signIn',
+      data() {
+        return{
+          email: '',
+          password: ''
         }
-        console.log(error);
-      });
-    },
-    onClick() {
-      alert('클릭됨!' + this.email + this.password)
+      },
+      methods: {
+      goUrl() {
+        this.$router.push("")
+      },
+      signIn() {
+          firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+              alert('Wrong password.');
+            } else {
+              alert(errorMessage);
+            }
+            console.log(error);
+          });
+        },
+        onClick() {
+          alert('클릭됨!' + this.email + this.password)
+        }
+      }
     }
-  }
-}
-
-</script>
+    </script>
 
 <style scoped lang="scss">
 body {
