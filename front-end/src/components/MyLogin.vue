@@ -21,16 +21,17 @@
           <div class="form-group">
             <div class="d-flex justify-content-between">
               <label for="exampleInputPassword1"><b>비밀번호</b></label>
-              <a href="#!">비밀번호 찾기</a>
+              <router-link to="/passwordreset" class="a">비밀번호 찾기</router-link>
             </div>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
           </div>
-          <button type="submit" class="btn btn-primary btn-block"><b>로그인</b></button>
+          <!-- <button type="submit" class="btn btn-primary btn-block"><b>로그인</b></button> -->
+          <router-link to="/" class="btn btn-primary btn-block">로그인</router-link>
         </form>
       </div>
       <div class="callout mt-3 p-4">
         처음이신가요?
-        <a href="#!">계정 만들기</a>
+      <router-link to="/join" class="a">계정 만들기</router-link>
       </div>
     </main>
   </div>
@@ -40,6 +41,11 @@
 <script>
 export default {
   name: "MyLogin",
+  methods: {
+    goUrl() {
+      this.$router.push("")
+    }
+  },
   data() {
   }
 };
