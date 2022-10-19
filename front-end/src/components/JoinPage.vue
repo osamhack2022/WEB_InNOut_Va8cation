@@ -263,6 +263,7 @@
             <button type="submit" class="btn btn-primary btn-block"><b>다음</b></button>
           </div>
         </form>
+        
       </div>
     </main>
   </div>
