@@ -4,6 +4,8 @@ import HomePage from "@/components/HomePage"
 import InputPoint from "@/components/InputPoint"
 import PasswordReset from "@/components/PasswordReset"
 import JoinPage from "@/components/JoinPage"
+import PointStatus from "@/components/PointStatus"
+import PointApply from "@/components/PointApply"
 
 const router = createRouter({
     history : createWebHistory(),
