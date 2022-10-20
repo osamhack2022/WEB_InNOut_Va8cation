@@ -153,7 +153,7 @@
               <label for="exampleInputEmail1">이용약관에 모두 동의합니다.</label>
             </section>
             <span class="text-muted"></span>
-            <section class="group">
+            <section class="group mt-4">
               <h6><b>개인정보 수집 및 이용에 대한 안내</b></h6>
               <div class="group-scroll">
                 <p>정보통신망법 규정에 따라 온라인 장병출타현황 IN&OUT에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.</p>
@@ -260,7 +260,7 @@
           </div>
           <div class="d-flex">
             <button type="submit" class="btn btn-secondary btn-block"><b>취소</b></button>
-            <button type="submit" class="btn btn-primary btn-block"><b>다음</b></button>
+            <button type="submit" class="btn btn-primary btn-block ms-2"><b>다음</b></button>
           </div>
         </form>
         
@@ -359,7 +359,7 @@ a {
   border-radius: 4px;
 }
 .group {
-  margin: 30px 0 0 0;
+  // margin: 30px 0 0 0;
   padding: 25px;
   border-radius: 10px;
   background-color: #f7f8fc;
