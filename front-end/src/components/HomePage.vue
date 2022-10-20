@@ -41,12 +41,40 @@
             <h6 class="text-muted m-0 px-3">
               2022년 10월 10일 월요일
             </h6>
-
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
             </svg>
+          </div>
+        </div>
+        <div>
+          <el-radio-group v-model="size" label="size control">
+            <el-radio-button label="large">large</el-radio-button>
+            <el-radio-button label="default">default</el-radio-button>
+            <el-radio-button label="small">small</el-radio-button>
+          </el-radio-group>
+        </div>
+        <div class="demo-date-picker">
+          <div class="block">
+            <span class="demonstration">Default</span>
+            <el-date-picker
+              v-model="value1"
+              type="date"
+              placeholder="Pick a day"
+              :size="size"
+            />
+          </div>
+          <div class="block">
+            <span class="demonstration">Picker with quick options</span>
+            <el-date-picker
+              v-model="value2"
+              type="date"
+              placeholder="Pick a day"
+              :disabled-date="disabledDate"
+              :shortcuts="shortcuts"
+              :size="size"
+            />
           </div>
         </div>
 
@@ -205,6 +233,40 @@
 
 
 <script>
+import { ref } from 'vue'
+// eslint-disable-next-line no-unused-vars
+const size = ref<'' | 'large' | 'small'>('')
+// eslint-disable-next-line no-unused-vars
+const value1 = ref('')
+// eslint-disable-next-line no-unused-vars
+const value2 = ref('')
+// eslint-disable-next-line no-unused-vars
+const shortcuts = [
+  {
+    text: 'Today',
+    value: new Date(),
+  },
+  {
+    text: 'Yesterday',
+    value: () => {
+      const date = new Date()
+      date.setTime(date.getTime() - 3600 * 1000 * 24)
+      return date
+    },
+  },
+  {
+    text: 'A week ago',
+    value: () => {
+      const date = new Date()
+      date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+      return date
+    },
+  },
+]
+
+
+
+
 
 export default {
   name: "HomePage",
@@ -287,12 +349,37 @@ export default {
   methods: {
     getValue: function (value) {
       return value
-    }
+    },
+    
   }
 };
 </script>
 
 <style scoped lang="scss">
+.demo-date-picker {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.demo-date-picker .block {
+  padding: 30px 0;
+  text-align: center;
+  border-right: solid 1px var(--el-border-color);
+  flex: 1;
+}
+.demo-date-picker .block:last-child {
+  border-right: none;
+}
+.demo-date-picker .demonstration {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+
+
 a {
   text-decoration: none;
 }
