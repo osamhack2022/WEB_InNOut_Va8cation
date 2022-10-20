@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "OutStatus",
+  name: "InputPoint",
   data() {
   }
 };

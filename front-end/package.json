@@ -11,10 +11,15 @@
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.9.1",
     "bootstrap-vue": "^2.22.0",
+    "bootstrap-vue-3": "^0.3.12",
     "core-js": "^3.8.3",
+    "firebase": "^9.12.1",
+    "jquery": "^3.6.1",
+    "moment": "^2.29.4",
     "sass": "^1.55.0",
     "sass-loader": "^10.3.1",
-    "vue": "^3.2.40",
+    "v-calendar": "^3.0.0-alpha.8",
+    "vue": "^3.2.41",
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
