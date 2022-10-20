@@ -263,6 +263,7 @@
             <router-link to="/joininfo" class="btn btn-primary btn-block ms-2"><b>다음</b></router-link>
           </div>
         </form>
+        
       </div>
     </main>
   </div>

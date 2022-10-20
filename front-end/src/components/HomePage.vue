@@ -1,5 +1,6 @@
 <template>
   <header>
+    
     <nav class="navbar navbar-expand navbar-dark bg-dark py-3 px-4">
       <a class="navbar-brand" href="#">
         <img src="@/assets/images/logo_32_white.svg" width="32" height="32" alt="">
@@ -40,6 +41,7 @@
             <h6 class="text-muted m-0 px-3">
               2022년 10월 10일 월요일
             </h6>
+
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd"
