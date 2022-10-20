@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/login">MyLogin</router-link> |
       <router-link to="/join">JoinPage</router-link> |
+      <router-link to="/joininfo">JoinInfo</router-link> |
       <router-link to="/passwordreset">PasswordReset</router-link> |
       <router-link to="/">HomePage</router-link> |
       <router-link to="/inputpoint">InputPoint</router-link> |
