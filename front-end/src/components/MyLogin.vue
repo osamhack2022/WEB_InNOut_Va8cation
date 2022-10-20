@@ -15,22 +15,23 @@
         <form class>
           <div class="form-group">
             <label for="exampleInputEmail1"><b>아이디</b></label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
               placeholder="username">
           </div>
           <div class="form-group">
             <div class="d-flex justify-content-between">
               <label for="exampleInputPassword1"><b>비밀번호</b></label>
-              <a href="#!">비밀번호 찾기</a>
+              <router-link to="/passwordreset" class="a">비밀번호 찾기</router-link>
             </div>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
+            <input type="password" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="password">
           </div>
-          <button type="submit" class="btn btn-primary btn-block"><b>로그인</b></button>
+          <!-- <button type="submit" class="btn btn-primary btn-block"><b>로그인</b></button> -->
+          <router-link to="/" v-on:click="signIn" class="btn btn-primary btn-block">로그인</router-link>
         </form>
       </div>
       <div class="callout mt-3 p-4">
         처음이신가요?
-        <a href="#!">계정 만들기</a>
+      <router-link to="/join" class="a">계정 만들기</router-link>
       </div>
     </main>
   </div>
@@ -38,12 +39,41 @@
 </template>
 
 <script>
-export default {
-  name: "MyLogin",
-  data() {
-  }
-};
-</script>
+    import firebase from 'firebase/compat/app';
+    import 'firebase/compat/auth';
+    import 'firebase/compat/firestore';
+    
+    export default {
+      name: 'signIn',
+      data() {
+        return{
+          email: '',
+          password: ''
+        }
+      },
+      methods: {
+      goUrl() {
+        this.$router.push("")
+      },
+      signIn() {
+          firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+              alert('Wrong password.');
+            } else {
+              alert(errorMessage);
+            }
+            console.log(error);
+          });
+        },
+        onClick() {
+          alert('클릭됨!' + this.email + this.password)
+        }
+      }
+    }
+    </script>
 
 <style scoped lang="scss">
 body {

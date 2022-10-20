@@ -1,5 +1,6 @@
 <template>
   <header>
+    
     <nav class="navbar navbar-expand navbar-dark bg-dark py-3 px-4">
       <a class="navbar-brand" href="#">
         <img src="@/assets/images/logo_32_white.svg" width="32" height="32" alt="">
@@ -7,13 +8,11 @@
       <div class="container-fluid">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">홈<span class="sr-only"></span></a>
+            <a class="nav-link" href="#">출타현황<span class="sr-only"></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">출타현황</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">휴가/상점입력</a>
+            <!-- <a class="nav-link" href="#">휴가/상점입력</a> -->
+            <router-link to="/inputpoint" class="a nav-link">휴가/상점입력</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">휴가/상점현황</a>
@@ -42,6 +41,7 @@
             <h6 class="text-muted m-0 px-3">
               2022년 10월 10일 월요일
             </h6>
+
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -86,13 +86,12 @@
                   d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
               </svg>
             </div>
-
             <b-card-text class="text-success fs-3">
               <b>134</b>
             </b-card-text>
           </b-card>
-
         </b-card-group>
+
         <div class="mt-3">
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">

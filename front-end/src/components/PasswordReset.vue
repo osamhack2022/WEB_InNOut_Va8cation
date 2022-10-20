@@ -16,19 +16,11 @@
           <div class="form-group mb-4">
             <label for="exampleInputEmail1"><b>이메일</b></label>
             <div class="el-input">
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="회원가입 시 등록한 이메일 주소">
+              <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" placeholder="회원가입 시 등록한 이메일 주소">
             </div>
             <span class="text-muted"></span>
-            <button type="submit" class="btn btn-primary btn-block"><b>인증번호 받기</b></button>
+            <button type="submit" v-on:click="PWReset" class="btn btn-primary btn-block"><b>초기화 링크 받기</b></button>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1"><b>인증번호</b></label>
-            <div class = "el-input">
-              <input type="password" class="form-control" id="exampleInputAuthnumber">
-            </div>
-            <a href="#!" class="txt-btn">인증번호 확인</a>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block"><b>비밀번호 초기화</b></button>
         </form>
       </div>
     </main>
@@ -36,10 +28,36 @@
 </template>
 
 <script>
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 export default {
   name: "PasswordReset",
   data() {
+    return {
+      email: ''
+    }
+    
+  },
+  methods: {
+    PWReset() {
+      firebase.auth().sendPasswordResetEmail(this.email).then(
+        // eslint-disable-next-line no-unused-vars
+        function(){
+          alert('이메일이 발송되었습니다.');
+          this.$router.push('/');
+        },
+        function(err){
+          alert('에러 : '+ err.message)
+        }
+      );
+    },
+   
+    onClick() {
+      alert('클릭됨!' + this.email)
+    }
   }
+
 };
 </script>
 

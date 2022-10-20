@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/login">MyLogin</router-link> |
+      <router-link to="/">MyLogin</router-link> |
       <router-link to="/join">JoinPage</router-link> |
       <router-link to="/passwordreset">PasswordReset</router-link> |
-      <router-link to="/">HomePage</router-link> |
+      <router-link to="/home">HomePage</router-link> |
       <router-link to="/outstatus">OutStatus</router-link> |
+      <router-link to="/pointstatus">pointStatus</router-link> |
+      <router-link to="/pointapply">pointApply</router-link> |
+      <router-link to="/inputpoint">InputPoint</router-link> |
     </nav>
     <router-view />
   </div>
