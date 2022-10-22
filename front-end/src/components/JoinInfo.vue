@@ -14,16 +14,16 @@
       <div class="form mt-4 p-4">
         <form class>
           <div class="form-group">
-            <label for="Inputid"><b>아이디</b></label>
-            <input type="id" class="form-control" id="Inputid" aria-describedby="idhelp">
+            <label for="InputEmail"><b>이메일</b></label>
+            <input type="text" v-model="email" class="form-control" id="InputEmail">
           </div>
           <div class="form-group">
             <label for="InputPassword"><b>비밀번호</b></label>
-            <input type="password" class="form-control" id="InputPassword">
+            <input type="password" v-model="password" class="form-control" id="InputPassword">
           </div>
           <div class="form-group">
             <label for="InputPassword2"><b>비밀번호 확인</b></label>
-            <input type="password" class="form-control" id="InputPassword2">
+            <input type="password" v-model="confirm" class="form-control" id="InputPassword2">
           </div>
           <div class="form-group">
             <label for="InputName"><b>성명</b></label>
@@ -33,28 +33,90 @@
             <label for="InputAuthcode"><b>확인코드</b></label>
             <input type="name" class="form-control" id="InputAuthcode">
           </div>
-          <div class="form-group">
-            <label for="InputEmail"><b>이메일</b></label>
-            <input type="name" class="form-control" id="InputEmail">
-          </div>
+
+
           <div class="d-flex">
             <!-- <button type="submit" class="btn btn-secondary btn-block"><b>취소</b></button> -->
             <router-link to="/join" class="btn btn-secondary btn-block"><b>취소</b></router-link>
-            <button type="submit" class="btn btn-primary btn-block ms-2"><b>다음</b></button>
+            <button type="submit" v-on:click="signUp" class="btn btn-primary btn-block ms-2"><b>다음</b></button>
           </div>
         </form>
       </div>
     </main>
   </div>
-
 </template>
 
 <script>
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 export default {
-  name: "PasswordReset",
+
+  name: "signUp",
   data() {
+    return {
+      email:'',
+      password:'',
+      confirm:'',  
+    }
+  },
+
+
+methods: {
+    signUp() {
+      console.log("Signup", this.email, this.password, this.confirm);
+      if(!this.email) {
+        alert("입력된 email 주소가 없습니다.");
+        return;
+      }
+ 
+      if(!this.password) {
+        alert("입력된 비밀번호가 없습니다.");
+        return;
+      }
+ 
+      if(!this.confirm) {
+        alert("입력된 비밀번호 확인이 없습니다.");
+        return;
+      }
+ 
+      if(this.password != this.confirm) {
+        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        return;
+      }
+   
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      .then(function(user){
+        userInfo = user;
+        console.log("userInfo/"+userInfo); 
+        console.log("userInfo.uid/"+userInfo.uid); 
+        logUser();
+      })
+      .catch(function(error) {
+       // Handle Errors here.
+       var errorCode = error.code;
+       var errorMessage = error.message;
+       if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+       }
+       else {
+         alert(errorMessage);
+       }
+       console.log(error);
+       return;
+      })
+
+      function logUser(){
+        alert('가입 완료');
+        //this.$router.push("/")
+        window.location.href = "/"
+      }
+
+       
+    },
   }
-};
+}
+
 </script>
 
 

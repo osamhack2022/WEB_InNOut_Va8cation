@@ -259,7 +259,7 @@
             <span class="text-muted"></span>
           </div>
           <div class="d-flex">
-            <router-link to="/login" class="btn btn-secondary btn-block"><b>취소</b></router-link>
+            <router-link to="/" class="btn btn-secondary btn-block"><b>취소</b></router-link>
             <router-link to="/joininfo" class="btn btn-primary btn-block ms-2"><b>다음</b></router-link>
           </div>
         </form>
