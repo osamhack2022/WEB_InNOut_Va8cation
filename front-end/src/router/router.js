@@ -1,10 +1,10 @@
 import { createWebHistory, createRouter } from "vue-router";
-import MyLogin from "@/components/MyLogin"
-import HomePage from "@/components/HomePage"
-import InputPoint from "@/components/InputPoint"
-import PasswordReset from "@/components/PasswordReset"
-import JoinPage from "@/components/JoinPage"
-import JoinInfo from "@/components/JoinInfo"
+import MyLogin from "@/components/pages/MyLogin"
+import HomePage from "@/components/pages/HomePage"
+import InputPoint from "@/components/pages/InputPoint"
+import PasswordReset from "@/components/pages/PasswordReset"
+import JoinPage from "@/components/pages/JoinPage"
+import JoinInfo from "@/components/pages/JoinInfo"
 
 
 

@@ -1,30 +1,5 @@
 <template>
-  <header>
-    <nav class="navbar navbar-expand navbar-dark bg-dark py-3 px-4">
-      <a class="navbar-brand" href="#">
-        <img src="@/assets/images/logo_32_white.svg" width="32" height="32" alt="">
-      </a>
-      <div class="container-fluid">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <!-- <a class="nav-link" href="#">출타현황<span class="sr-only"></span></a> -->
-            <router-link to="/" class="a nav-link">출타현황</router-link>
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" href="#">휴가/상점입력</a> -->
-            <router-link to="/inputpoint" class="a nav-link">휴가/상점입력</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">휴가/상점현황</a>
-          </li>
-        </ul>
-        <div class="Header-item position-relative">
-          <b-avatar variant="secondary" size="2rem"></b-avatar>
-          <a :style="{color:'white'}" class="ps-2">간부</a>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <AppHeader />
   <div class="container-fluid col-8">
     <main>
       <div class="headline p-4">
@@ -78,34 +53,36 @@
 
 
 <script>
+import AppHeader from '../AppHeader.vue';
 export default {
-  name: "InputPoint",
-  data() {
-    // rows: []
-  },
-  methods: {
-    doAdd: function () {
-      var date = this.$refs.text
-      var rule = this.$refs.text
-      var point = this.$refs.text
-      var review = this.$refs.text
-      // 입력이 없다면 아무 것도 하지 않음 return
-      if (!date.value.length || !rule.value.length || !point.value.length || !review.value.length) {
-        return
-      }
-      this.rows.push({
-        date: date.value,
-        rule: rule.value,
-        point: point.value,
-        review: review.value
-      })
-      // 입력 양식의 내용 제거하기
-      date.value = '',
-        rule.value = '',
-        point.value = '',
-        review.value = ''
-    }
-  }
+    name: "InputPoint",
+    data() {
+        // rows: []
+    },
+    methods: {
+        doAdd: function () {
+            var date = this.$refs.text;
+            var rule = this.$refs.text;
+            var point = this.$refs.text;
+            var review = this.$refs.text;
+            // 입력이 없다면 아무 것도 하지 않음 return
+            if (!date.value.length || !rule.value.length || !point.value.length || !review.value.length) {
+                return;
+            }
+            this.rows.push({
+                date: date.value,
+                rule: rule.value,
+                point: point.value,
+                review: review.value
+            });
+            // 입력 양식의 내용 제거하기
+            date.value = "",
+                rule.value = "",
+                point.value = "",
+                review.value = "";
+        }
+    },
+    components: { AppHeader }
 };
 </script>
 
