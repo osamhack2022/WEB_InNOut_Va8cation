@@ -4,18 +4,9 @@
     <main>
       <div class="headline p-4">
         <h1>
-          <b>상점추가</b>
+          <b>상점입력/조회</b>
         </h1>
       </div>
-      <form class="add-form d-flex" v-on:submit.prevent="doAdd">
-        <!-- 내용 입력 양식 -->
-        일시 <input type="text" ref="date">
-        기준 <input type="text" ref="rule">
-        점수 <input type="number" ref="point">
-        담당간부 <input type="review" ref="review">
-        <!-- 추가 버튼 목업 -->
-        <button type="submit">추가</button>
-      </form>
       <b-card class="shadow my-4">
         <div class="container-fluid p-0 d-flex justify-content-between">
           <table>
@@ -28,6 +19,33 @@
                 <th class="rule">기준</th>
                 <th class="point">점수</th>
                 <th class="review">담당간부</th>
+                <th style="width: 48px;"></th>
+              </tr>
+              <tr>
+                <td>
+                  <input class="form-control form-control-sm" type="text" ref="name">
+                </td>
+                <td>
+                  <input class="form-control form-control-sm" type="text" ref="rank">
+                </td>
+                <td>
+                  <input class="form-control form-control-sm" type="text" ref="armynum">
+                </td>
+                <td>
+                  <input class="form-control form-control-sm" type="text" ref="date">
+                </td>
+                <td>
+                  <input class="form-control form-control-sm" type="text" ref="date">
+                </td>
+                <td>
+                  <input class="form-control form-control-sm" type="number" ref="point">
+                </td>
+                <td>
+                  <input class="form-control form-control-sm" type="review" ref="review">
+                </td>
+                <td>
+                  <button class="btn btn-primary btn-sm"><b>추가</b></button>
+                </td>
               </tr>
             </thead>
             <tbody>
@@ -55,34 +73,34 @@
 <script>
 import AppHeader from '../AppHeader.vue';
 export default {
-    name: "InputPoint",
-    data() {
-        // rows: []
-    },
-    methods: {
-        doAdd: function () {
-            var date = this.$refs.text;
-            var rule = this.$refs.text;
-            var point = this.$refs.text;
-            var review = this.$refs.text;
-            // 입력이 없다면 아무 것도 하지 않음 return
-            if (!date.value.length || !rule.value.length || !point.value.length || !review.value.length) {
-                return;
-            }
-            this.rows.push({
-                date: date.value,
-                rule: rule.value,
-                point: point.value,
-                review: review.value
-            });
-            // 입력 양식의 내용 제거하기
-            date.value = "",
-                rule.value = "",
-                point.value = "",
-                review.value = "";
-        }
-    },
-    components: { AppHeader }
+  name: "InputPoint",
+  data() {
+    // rows: []
+  },
+  methods: {
+    doAdd: function () {
+      var date = this.$refs.text;
+      var rule = this.$refs.text;
+      var point = this.$refs.text;
+      var review = this.$refs.text;
+      // 입력이 없다면 아무 것도 하지 않음 return
+      if (!date.value.length || !rule.value.length || !point.value.length || !review.value.length) {
+        return;
+      }
+      this.rows.push({
+        date: date.value,
+        rule: rule.value,
+        point: point.value,
+        review: review.value
+      });
+      // 입력 양식의 내용 제거하기
+      date.value = "",
+        rule.value = "",
+        point.value = "",
+        review.value = "";
+    }
+  },
+  components: { AppHeader }
 };
 </script>
 
@@ -93,6 +111,26 @@ export default {
 }
 
 ;
+
+table {
+  width: 100%;
+}
+
+.input-name {
+  width: 8rem;
+}
+
+.input-rank {
+  width: 6rem;
+}
+
+.input-armynum {
+  width: 12rem;
+}
+
+.input-point {
+  width: 4rem;
+}
 
 .headline {
   text-align: center;
