@@ -32,6 +32,18 @@
           <h1>
             <b>5678부대</b>
           </h1>
+        <div class="demo-date-picker">
+          <div class="block">
+            <!--<span class="demonstration">Default</span>-->
+            <el-date-picker
+              v-model="selectedDate"
+              type="date"
+              placeholder="날짜선택"
+              value-format="yyyyMMdd"
+              :size="size"
+            ></el-date-picker>
+          </div>
+        </div>
           <div class="d-flex justify-content-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left"
               viewBox="0 0 16 16">
@@ -39,9 +51,8 @@
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
             <h6 class="text-muted m-0 px-3">
-              2022년 10월 10일 월요일
+              {{selectedDate}}
             </h6>
-
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -49,6 +60,8 @@
             </svg>
           </div>
         </div>
+
+
 
         <b-card-group deck>
           <b-card class="shadow">
@@ -205,6 +218,11 @@
 
 
 <script>
+import { ref } from 'vue'
+// eslint-disable-next-line no-unused-vars
+const size = ref<'' | 'large' | 'small'>('')
+const selectedDate = ref('')
+// eslint-disable-next-line no-unused-vars
 
 export default {
   name: "HomePage",
@@ -287,12 +305,37 @@ export default {
   methods: {
     getValue: function (value) {
       return value
-    }
+    },
+    
   }
 };
 </script>
 
 <style scoped lang="scss">
+.demo-date-picker {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.demo-date-picker .block {
+  padding: 30px 0;
+  text-align: center;
+  border-right: solid 1px var(--el-border-color);
+  flex: 1;
+}
+.demo-date-picker .block:last-child {
+  border-right: none;
+}
+.demo-date-picker .demonstration {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+
+
 a {
   text-decoration: none;
 }

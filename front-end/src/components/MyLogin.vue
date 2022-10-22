@@ -56,17 +56,33 @@
         this.$router.push("")
       },
       signIn() {
-          firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+
+          firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+          .then(function(firebaseUser){
+            loginSuccess(firebaseUser)
+          })
+          .catch(function(error) {
             // Handle Errors here.
+            
             var errorCode = error.code;
             var errorMessage = error.message;
+
             if (errorCode === 'auth/wrong-password') {
               alert('Wrong password.');
-            } else {
-              alert(errorMessage);
-            }
+              
+            } 
+            alert(errorMessage);
             console.log(error);
-          });
+            
+          })
+          function loginSuccess(firebaseUser){
+            alert('Login!');
+            //this.$router.push("/home")
+            window.location.href = "/home"
+          }
+
+          
+                        
         },
         onClick() {
           alert('클릭됨!' + this.email + this.password)

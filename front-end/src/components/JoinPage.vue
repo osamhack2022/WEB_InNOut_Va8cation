@@ -259,8 +259,8 @@
             <span class="text-muted"></span>
           </div>
           <div class="d-flex">
-            <button type="submit" class="btn btn-secondary btn-block"><b>취소</b></button>
-            <button type="submit" class="btn btn-primary btn-block ms-2"><b>다음</b></button>
+            <router-link to="/" class="btn btn-secondary btn-block"><b>취소</b></router-link>
+            <router-link to="/joininfo" class="btn btn-primary btn-block ms-2"><b>다음</b></router-link>
           </div>
         </form>
         
