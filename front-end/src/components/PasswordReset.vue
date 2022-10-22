@@ -19,7 +19,7 @@
               <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" placeholder="회원가입 시 등록한 이메일 주소">
             </div>
             <span class="text-muted"></span>
-            <button type="submit" v-on:click="PWReset" class="btn btn-primary btn-block"><b>초기화 링크 받기</b></button>
+            <router-link to ="/passwordreset" v-on:click="PWReset" class="btn btn-primary btn-block"><b>초기화 링크 받기</b></router-link>
           </div>
         </form>
       </div>
@@ -31,6 +31,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+
 export default {
   name: "PasswordReset",
   data() {
@@ -40,22 +41,17 @@ export default {
     
   },
   methods: {
+    
     PWReset() {
-      firebase.auth().sendPasswordResetEmail(this.email).then(
-        // eslint-disable-next-line no-unused-vars
-        function(){
-          alert('이메일이 발송되었습니다.');
-          this.$router.push('/');
-        },
-        function(err){
-          alert('에러 : '+ err.message)
-        }
-      );
+      firebase.auth().sendPasswordResetEmail(this.email)
+      .then((user)=> {
+        alert('이메일이 발송되었습니다.');
+        this.$router.push("/")
+      })
+      .catch((error)=> {
+        alert('에러 : '+ error.code + error.message)
+      })
     },
-   
-    onClick() {
-      alert('클릭됨!' + this.email)
-    }
   }
 
 };

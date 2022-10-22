@@ -12,7 +12,7 @@
         </h4>
       </div>
       <div class="form mt-4 p-4">
-        <form class>
+        
           <div class="form-group">
             <label for="InputEmail"><b>이메일</b></label>
             <input type="text" v-model="email" class="form-control" id="InputEmail">
@@ -40,7 +40,7 @@
             <router-link to="/join" class="btn btn-secondary btn-block"><b>취소</b></router-link>
             <button type="submit" v-on:click="signUp" class="btn btn-primary btn-block ms-2"><b>다음</b></button>
           </div>
-        </form>
+        
       </div>
     </main>
   </div>
@@ -58,6 +58,7 @@ export default {
       email:'',
       password:'',
       confirm:'',  
+
     }
   },
 
@@ -86,13 +87,11 @@ methods: {
       }
    
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-      .then(function(user){
-        userInfo = user;
-        console.log("userInfo/"+userInfo); 
-        console.log("userInfo.uid/"+userInfo.uid); 
-        logUser();
+      .then((user)=> {
+        alert('가입 완료');
+        this.$router.push("/")
       })
-      .catch(function(error) {
+      .catch((error)=> {
        // Handle Errors here.
        var errorCode = error.code;
        var errorMessage = error.message;
@@ -105,12 +104,6 @@ methods: {
        console.log(error);
        return;
       })
-
-      function logUser(){
-        alert('가입 완료');
-        //this.$router.push("/")
-        window.location.href = "/"
-      }
 
        
     },
