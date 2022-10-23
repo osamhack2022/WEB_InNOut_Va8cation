@@ -1,31 +1,5 @@
 <template>
-  <header>
-    
-    <nav class="navbar navbar-expand navbar-dark bg-dark py-3 px-4">
-      <a class="navbar-brand" href="#">
-        <img src="@/assets/images/logo_32_white.svg" width="32" height="32" alt="">
-      </a>
-      <div class="container-fluid">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">출타현황<span class="sr-only"></span></a>
-          </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" href="#">휴가/상점입력</a> -->
-            <router-link to="/inputpoint" class="a nav-link">휴가/상점입력</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">휴가/상점현황</a>
-          </li>
-        </ul>
-        <div class="Header-item position-relative">
-          <b-avatar variant="secondary" size="2rem"></b-avatar>
-          <a :style="{color:'white'}" class="ps-2">간부</a>
-        </div>
-      </div>
-    </nav>
-  </header>
- 
+  <AppHeader />
   <div class="container-fluid col-8">
 
     <main>
@@ -34,29 +8,29 @@
           <h1>
             <b>5678부대</b>
           </h1>
-    <div>
-      <label for="example-datepicker">Choose a date</label>
-      <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"></b-form-datepicker>
-      <p>Value: '{{ value }}'</p>
-    </div> 
+          <div class="demo-date-picker">
+            <div class="block">
+              <!--<span class="demonstration">Default</span>-->
+              <el-date-picker v-model="selectedDate" type="date" placeholder="날짜선택" value-format="yyyyMMdd"
+                :size="size"></el-date-picker>
+            </div>
+          </div>
           <div class="d-flex justify-content-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left"
-              viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-chevron-left" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
             <h6 class="text-muted m-0 px-3">
               {{value}}
             </h6>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right"
-              viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-chevron-right" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
             </svg>
           </div>
         </div>
-
-
 
         <b-card-group deck>
           <b-card class="shadow">
@@ -128,7 +102,7 @@
                 <span style="display:inline-block; width:72px;" class=mx-2><b>휴가 출발</b></span>
                 <span>{{getValue(value_vacation_start)}}</span>
                 <span v-for="item in vacation_start_list" v-bind:key="item" class="text-muted ms-2">
-                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  <img :src="require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
                   {{' '+item.name}}
                 </span>
               </div>
@@ -140,7 +114,7 @@
                 <span style="display:inline-block; width:72px;" class=mx-2><b>휴가 중</b></span>
                 <span>{{getValue(value_vacation_going)}}</span>
                 <span v-for="item in vacation_going_list" v-bind:key="item" class="text-muted ms-2">
-                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  <img :src="require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
                   {{' '+item.name}}
                 </span>
               </div>
@@ -152,7 +126,7 @@
                 <span style="display:inline-block; width:72px;" class=mx-2><b>휴가 복귀</b></span>
                 <span>{{getValue(value_vacation_end)}}</span>
                 <span v-for="item in vacation_end_list" v-bind:key="item" class="text-muted ms-2">
-                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  <img :src="require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
                   {{' '+item.name}}
                 </span>
               </div>
@@ -164,7 +138,7 @@
                 <span style="display:inline-block; width:72px;" class=mx-2><b>외박 출발</b></span>
                 <span>{{getValue(value_stayovn_start)}}</span>
                 <span v-for="item in stayovn_start_list" v-bind:key="item" class="text-muted ms-2">
-                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  <img :src="require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
                   {{' '+item.name}}
                 </span>
               </div>
@@ -176,7 +150,7 @@
                 <span style="display:inline-block; width:72px;" class=mx-2><b>외박 복귀</b></span>
                 <span>{{getValue(value_stayovn_end)}}</span>
                 <span v-for="item in stayovn_end_list" v-bind:key="item" class="text-muted ms-2">
-                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  <img :src="require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
                   {{' '+item.name}}
                 </span>
               </div>
@@ -188,7 +162,7 @@
                 <span style="display:inline-block; width:72px;" class=mx-2><b>외출</b></span>
                 <span>{{getValue(value_outing)}}</span>
                 <span v-for="item in outing_list" v-bind:key="item" class="text-muted ms-2">
-                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  <img :src="require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
                   {{' '+item.name}}</span>
               </div>
               <div class="mr-3">
@@ -199,7 +173,7 @@
                 <span style="display:inline-block; width:72px;" class=mx-2><b>기타</b></span>
                 <span>{{getValue(value_etc)}}</span>
                 <span v-for="item in etc_list" v-bind:key="item" class="text-muted ms-2">
-                  <img :src= "require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
+                  <img :src="require(`@/assets/images/ranks/${item.rank}.svg`)" width="18" height="18" alt="">
                   {{' '+item.name}}
                 </span>
               </div>
@@ -214,10 +188,20 @@
 
 <script>
 
+import { ref } from 'vue'
+import AppHeader from '@/components/AppHeader';
 // eslint-disable-next-line no-unused-vars
+const size = ref < '' | 'large' | 'small' > ('')
+const selectedDate = ref('')
+// eslint-disable-next-line no-unused-vars
+
+
 
 export default {
   name: "HomePage",
+  components: { 
+    AppHeader,
+  },
   data() {
     return {
       value:'',//캘린더 값
@@ -230,75 +214,67 @@ export default {
       value_vacation_end: 3,
       value_etc: 2,
       max: 23,
-
       /* 계급 (영문명)
       이병 : PVT, 일병 : PFC, 상병 : CPL, 병장 : SGT
       하사 : SSG, 중사 : SFC, 상사 : FSG, 원사 : SGM
       소위 : 2LT, 중위 : 1LT, 대위 : CPT
-      소령 : MAJ, 중령 : LCL, 대령 : COL 
+      소령 : MAJ, 중령 : LCL, 대령 : COL
       */
-
       // 휴가 출발
       vacation_start_list: [
-        { rank: '1LT', name: '문선재' },
-        { rank: 'SGT', name: '추시경' },
-        { rank: 'CPL', name: '송우민' },
-        { rank: 'PFC', name: '류서준' },
-        { rank: 'PVT', name: '김지용' }
+        { rank: "1LT", name: "문선재" },
+        { rank: "SGT", name: "추시경" },
+        { rank: "CPL", name: "송우민" },
+        { rank: "PFC", name: "류서준" },
+        { rank: "PVT", name: "김지용" }
       ],
-
       // 휴가 중
       vacation_going_list: [
-        { rank: 'CPT', name: '정선우' },
-        { rank: 'SSG', name: '황현철' },
-        { rank: 'CPL', name: '장주환' },
-        { rank: 'CPL', name: '손원주' },
-        { rank: 'PFC', name: '윤성호' },
-        { rank: 'PVT', name: '신종현' }
+        { rank: "CPT", name: "정선우" },
+        { rank: "SSG", name: "황현철" },
+        { rank: "CPL", name: "장주환" },
+        { rank: "CPL", name: "손원주" },
+        { rank: "PFC", name: "윤성호" },
+        { rank: "PVT", name: "신종현" }
       ],
-
       // 휴가 복귀
       vacation_end_list: [
-        {rank: 'MAJ', name: '김규연'},
-        {rank: '2LT', name: '고철순'},
-        {rank: 'SGT', name: '박남규'},
+        { rank: "MAJ", name: "김규연" },
+        { rank: "2LT", name: "고철순" },
+        { rank: "SGT", name: "박남규" },
       ],
-
       // 외박 출발
       stayovn_start_list: [
-        {rank: 'SGT', name: '이동건'},
-        {rank: 'CPL', name: '최장규'},
-        {rank: 'PFC', name: '김민겸'},
+        { rank: "SGT", name: "이동건" },
+        { rank: "CPL", name: "최장규" },
+        { rank: "PFC", name: "김민겸" },
       ],
-
       // 외박 복귀
       stayovn_end_list: [
-        {rank: 'SGT', name: '김남우'},
-        {rank: 'PFC', name: '정철민'},
-        {rank: 'PFC', name: '민규성'},
+        { rank: "SGT", name: "김남우" },
+        { rank: "PFC", name: "정철민" },
+        { rank: "PFC", name: "민규성" },
       ],
-
       // 외출 
-      outing_list:[
-        {rank: 'CPL', name: '김노을'},
-        {rank: 'CPL', name: '최장규'},
-        {rank: 'PFC', name: '정찬민'},
-        {rank: 'PVT', name: '이정호'}
+      outing_list: [
+        { rank: "CPL", name: "김노을" },
+        { rank: "CPL", name: "최장규" },
+        { rank: "PFC", name: "정찬민" },
+        { rank: "PVT", name: "이정호" }
       ],
-
       // 기타
       etc_list: [
-        {rank: 'CPL', name: '류민철'},
-        {rank: 'PFC', name: '강건호'}
+        { rank: "CPL", name: "류민철" },
+        { rank: "PFC", name: "강건호" }
       ],
-    }
+    };
   },
   props: {
     msg: String,
   },
   methods: {
     getValue: function (value) {
-      return value
+      return value;
     },
     onContext(ctx) {
       this.context = ctx
@@ -315,15 +291,18 @@ export default {
   padding: 0;
   flex-wrap: wrap;
 }
+
 .demo-date-picker .block {
   padding: 30px 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
 }
+
 .demo-date-picker .block:last-child {
   border-right: none;
 }
+
 .demo-date-picker .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
