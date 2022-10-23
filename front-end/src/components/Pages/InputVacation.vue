@@ -12,6 +12,7 @@
           <table>
             <thead>
               <tr>
+                <th class="index">순서</th>
                 <th class="name">성명</th>
                 <th class="rank">계급</th>
                 <th class="number">군번</th>
@@ -20,44 +21,47 @@
                 <th class="indate">출타종료일</th>
                 <th style="width: 48px;"></th>
               </tr>
-              <tr>
+              <tr v-for="row in rows" v-bind:key="row.index">
                 <td>
-                  <input class="form-control form-control-sm" type="text" ref="name">
+                  {{$index+1}}
                 </td>
                 <td>
-                  <b-form-select v-model="rank" :options="rank_options" size="sm"></b-form-select>
+                  <input class="form-control form-control-sm" v-model="row.name" type="text" ref="name">
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="select" ref="armynum">
+                  <b-form-select v-model="row.rank" :options="rank_options" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <b-form-select v-model="outtype" :options="out_options" size="sm"></b-form-select>
+                  <input v-model="row.armynum" class="form-control form-control-sm" type="select" ref="armynum">
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="date" ref="outdate">
+                  <b-form-select v-model="row.outtype" :options="out_options" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="date" ref="indate">
+                  <input v-model="row.outdate" class="form-control form-control-sm" type="date" ref="outdate">
+                </td>
+                <td>
+                  <input v-model="row.indate" class="form-control form-control-sm" type="date" ref="indate">
                 </td>
                 <td>
                   <button class="btn btn-primary btn-sm"><b>추가</b></button>
                 </td>
               </tr>
             </thead>
-            <tbody>
-              <tr v-for="item in todos" v-bind:key="item.id">
-                <th>{{ item.name }}</th>
-                <td>{{ item.rank }}</td>
+            <!-- <tbody>
+              <tr v-for="row in rows" v-bind:key="row.number">
+                <td>
+                  <textarea class="form-control" v-model="row.name"></textarea>
+                </td>
                 <td>{{ item.number }}</td>
                 <td>{{ item.date }}</td>
                 <td>{{ item.rule }}</td>
                 <td>{{ item.point }}</td>
                 <td class="button">
-                  <!-- 제거 버튼 목업 -->
                   <button>제거</button>
                 </td>
               </tr>
-            </tbody>
+            </tbody> -->
           </table>
         </div>
       </b-card>
@@ -72,20 +76,23 @@ export default {
   name: "InputPoint",
   data() {
     return {
-        rank: null, outtype: null,
-        rank_options: [
-          { value: "PVT", text: '이병' },{ value: "PFC", text: '일병' },{ value: "CPL", text: '상병' },{ value: "SGT", text: '병장' },
-          { value: "SSG", text: '하사' },{ value: "SFC", text: '중사' },{ value: "FSG", text: '상사' },{ value: "SGM", text: '원사' },
-          { value: "2LT", text: '소위' },{ value: "1LT", text: '중위' },{ value: "CPT", text: '대위' },
-          { value: "MAJ", text: '소령' },{ value: "LCL", text: '중령' },{ value: "COL", text: '대령' },
-        ],
-        out_options: [
-          { value: "vacation", text: '휴가' },
-          { value: "stayovn", text: '외박' },
-          { value: "outing", text: '외출' },
-          { value: "etc", text: '기타' },
-        ]
-      }
+      rows: [
+        {name: "문규성", rank: "1LT", armynum: "21-11838", outtype: "휴가", outdate: "20221028", indate: "20221028"}
+      ],
+      rank: null, outtype: null,
+      rank_options: [
+        { value: "PVT", text: '이병' }, { value: "PFC", text: '일병' }, { value: "CPL", text: '상병' }, { value: "SGT", text: '병장' },
+        { value: "SSG", text: '하사' }, { value: "SFC", text: '중사' }, { value: "FSG", text: '상사' }, { value: "SGM", text: '원사' },
+        { value: "2LT", text: '소위' }, { value: "1LT", text: '중위' }, { value: "CPT", text: '대위' },
+        { value: "MAJ", text: '소령' }, { value: "LCL", text: '중령' }, { value: "COL", text: '대령' },
+      ],
+      out_options: [
+        { value: "vacation", text: '휴가' },
+        { value: "stayovn", text: '외박' },
+        { value: "outing", text: '외출' },
+        { value: "etc", text: '기타' },
+      ]
+    }
   },
   methods: {
     doAdd: function () {
