@@ -6,7 +6,6 @@
       <router-link to="/joininfo">JoinInfo</router-link> |
       <router-link to="/passwordreset">PasswordReset</router-link> |
       <router-link to="/home">HomePage</router-link> |
-      <router-link to="/outstatus">OutStatus</router-link> |
       <router-link to="/inputpoint">InputPoint</router-link> |
       <router-link to="/inputvacation">InputVacation</router-link> |
     </nav>
