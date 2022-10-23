@@ -10,15 +10,15 @@
             <router-link to="/home" class="a nav-link">출타현황</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/inputvacation" class="a nav-link">휴가입력/조회</router-link>
+            <a class="nav-link" href="#">휴가조회</a>
           </li>
           <li class="nav-item">
-            <router-link to="/inputpoint" class="a nav-link">상점입력/조회</router-link>
+            <router-link to="/inputpoint" class="a nav-link">상점조회</router-link>
           </li>
         </ul>
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
-          <b-badge variant="primary">간부</b-badge>       
+          <b-badge variant="success">관리자</b-badge>       
         </div>
       </div>
     </nav>
@@ -27,7 +27,7 @@
 
 <script>
   export default {
-    name: 'AppHeader',
+    name: 'AppHeader-soldier',
   };
 </script>
 
