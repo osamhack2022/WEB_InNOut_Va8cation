@@ -21,7 +21,7 @@
                 <th class="indate">출타종료일</th>
                 <th style="width: 48px;"></th>
               </tr>
-              <tr v-for="row in rows" v-bind:key="row.index">
+              <tr v-for="row in rows" track-by="$index" v-bind:key="row.index">
                 <td>
                   {{$index+1}}
                 </td>
@@ -44,7 +44,8 @@
                   <input v-model="row.indate" class="form-control form-control-sm" type="date" ref="indate">
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-sm"><b>추가</b></button>
+                  <button class="btn btn-primary btn-sm" @click="addRow($index)"><b>추가</b></button>
+                  <!-- <button class="btn btn-danger btn-sm" @click="removeRow($index)"><b>제거</b></button> -->
                 </td>
               </tr>
             </thead>
@@ -77,7 +78,7 @@ export default {
   data() {
     return {
       rows: [
-        {name: "문규성", rank: "1LT", armynum: "21-11838", outtype: "휴가", outdate: "20221028", indate: "20221028"}
+        {name: "문규성", rank: "1LT", armynum: "21-11838", outtype: "vacation", outdate: "2022-10-28", indate: "2022-10-29"}
       ],
       rank: null, outtype: null,
       rank_options: [
@@ -95,26 +96,15 @@ export default {
     }
   },
   methods: {
-    doAdd: function () {
-      var date = this.$refs.text;
-      var rule = this.$refs.text;
-      var point = this.$refs.text;
-      var review = this.$refs.text;
-      // 입력이 없다면 아무 것도 하지 않음 return
-      if (!date.value.length || !rule.value.length || !point.value.length || !review.value.length) {
-        return;
+    addRow: function (index) {
+      try {
+        this.rows.splice(index + 1, 0, {});
+      } catch (e) {
+        console.log(e);
       }
-      this.rows.push({
-        date: date.value,
-        rule: rule.value,
-        point: point.value,
-        review: review.value
-      });
-      // 입력 양식의 내용 제거하기
-      date.value = "",
-        rule.value = "",
-        point.value = "",
-        review.value = "";
+    },
+    removeRow: function(index) {
+      this.rows.splice(index,1)
     }
   },
   components: { AppHeader }

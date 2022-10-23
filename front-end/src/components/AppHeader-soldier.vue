@@ -18,7 +18,7 @@
         </ul>
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
-          <b-badge variant="success">관리자</b-badge>       
+          <b-badge variant="secondary">용사</b-badge>       
         </div>
       </div>
     </nav>

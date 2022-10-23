@@ -9,7 +9,7 @@ import App from './App.vue'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import store from '@/store/index.js'
+// import store from '@/store/index.js'
 import router from "./router/router"
 
 

@@ -12,56 +12,61 @@
           <table>
             <thead>
               <tr>
+                <th class="index">순서</th>
                 <th class="name">성명</th>
                 <th class="rank">계급</th>
                 <th class="number">군번</th>
                 <th class="date">일시</th>
                 <th class="rule">기준</th>
                 <th class="point">점수</th>
-                <th class="review">담당간부</th>
+                <th class="manager">담당간부</th>
                 <th style="width: 48px;"></th>
               </tr>
-              <tr>
+              <tr v-for="row in rows" track-by="$index" v-bind:key="row.index">
                 <td>
-                  <input class="form-control form-control-sm" type="text" ref="name">
+                  {{$index+1}}
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="text" ref="rank">
+                  <input class="form-control form-control-sm" v-model="row.name" type="text" ref="name">
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="text" ref="armynum">
+                  <b-form-select v-model="row.rank" :options="rank_options" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="text" ref="date">
+                  <input v-model="row.armynum" class="form-control form-control-sm" type="select" ref="armynum">
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="text" ref="date">
+                  <input v-model="row.date" class="form-control form-control-sm" type="date" ref="date">
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="number" ref="point">
+                  <b-form-select v-model="row.rule" :options="rules" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" type="review" ref="review">
+                  <input v-model="row.point" class="form-control form-control-sm" type="number" ref="point">
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-sm"><b>추가</b></button>
+                  <input v-model="row.manager" class="form-control form-control-sm" type="text" ref="manager">
+                </td>
+                <td>
+                  <button class="btn btn-primary btn-sm" @click="addRow($index)"><b>추가</b></button>
+                  <!-- <button class="btn btn-danger btn-sm" @click="removeRow($index)"><b>제거</b></button> -->
                 </td>
               </tr>
             </thead>
-            <tbody>
-              <tr v-for="item in todos" v-bind:key="item.id">
-                <th>{{ item.name }}</th>
-                <td>{{ item.rank }}</td>
+            <!-- <tbody>
+              <tr v-for="row in rows" v-bind:key="row.number">
+                <td>
+                  <textarea class="form-control" v-model="row.name"></textarea>
+                </td>
                 <td>{{ item.number }}</td>
                 <td>{{ item.date }}</td>
                 <td>{{ item.rule }}</td>
                 <td>{{ item.point }}</td>
                 <td class="button">
-                  <!-- 제거 버튼 목업 -->
                   <button>제거</button>
                 </td>
               </tr>
-            </tbody>
+            </tbody> -->
           </table>
         </div>
       </b-card>
@@ -75,29 +80,32 @@ import AppHeader from '../AppHeader.vue';
 export default {
   name: "InputPoint",
   data() {
-    // rows: []
+    return {
+      rows: [
+        {name: "굳건이", rank: "SGT", armynum: "21-1234567", date: "2022-10-28", rule: "1-1", point: 3, manager: "문규성"}
+      ],
+      rank: null, outtype: null,
+      rank_options: [
+        { value: "PVT", text: '이병' }, { value: "PFC", text: '일병' }, { value: "CPL", text: '상병' }, { value: "SGT", text: '병장' },
+      ],
+      rules: [
+        { value: "1-1", text: '생활관 정리정돈 우수' },
+        { value: "1-2", text: '머시기 우수' },
+        { value: "2-1", text: '근무 태도 우수' },
+        { value: "3-1", text: '어쩌구 저쩌구 우수' },
+      ]
+    }
   },
   methods: {
-    doAdd: function () {
-      var date = this.$refs.text;
-      var rule = this.$refs.text;
-      var point = this.$refs.text;
-      var review = this.$refs.text;
-      // 입력이 없다면 아무 것도 하지 않음 return
-      if (!date.value.length || !rule.value.length || !point.value.length || !review.value.length) {
-        return;
+    addRow: function (index) {
+      try {
+        this.rows.splice(index + 1, 0, {});
+      } catch (e) {
+        console.log(e);
       }
-      this.rows.push({
-        date: date.value,
-        rule: rule.value,
-        point: point.value,
-        review: review.value
-      });
-      // 입력 양식의 내용 제거하기
-      date.value = "",
-        rule.value = "",
-        point.value = "",
-        review.value = "";
+    },
+    removeRow: function(index) {
+      this.rows.splice(index,1)
     }
   },
   components: { AppHeader }
