@@ -1,6 +1,7 @@
 <template>
   <AppHeader />
   <div class="container-fluid col-8">
+
     <main>
       <div>
         <div class="headline p-4">
@@ -21,7 +22,7 @@
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
             <h6 class="text-muted m-0 px-3">
-              {{selectedDate}}
+              {{value}}
             </h6>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-chevron-right" viewBox="0 0 16 16">
@@ -183,6 +184,8 @@ export default {
   },
   data() {
     return {
+      value:'',//캘린더 값
+      context: null,
       value_outing: 4,
       value_stayovn_start: 3,
       value_stayovn_end: 2,
@@ -253,7 +256,11 @@ export default {
     getValue: function (value) {
       return value;
     },
-  },
+    onContext(ctx) {
+      this.context = ctx
+    }
+    
+  }
 };
 </script>
 
