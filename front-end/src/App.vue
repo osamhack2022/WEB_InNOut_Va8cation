@@ -8,6 +8,7 @@
       <router-link to="/home">HomePage</router-link> |
       <router-link to="/outstatus">OutStatus</router-link> |
       <router-link to="/inputpoint">InputPoint</router-link> |
+      <router-link to="/inputvacation">InputVacation</router-link> |
     </nav>
     <router-view />
   </div>

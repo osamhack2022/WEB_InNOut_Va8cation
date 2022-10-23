@@ -34,11 +34,6 @@
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="m-0">총원</b-card-text>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-three-dots" viewBox="0 0 16 16">
-                <path
-                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-              </svg>
             </div>
             <b-card-text class="text-primary fs-3">
               <b>157</b>
@@ -47,11 +42,6 @@
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="my-0">열외</b-card-text>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-three-dots" viewBox="0 0 16 16">
-                <path
-                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-              </svg>
             </div>
             <b-card-text class="text-danger fs-3">
               <b>23</b>
@@ -60,11 +50,6 @@
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="my-0">현재원</b-card-text>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-three-dots" viewBox="0 0 16 16">
-                <path
-                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-              </svg>
             </div>
             <b-card-text class="text-success fs-3">
               <b>134</b>
@@ -76,20 +61,15 @@
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="my-0">열외내용</b-card-text>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-three-dots" viewBox="0 0 16 16">
-                <path
-                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-              </svg>
             </div>
             <b-progress class="mt-2" :max="max">
-              <b-progress-bar :style="{ 'background-color': '#FF9754' }" :value="value_vacation_start"></b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#FF7262' }" :value="value_vacation_going"></b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#E84D65' }" :value="value_vacation_end"></b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#A259FF' }" :value="value_stayovn_start"></b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#6046E8' }" :value="value_stayovn_end"></b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#0ACF83' }" :value="value_outing"></b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#57606A' }" :value="value_etc"></b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#FF9754' }" :value="value_vacation_start">휴가복귀</b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#FF7262' }" :value="value_vacation_going">휴가 중</b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#E84D65' }" :value="value_vacation_end">휴가 복귀</b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#A259FF' }" :value="value_stayovn_start">외박출발</b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#6046E8' }" :value="value_stayovn_end">외박복귀</b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#0ACF83' }" :value="value_outing">외출</b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#57606A' }" :value="value_etc">기타</b-progress-bar>
             </b-progress>
             <div class="px-0 pt-4 d-flex flex-column">
               <div class="mr-3">
