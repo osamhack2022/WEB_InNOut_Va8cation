@@ -9,8 +9,9 @@ import App from './App.vue'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+
 import router from "./router/router"
-import { createPopper } from '@popperjs/core';
+
 
 const app = createApp(App)
 app.use(BootstrapVue3)

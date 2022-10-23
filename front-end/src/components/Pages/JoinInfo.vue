@@ -27,11 +27,11 @@
           </div>
           <div class="form-group">
             <label for="InputName"><b>성명</b></label>
-            <input type="name" class="form-control" id="InputName">
+            <input type="name" v-model="name" class="form-control" id="InputName">
           </div>
           <div class="form-group">
             <label for="InputAuthcode"><b>확인코드</b></label>
-            <input type="name" class="form-control" id="InputAuthcode">
+            <input type="name" v-model="code" class="form-control" id="InputAuthcode">
           </div>
 
 
@@ -47,9 +47,12 @@
 </template>
 
 <script>
+import { addMapping } from '@jridgewell/gen-mapping';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import { getDatabase, set, ref } from "firebase/database"
+import { get } from 'lodash';
 export default {
 
   name: "signUp",
@@ -58,14 +61,26 @@ export default {
       email:'',
       password:'',
       confirm:'',  
-
+      name:'',
+      code:'',
     }
   },
 
 
 methods: {
     signUp() {
-      console.log("Signup", this.email, this.password, this.confirm);
+      console.log("Signup", this.email, this.password, this.confirm, this.code, this.name);
+
+      if(!this.name) {
+        alert("입력된 이름이 없습니다.");
+        return;
+      }
+
+      if(!this.code) {
+        alert("입력된 코드가 없습니다.");
+        return;
+      }
+
       if(!this.email) {
         alert("입력된 email 주소가 없습니다.");
         return;
@@ -85,9 +100,37 @@ methods: {
         alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         return;
       }
-   
+      
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-      .then((user)=> {
+      .then((userCredential)=> {
+        const uuid = userCredential.user.uid
+        var type = ''
+        var base = ''
+        const db = ref(getDatabase());
+
+        if(this.code == "5678admin%"){
+          alert("hello admin")
+          type = 'admin'
+          base = '5678'
+        } 
+        else if(this.code == "5678officer!"){
+          type = "officer"
+          base ='5678'
+        } 
+        else if(this.code == "5678user@"){
+          type = "solider"
+          base = '5678'
+        }
+        else{
+          alert("유효하지 않은 코드입니다.")
+          return;
+        }
+        set(ref(db, 'base/${base}/user/${type}'), {
+          title: this.name,
+          content: uuid
+        })
+
+        //console.log("userInfo.uid/"+userInfo.uid); 
         alert('가입 완료');
         this.$router.push("/")
       })

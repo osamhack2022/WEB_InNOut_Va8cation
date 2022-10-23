@@ -8,13 +8,11 @@
           <h1>
             <b>5678부대</b>
           </h1>
-          <div class="demo-date-picker">
-            <div class="block">
-              <!--<span class="demonstration">Default</span>-->
-              <el-date-picker v-model="selectedDate" type="date" placeholder="날짜선택" value-format="yyyyMMdd"
-                :size="size"></el-date-picker>
-            </div>
+          <div>           
+            <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"></b-form-datepicker>            
           </div>
+
+
           <div class="d-flex justify-content-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-chevron-left" viewBox="0 0 16 16">
@@ -204,7 +202,7 @@ export default {
   },
   data() {
     return {
-      value:'',//캘린더 값
+      value:"2020-05-13",//캘린더 값
       context: null,
       value_outing: 4,
       value_stayovn_start: 3,
@@ -285,30 +283,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.demo-date-picker {
-  display: flex;
-  width: 100%;
-  padding: 0;
-  flex-wrap: wrap;
-}
 
-.demo-date-picker .block {
-  padding: 30px 0;
-  text-align: center;
-  border-right: solid 1px var(--el-border-color);
-  flex: 1;
-}
-
-.demo-date-picker .block:last-child {
-  border-right: none;
-}
-
-.demo-date-picker .demonstration {
-  display: block;
-  color: var(--el-text-color-secondary);
-  font-size: 14px;
-  margin-bottom: 20px;
-}
 
 
 
