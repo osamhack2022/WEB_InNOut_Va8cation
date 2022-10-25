@@ -21,9 +21,11 @@
                 <th class="indate">출타종료일</th>
                 <th style="width: 48px;"></th>
               </tr>
-              <tr v-for="row in rows" track-by="$index" v-bind:key="row.index">
+            </thead>
+            <tbody>
+              <tr v-for="(row, index) in rows" :key="index">
                 <td>
-                  {{$index+1}}
+                  {{index+1}}
                 </td>
                 <td>
                   <input class="form-control form-control-sm" v-model="name" type="text" ref="name">
@@ -45,24 +47,10 @@
                 </td>
                 <td>
                   <button class="btn btn-primary btn-sm" v-on:click="inputvacation" @click="addRow($index)"><b>추가</b></button>
-                  <!-- <button class="btn btn-danger btn-sm" @click="removeRow($index)"><b>제거</b></button> -->
+                  <button class="btn btn-danger btn-sm" @click="removeRow($index)"><b>제거</b></button>
                 </td>
               </tr>
-            </thead>
-            <!-- <tbody>
-              <tr v-for="row in rows" v-bind:key="row.number">
-                <td>
-                  <textarea class="form-control" v-model="row.name"></textarea>
-                </td>
-                <td>{{ item.number }}</td>
-                <td>{{ item.date }}</td>
-                <td>{{ item.rule }}</td>
-                <td>{{ item.point }}</td>
-                <td class="button">
-                  <button>제거</button>
-                </td>
-              </tr>
-            </tbody> -->
+            </tbody>
           </table>
         </div>
       </b-card>
