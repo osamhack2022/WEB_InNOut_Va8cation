@@ -16,28 +16,40 @@ const router = createRouter({
     routes : [ // path별 component를 추가한다.
     { path : "/home", name : "HomePage", component : HomePage, 
     beforeEnter: function(to, from, next){
-        var user = firebase.auth().currentUser;
-        if(user != ''){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
           return next()
+        } else {
+          // No user is signed in.
+          next('/')
         }
-        next('/')
+      });
     } },
     { path : "/", name : "login", component : MyLogin },
     { path : "/inputpoint", name : "inputpoint", component : InputPoint, 
     beforeEnter: function(to, from, next){
-        var user = firebase.auth().currentUser;
-        if(user != ''){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
           return next()
+        } else {
+          // No user is signed in.
+          next('/')
         }
-        next('/')
+      });
     }  },
     { path : "/inputvacation", name : "inputvacation", component : InputVacation, 
     beforeEnter: function(to, from, next){
-        var user = firebase.auth().currentUser;
-        if(user != ''){
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
           return next()
+        } else {
+          // No user is signed in.
+          next('/')
         }
-        next('/')
+      });
     }  },
     { path : "/passwordreset", name : "passwordreset", component : PasswordReset },
     { path : "/join", name : "join", component : JoinPage },

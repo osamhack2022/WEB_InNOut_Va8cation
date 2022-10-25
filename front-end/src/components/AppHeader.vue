@@ -18,7 +18,8 @@
         </ul>
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
-          <b-badge variant="primary">간부</b-badge>       
+          <b-badge variant="primary">간부</b-badge>
+          <button v-on:click="logout">로그아웃</button>       
         </div>
       </div>
     </nav>
@@ -26,9 +27,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'AppHeader',
-  };
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+export default {
+  name: 'AppHeader',
+  data(){
+
+  },
+ 
+  methods: {
+    logout: function(){
+      firebase.auth().signOut().then(() => {
+        this.$router.replace('/')
+      })
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

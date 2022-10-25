@@ -30,6 +30,10 @@
             <input type="name" v-model="name" class="form-control" id="InputName">
           </div>
           <div class="form-group">
+            <label for="InputName"><b>군번</b></label>
+            <input type="name" v-model="solnum" class="form-control" id="InputName">
+          </div>
+          <div class="form-group">
             <label for="InputAuthcode"><b>확인코드</b></label>
             <input type="name" v-model="code" class="form-control" id="InputAuthcode">
           </div>
@@ -63,6 +67,7 @@ export default {
       confirm:'',  
       name:'',
       code:'',
+      solnum:'',
     }
   },
 
@@ -93,6 +98,11 @@ methods: {
  
       if(!this.confirm) {
         alert("입력된 비밀번호 확인이 없습니다.");
+        return;
+      }
+
+      if(!this.solnum) {
+        alert("입력된 군번이 없습니다.");
         return;
       }
  
@@ -141,7 +151,8 @@ methods: {
           name : this.name,
           email : this.email,
           base : base,
-          battalion : battalion
+          battalion : battalion,
+          num : this.solnum
         })
 
         alert('가입 완료');
@@ -152,7 +163,7 @@ methods: {
        var errorCode = error.code;
        var errorMessage = error.message;
        if (errorCode == 'auth/weak-password') {
-          alert('The password is too weak.');
+          alert('비밀번호는 최소 6자리 이상이어야 합니다.');
        }
        else {
          alert(errorMessage);

@@ -26,25 +26,25 @@
                   {{$index+1}}
                 </td>
                 <td>
-                  <input class="form-control form-control-sm" v-model="row.name" type="text" ref="name">
+                  <input class="form-control form-control-sm" v-model="name" type="text" ref="name">
                 </td>
                 <td>
-                  <b-form-select v-model="row.rank" :options="rank_options" size="sm"></b-form-select>
+                  <b-form-select v-model="rank" :options="rank_options" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <input v-model="row.armynum" class="form-control form-control-sm" type="select" ref="armynum">
+                  <input v-model="armynum" class="form-control form-control-sm" type="select" ref="armynum">
                 </td>
                 <td>
-                  <b-form-select v-model="row.outtype" :options="out_options" size="sm"></b-form-select>
+                  <b-form-select v-model="outtype" :options="out_options" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <input v-model="row.outdate" class="form-control form-control-sm" type="date" ref="outdate">
+                  <input v-model="outdate" class="form-control form-control-sm" type="date" ref="outdate">
                 </td>
                 <td>
-                  <input v-model="row.indate" class="form-control form-control-sm" type="date" ref="indate">
+                  <input v-model="indate" class="form-control form-control-sm" type="date" ref="indate">
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-sm" @click="addRow($index)"><b>추가</b></button>
+                  <button class="btn btn-primary btn-sm" v-on:click="inputvacation" @click="addRow($index)"><b>추가</b></button>
                   <!-- <button class="btn btn-danger btn-sm" @click="removeRow($index)"><b>제거</b></button> -->
                 </td>
               </tr>
@@ -73,12 +73,17 @@
 
 <script>
 import AppHeader from '../AppHeader.vue';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import { getDatabase, set, ref, get, child } from "firebase/database"
+
 export default {
   name: "InputPoint",
   data() {
     return {
       rows: [
-        {name: "문규성", rank: "1LT", armynum: "21-11838", outtype: "vacation", outdate: "2022-10-28", indate: "2022-10-29"}
+        {name: "", rank: "", armynum: "", outtype: "", outdate: "", indate: ""}
       ],
       rank: null, outtype: null,
       rank_options: [
@@ -105,6 +110,69 @@ export default {
     },
     removeRow: function(index) {
       this.rows.splice(index,1)
+    },
+    inputvacation() {
+      if(!this.name) {
+        alert("입력된 이름이 없습니다.");
+        return;
+      }
+      if(!this.rank) {
+        alert("입력된 계급이 없습니다.");
+        return;
+      }
+      if(!this.armynum) {
+        alert("입력된 군번이 없습니다.");
+        return;
+      }
+      if(!this.outdate) {
+        alert("입력된 출타시작일이 없습니다.");
+        return;
+      }
+      if(!this.indate) {
+        alert("입력된 출타종료일이 없습니다.");
+        return;
+      }
+      if(!this.outtype) {
+        alert("입력된 출타종료가 없습니다.");
+        return;
+      }
+      var date = new Date()
+      
+      let tempvalue = [];
+      var uid = (firebase.auth().currentUser.uid)
+      var base = 'null'
+      var dbRef = ref(getDatabase())
+      function inputvac(){
+      get(child(this.dbRef), `user/admin/${uid}/base`).then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          base = snapshot.val()
+        } 
+        else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+      console.log(snapshot.val())
+      }
+
+      set(ref(getDatabase(), 'base/' + base + '/outstatus/' +date.getFullYear() + ":" 
+          + date.getMonth() + ":" + date.getDate() + "_" + date.getHours() +":" + date.getMinutes()
+          + ":" + date.getSeconds()), {
+          name : this.name,
+          rank : this.rank,
+          armynum : this.armynum,
+          outtype : this.outtype,
+          outdate : this.outdate,
+          indate : this.indate
+          })
+
+
+
+
+
+
     }
   },
   components: { AppHeader }
