@@ -22,9 +22,11 @@
                 <th class="manager">담당간부</th>
                 <th style="width: 48px;"></th>
               </tr>
-              <tr v-for="row in rows" track-by="$index" v-bind:key="row.index">
+            </thead>
+            <tbody>
+              <tr v-for="(row, index) in rows" :key="index">
                 <td>
-                  {{$index+1}}
+                  {{index+1}}
                 </td>
                 <td>
                   <input class="form-control form-control-sm" v-model="row.name" type="text" ref="name">
@@ -48,11 +50,11 @@
                   <input v-model="row.manager" class="form-control form-control-sm" type="text" ref="manager">
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-sm" @click="addRow($index)"><b>추가</b></button>
-                  <!-- <button class="btn btn-danger btn-sm" @click="removeRow($index)"><b>제거</b></button> -->
+                  <button class="btn btn-primary btn-sm" @click="addRow(index)"><b>추가</b></button>
+                  <button class="btn btn-danger btn-sm" @click="removeRow(index)"><b>제거</b></button>
                 </td>
               </tr>
-            </thead>
+            </tbody>
             <!-- <tbody>
               <tr v-for="row in rows" v-bind:key="row.number">
                 <td>
@@ -82,7 +84,7 @@ export default {
   data() {
     return {
       rows: [
-        {name: "굳건이", rank: "SGT", armynum: "21-1234567", date: "2022-10-28", rule: "1-1", point: 3, manager: "문규성"}
+        { name: "굳건이", rank: "SGT", armynum: "21-1234567", date: "2022-10-28", rule: "1-1", point: 3, manager: "문규성" }
       ],
       rank: null, outtype: null,
       rank_options: [
@@ -104,8 +106,8 @@ export default {
         console.log(e);
       }
     },
-    removeRow: function(index) {
-      this.rows.splice(index,1)
+    removeRow: function (index) {
+      this.rows.splice(index, 1)
     }
   },
   components: { AppHeader }

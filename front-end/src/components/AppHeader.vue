@@ -18,8 +18,8 @@
         </ul>
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
-          <b-badge variant="primary">간부</b-badge>
-          <button v-on:click="logout">로그아웃</button>       
+          <b-badge variant="primary">간부</b-badge>   
+          <b-button class="ms-4" v-on:click="logout">로그아웃</b-button>    
         </div>
       </div>
     </nav>
