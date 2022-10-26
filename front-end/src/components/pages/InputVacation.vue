@@ -127,40 +127,27 @@ export default {
       var date = new Date()
       
       var uid = (firebase.auth().currentUser.uid)
-      var abase = ''
-      const dbRef = getDatabase()
-      async function inputvac() {
+      
+      async function getpromise() {
         try{
-          const snapshot = await get(child(this.dbRef), `user/admin/${uid}/base`);
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/admin/${uid}/base`));
           if (snapshot.exists()) {
             console.log(snapshot.val());
             const base = snapshot.val()
-            set(ref(getDatabase(), 'base/' + base + '/outstatus/' +date.getFullYear() + ":" 
-          + date.getMonth() + ":" + date.getDate() + "_" + date.getHours() +":" + date.getMinutes()
-          + ":" + date.getSeconds()), {
-            name : this.name,
-            rank : this.rank,
-            armynum : this.armynum,
-            outtype : this.outtype,
-            outdate : this.outdate,
-            indate : this.indate
-            })
             return base;
           }
           else {
             console.log("No data available");
           }
-        }catch(e) {
-          console.error(e);
+        }catch(error) {
+          console.error(error);
         }
-      } 
-      async function getbase() {
-        var base = ''
-        base = await inputvac()
-        alert(base)
-        return base
-      }  
-      set(ref(getDatabase(), 'base/' + getbase() + '/outstatus/' +date.getFullYear() + ":" 
+    }
+
+      getpromise().then((base) => {
+        console.log("base : " + base)
+        set(ref(getDatabase(), 'base/' + base + '/outstatus/' +date.getFullYear() + ":" 
           + date.getMonth() + ":" + date.getDate() + "_" + date.getHours() +":" + date.getMinutes()
           + ":" + date.getSeconds()), {
           name : this.name,
@@ -170,6 +157,8 @@ export default {
           outdate : this.outdate,
           indate : this.indate
           })
+      })
+
     }
   },
   components: { AppHeader }
