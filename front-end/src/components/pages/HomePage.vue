@@ -14,16 +14,17 @@
 
 
           <div class="d-flex justify-content-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-chevron-left" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+              class="bi bi-chevron-left me-4" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
-            <h6 class="text-muted m-0 px-3">
+            <input class="form-control form-control" type="date" ref="date">
+            <!-- <h6 class="text-muted m-0 px-3">
               {{value}}
-            </h6>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-chevron-right" viewBox="0 0 16 16">
+            </h6> -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+              class="bi bi-chevron-right ms-4" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
             </svg>
@@ -269,6 +270,10 @@ export default {
 
 a {
   text-decoration: none;
+}
+
+.form-control {
+  width: 16rem;
 }
 
 .headline {
