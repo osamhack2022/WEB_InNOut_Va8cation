@@ -11,6 +11,7 @@
 
           <div>
             <b-form-datepicker id="example-datepicker" v-model="value" class="mb-0"></b-form-datepicker>
+            <button type="submit" v-on:click="showOutstatus" class="btn btn-primary btn-block ms-2"><b>가입</b></button>
           </div>
 
           <div class="d-flex justify-content-center">
@@ -256,8 +257,84 @@ export default {
     },
     onContext(ctx) {
       this.context = ctx
+    },
+    showOutstatus(){
+      var uid = (firebase.auth().currentUser.uid)
+
+      /*async function getlevelpromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/level`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const level = snapshot.val()
+            return level;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+      getlevelpromise().then((level) => {
+        console.log("user level : " + level)
+      })*/
+
+      async function getbasepromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/base`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const base = snapshot.val()
+            return base;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      async function getsoliderpromise(base = getbasepromise()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val())
+            const soliderarr = snapshot.val()
+            console.log('arr[0]: ' + soliderarr[0])
+            return soliderarr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbasepromise().then((base) => {
+        console.log("base : " + base)
+        return base
+      })
+      
+
+
+
+      getbasepromise().then((base) => {
+        console.log("base : " + base)
+        getsoliderpromise(base).then((soliderarr) => {
+          console.log("solider" + soliderarr)
+          var soliderarray = soliderarr
+
+        })
+      })
+
+
     }
-    
   }
 };
 </script>

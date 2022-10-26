@@ -131,7 +131,7 @@ export default {
       async function getpromise() {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `user/admin/${uid}/base`));
+          const snapshot = await get(child(db, `user/${uid}/base`));
           if (snapshot.exists()) {
             console.log(snapshot.val());
             const base = snapshot.val()
@@ -143,11 +143,11 @@ export default {
         }catch(error) {
           console.error(error);
         }
-    }
+      }
 
       getpromise().then((base) => {
         console.log("base : " + base)
-        set(ref(getDatabase(), 'base/' + base + '/' + this.armynum + '/outstatus/' + this.outdate + '~' + this.indate), {
+        set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/outstatus/' + this.outdate + '~' + this.indate), {
           name : this.name,
           rank : this.rank,
           armynum : this.armynum,

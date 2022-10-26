@@ -110,18 +110,14 @@ methods: {
         alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         return;
       }
-      
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-      .then((userCredential)=> {
-        var type = ''
-        var base = ''
-        var battalion = ''
-        const db = getDatabase()
-
+      var type = ''
+      var base = ''
+      var battalion = ''
         if(this.code == "5678admin%"){
           alert("관리자 계정입니다.")
           type = 'admin'
           base = '5678'
+          battalion = 'all'
         } 
         else if(this.code == "5678officer!1"){
           type = "officer"
@@ -135,7 +131,7 @@ methods: {
         } 
         else if(this.code == "5678user@1"){
           type = "solider"
-          base = '5678'
+          base = '5678'  
           battalion = '1BN'
         }
         else if(this.code == "5678user@2"){
@@ -146,13 +142,17 @@ methods: {
         else{
           alert("유효하지 않은 코드입니다.")
           return;
-        }
-        set(ref(db, 'user/' + type + '/' + userCredential.user.uid), {
+        }      
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      .then((userCredential)=> {
+        const db = getDatabase()
+        set(ref(db, 'user/'+ userCredential.user.uid), {
           name : this.name,
           email : this.email,
           base : base,
           battalion : battalion,
-          num : this.solnum
+          num : this.solnum,
+          level : type
         })
 
         alert('가입 완료');
