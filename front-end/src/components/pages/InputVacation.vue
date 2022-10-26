@@ -147,9 +147,7 @@ export default {
 
       getpromise().then((base) => {
         console.log("base : " + base)
-        set(ref(getDatabase(), 'base/' + base + '/outstatus/' +date.getFullYear() + ":" 
-          + date.getMonth() + ":" + date.getDate() + "_" + date.getHours() +":" + date.getMinutes()
-          + ":" + date.getSeconds()), {
+        set(ref(getDatabase(), 'base/' + base + '/' + this.armynum + '/outstatus/' + this.outdate + '~' + this.indate), {
           name : this.name,
           rank : this.rank,
           armynum : this.armynum,
