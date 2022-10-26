@@ -8,22 +8,22 @@
           <h1>
             <b>5678부대</b>
           </h1>
-          <div>           
-            <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"></b-form-datepicker>            
+
+          <div>
+            <b-form-datepicker id="example-datepicker" v-model="value" class="mb-0"></b-form-datepicker>
           </div>
 
-
-          <div class="d-flex justify-content-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+          <div class="d-flex justify-content-center align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-chevron-left me-4" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
             <input class="form-control form-control" type="date" ref="date">
             <!-- <h6 class="text-muted m-0 px-3">
-              {{value}}
+              {{ondate}}
             </h6> -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-chevron-right ms-4" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
@@ -167,13 +167,13 @@
 
 <script>
 
-import { ref } from 'vue'
+//import { ref } from 'vue'
 import AppHeader from '@/components/AppHeader';
 // eslint-disable-next-line no-unused-vars
-const size = ref < '' | 'large' | 'small' > ('')
-const selectedDate = ref('')
-// eslint-disable-next-line no-unused-vars
-
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 
 
 export default {
@@ -251,7 +251,7 @@ export default {
   props: {
     msg: String,
   },
-  methods: {
+  methods: {   
     getValue: function (value) {
       return value;
     },

@@ -2649,10 +2649,10 @@
   "resolved" "https://registry.npmjs.org/bootstrap-vue-3/-/bootstrap-vue-3-0.3.12.tgz"
   "version" "0.3.12"
 
-"bootstrap-vue@^2.22.0":
-  "integrity" "sha512-denjR/ae0K7Jrcqud3TrZWw0p/crtyigeGUNunWQ4t+KFi+7rzJ6j6lx1W5/gpUtSSUgNbWrXcHH4lIWXzXOOQ=="
-  "resolved" "https://registry.npmjs.org/bootstrap-vue/-/bootstrap-vue-2.22.0.tgz"
-  "version" "2.22.0"
+"bootstrap-vue@^2.23.1":
+  "integrity" "sha512-SEWkG4LzmMuWjQdSYmAQk1G/oOKm37dtNfjB5kxq0YafnL2W6qUAmeDTcIZVbPiQd2OQlIkWOMPBRGySk/zGsg=="
+  "resolved" "https://registry.npmjs.org/bootstrap-vue/-/bootstrap-vue-2.23.1.tgz"
+  "version" "2.23.1"
   dependencies:
     "@nuxt/opencollective" "^0.3.2"
     "bootstrap" "^4.6.1"

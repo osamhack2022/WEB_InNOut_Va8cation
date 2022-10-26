@@ -64,7 +64,7 @@ import AppHeader from '../AppHeader.vue';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { getDatabase, set, ref, get, child } from "firebase/database"
+import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 
 export default {
   name: "InputPoint",
@@ -126,28 +126,28 @@ export default {
       }
       var date = new Date()
       
-      let tempvalue = [];
       var uid = (firebase.auth().currentUser.uid)
-      var base = 'null'
-      var dbRef = ref(getDatabase())
-      function inputvac(){
-      get(child(this.dbRef), `user/admin/${uid}/base`).then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-          base = snapshot.val()
-        } 
-        else {
-          console.log("No data available");
+      
+      async function getpromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/admin/${uid}/base`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const base = snapshot.val()
+            return base;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
         }
-      }).catch((error) => {
-        console.error(error);
-      });
-      console.log(snapshot.val())
-      }
+    }
 
-      set(ref(getDatabase(), 'base/' + base + '/outstatus/' +date.getFullYear() + ":" 
-          + date.getMonth() + ":" + date.getDate() + "_" + date.getHours() +":" + date.getMinutes()
-          + ":" + date.getSeconds()), {
+      getpromise().then((base) => {
+        console.log("base : " + base)
+        set(ref(getDatabase(), 'base/' + base + '/' + this.armynum + '/outstatus/' + this.outdate + '~' + this.indate), {
           name : this.name,
           rank : this.rank,
           armynum : this.armynum,
@@ -155,11 +155,7 @@ export default {
           outdate : this.outdate,
           indate : this.indate
           })
-
-
-
-
-
+      })
 
     }
   },
