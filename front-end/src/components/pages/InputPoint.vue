@@ -12,7 +12,7 @@
           <table>
             <thead>
               <tr>
-                <th class="index">순서</th>
+                <!-- <th class="index">순서</th> -->
                 <th class="name">성명</th>
                 <th class="rank">계급</th>
                 <th class="number">군번</th>
@@ -25,9 +25,9 @@
             </thead>
             <tbody>
               <tr v-for="(row, index) in rows" :key="index">
-                <td>
+                <!-- <td>
                   {{index+1}}
-                </td>
+                </td> -->
                 <td>
                   <input class="form-control form-control-sm" v-model="row.name" type="text" ref="name">
                 </td>
@@ -50,8 +50,9 @@
                   <input v-model="row.manager" class="form-control form-control-sm" type="text" ref="manager">
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-sm" @click="addRow(index)"><b>추가</b></button>
-                  <button class="btn btn-danger btn-sm" @click="removeRow(index)"><b>제거</b></button>
+                  <button class="btn btn-primary btn-sm"><b>추가</b></button>
+                  <!-- <button class="btn btn-primary btn-sm" @click="addRow(index)"><b>추가</b></button> -->
+                  <!-- <button class="btn btn-danger btn-sm" @click="removeRow(index)"><b>제거</b></button> -->
                 </td>
               </tr>
             </tbody>
