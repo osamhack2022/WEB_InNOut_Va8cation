@@ -66,6 +66,64 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 
+        function to_date(date_str)
+      {
+        var yyyyMMdd = String(date_str);
+        var sYear = yyyyMMdd.substring(0,4);
+        var sMonth = yyyyMMdd.substring(4,6);
+        var sDate = yyyyMMdd.substring(6,8);
+
+        return new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
+      }
+
+        function to_date2(date_str) // yyyy-mm-dd -> date()
+      {
+        var yyyyMMdd = String(date_str);
+        var sYear = yyyyMMdd.substring(0,4);
+        var sMonth = yyyyMMdd.substring(5,7);
+        var sDate = yyyyMMdd.substring(8,10);
+
+        //alert("sYear :"+sYear +"   sMonth :"+sMonth + "   sDate :"+sDate);
+        return new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
+      }
+      function between_date(date1, date2)
+      {   
+        var y1970 = new Date(1970, 0, 1).getTime();
+        var time1 = null;
+        var time2 = null;
+
+        if(date1.length > 8)
+            time1 = to_date2(date1).getTime() - y1970;
+        else
+            time1 = to_date(date1).getTime() - y1970;
+   
+        if(date2.length > 8)
+            time2 = to_date2(date2).getTime() - y1970;
+        else
+            time2 = to_date(date2).getTime() - y1970;
+
+        var per_day = 1000 * 60 * 60 * 24;              // 1일 밀리초
+
+        return Math.floor(time1/per_day) - Math.floor(time2/per_day);
+      }
+      function get_date_str(date)//Date -> yyyy-mm-dd trans
+      {
+        var sYear = date.getFullYear();
+        var sMonth = date.getMonth() + 1;
+        var sDate = date.getDate();
+
+        sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
+        sDate  = sDate > 9 ? sDate : "0" + sDate;
+        return sYear +'-'+ sMonth +'-'+ sDate;
+      }
+      function get_tomorrow(date, num)
+      {
+        var newdate = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+        newdate.setDate(newdate.getDate() + num)
+        return newdate
+      }  
+
+
 export default {
   name: "InputPoint",
   data() {
@@ -99,6 +157,7 @@ export default {
     removeRow: function(index) {
       this.rows.splice(index,1)
     },
+    
     inputvacation() {
       if(!this.name) {
         alert("입력된 이름이 없습니다.");
@@ -131,7 +190,7 @@ export default {
       async function getpromise() {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `user/admin/${uid}/base`));
+          const snapshot = await get(child(db, `user/${uid}/base`));
           if (snapshot.exists()) {
             console.log(snapshot.val());
             const base = snapshot.val()
@@ -143,18 +202,71 @@ export default {
         }catch(error) {
           console.error(error);
         }
-    }
+      }
 
       getpromise().then((base) => {
         console.log("base : " + base)
-        set(ref(getDatabase(), 'base/' + base + '/' + this.armynum + '/outstatus/' + this.outdate + '~' + this.indate), {
+        set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/outstatus/' + this.outdate + '~' + this.indate), {
           name : this.name,
           rank : this.rank,
           armynum : this.armynum,
           outtype : this.outtype,
           outdate : this.outdate,
           indate : this.indate
-          })
+        })
+
+
+
+
+ 
+
+
+
+
+
+        if(this.outtype == 'outing'){
+          set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + (this.outdate) +'/outing/' + this.armynum), {
+          name : this.name,
+          rank : this.rank
+        })             
+        }
+        else if (this.outtype == 'stayovn'){
+          set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + (this.outdate) +'/stayovn_start/' + this.armynum), {
+          name : this.name,
+          rank : this.rank
+        })    
+          set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + (this.indate) +'/stayovn_end/' + this.armynum), {
+          name : this.name,
+          rank : this.rank
+        })           
+        }
+        else if (this.outtype == 'vacation'){
+          set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + (this.outdate) +'/vacation_start/' + this.armynum), {
+            name : this.name,
+            rank : this.rank
+            })
+          
+                   
+          for(var i = 1; i < between_date(get_date_str(to_date2(this.indate)),get_date_str(to_date2(this.outdate))); i++){
+            set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + get_date_str(get_tomorrow(to_date2(this.outdate), i)) +'/vacation_going/' + this.armynum), {
+            name : this.name,
+            rank : this.rank
+            })          
+          }
+          set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + (this.indate) +'/vacation_end/' + this.armynum), {
+            name : this.name,
+            rank : this.rank
+            })                      
+        }
+        else if (this.outtype == 'etc'){
+          for(var i = 0; i <= between_date(get_date_str(to_date2(this.indate)),get_date_str(to_date2(this.outdate))); i++){
+            set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + get_date_str(get_tomorrow(to_date2(this.outdate), i)) +'/etc/' + this.armynum), {
+            name : this.name,
+            rank : this.rank
+            })          
+          }        
+        }
+
       })
 
     }

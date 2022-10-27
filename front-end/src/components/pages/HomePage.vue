@@ -10,7 +10,8 @@
           </h1>
 
           <div>
-            <b-form-datepicker id="example-datepicker" v-model="value" class="mb-0"></b-form-datepicker>
+            <!--<b-form-datepicker id="example-datepicker" v-model="ondate" class="mb-0"></b-form-datepicker>-->
+            <button type="submit" v-on:click="showOutstatus" class="btn btn-primary btn-block ms-2"><b>TEST</b></button>
           </div>
 
           <div class="d-flex justify-content-center align-items-center">
@@ -19,10 +20,11 @@
               <path fill-rule="evenodd"
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
-            <input class="form-control form-control" type="date" ref="date">
-            <!-- <h6 class="text-muted m-0 px-3">
+            <input class="form-control form-control" v-model='wishdate' type="date" ref="date">
+            <button type="submit" v-on:click="setDate" class="btn btn-primary btn-block ms-2"><b>날짜설정</b></button>
+            <!--<h6 class="text-muted m-0 px-3">
               {{ondate}}
-            </h6> -->
+            </h6>-->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-chevron-right ms-4" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -183,8 +185,7 @@ export default {
   },
   data() {
     return {
-      value:"2020-05-13",//캘린더 값
-      context: null,
+      wishdate: '',
       value_outing: 4,
       value_stayovn_start: 3,
       value_stayovn_end: 2,
@@ -255,10 +256,286 @@ export default {
     getValue: function (value) {
       return value;
     },
+
+
+
+
+    setDate(){
+      var uid = (firebase.auth().currentUser.uid)
+      var todate = this.wishdate
+      async function getbase() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/base`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const base = snapshot.val()
+            return base;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+////////////////////////////////////////////////////////////
+      async function get_wishdate_vacstart(base=getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_start`));
+          console.log("vacation start")
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_vacstart(base).then((arr) => {
+          console.log(arr)
+        })
+      }) 
+////////////////////////////////////////////////////////////
+      async function get_wishdate_vacgoing(base = getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_going`));
+          console.log("vacation going")
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_vacgoing(base).then((arr) => {
+          console.log(arr)
+        })
+      })  
+////////////////////////////////////////////////////////////
+      async function get_wishdate_vacend(base=getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_end`));
+          console.log("vacation end")
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_vacend(base).then((arr) => {
+          console.log(arr)
+        })
+      })  
+////////////////////////////////////////////////////////////
+async function get_wishdate_outing(base=getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/outing`));
+          console.log("outing")
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_outing(base).then((arr) => {
+          console.log(arr)
+        })
+      })  
+////////////////////////////////////////////////////////////
+async function get_wishdate_staystart(base=getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_start`));
+          console.log("stayovn start")
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_staystart(base).then((arr) => {
+          console.log(arr)
+        })
+      })  
+////////////////////////////////////////////////////////////
+async function get_wishdate_stayend(base=getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_end`));
+          console.log("stayovn end")
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_stayend(base).then((arr) => {
+          console.log(arr)
+        })
+      })  
+////////////////////////////////////////////////////////////
+async function get_wishdate_etc(base=getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/etc`));
+          console.log("etc")
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_etc(base).then((arr) => {
+          console.log(arr)
+        })
+      })  
+
+
+    },
+
+
+
+
     onContext(ctx) {
       this.context = ctx
+    },
+
+
+
+    showOutstatus(){
+      var uid = (firebase.auth().currentUser.uid)
+
+      /*async function getlevelpromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/level`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const level = snapshot.val()
+            return level;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+      getlevelpromise().then((level) => {
+        console.log("user level : " + level)
+      })*/
+
+      async function getbasepromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/base`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const base = snapshot.val()
+            return base;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      async function getsoliderpromise(base = getbasepromise()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/byuser/`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val())
+            const soliderarr = snapshot.val()
+            console.log(soliderarr)
+            return soliderarr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbasepromise().then((base) => {
+        getsoliderpromise(base).then((soliderarr) => {
+          console.log(soliderarr)
+          var total = Object.keys(soliderarr).length
+          console.log("total : " + total)
+          var member = []
+          for(var temp of Object.keys(soliderarr)){
+            console.log(temp)
+            member.push(temp)
+          }
+          for(var temp of member){
+            console.log(Object.values(soliderarr))
+          }
+        })
+      })
+
+
     }
-    
   }
 };
 </script>
