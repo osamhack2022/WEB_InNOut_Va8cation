@@ -302,7 +302,7 @@ export default {
       async function getsoliderpromise(base = getbasepromise()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/byuser`));
+          const snapshot = await get(child(db, `base/${base}/byuser/`));
           if (snapshot.exists()) {
             console.log(snapshot.val())
             const soliderarr = snapshot.val()
@@ -320,7 +320,16 @@ export default {
       getbasepromise().then((base) => {
         getsoliderpromise(base).then((soliderarr) => {
           console.log(soliderarr)
-          var soliderarray = soliderarr
+          var total = Object.keys(soliderarr).length
+          console.log("total : " + total)
+          var member = []
+          for(var temp of Object.keys(soliderarr)){
+            console.log(temp)
+            member.push(temp)
+          }
+          for(var temp of member){
+            console.log(Object.values(soliderarr))
+          }
         })
       })
 
