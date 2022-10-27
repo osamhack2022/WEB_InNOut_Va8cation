@@ -246,7 +246,7 @@ export default {
             rank : this.rank
             })
           
-          alert(between_date(get_date_str(to_date2(this.indate)),get_date_str(to_date2(this.outdate))))         
+                   
           for(var i = 1; i < between_date(get_date_str(to_date2(this.indate)),get_date_str(to_date2(this.outdate))); i++){
             set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + get_date_str(get_tomorrow(to_date2(this.outdate), i)) +'/vacation_going/' + this.armynum), {
             name : this.name,
@@ -259,12 +259,12 @@ export default {
             })                      
         }
         else if (this.outtype == 'etc'){
-          for(var i = 0; i <= this.indate - this.outdate; i++){
-            set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + (this.outdate + i ) +'/etc/' + this.armynum), {
+          for(var i = 0; i <= between_date(get_date_str(to_date2(this.indate)),get_date_str(to_date2(this.outdate))); i++){
+            set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + get_date_str(get_tomorrow(to_date2(this.outdate), i)) +'/etc/' + this.armynum), {
             name : this.name,
             rank : this.rank
             })          
-          }          
+          }        
         }
 
       })
