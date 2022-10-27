@@ -10,7 +10,7 @@
           </h1>
 
           <div>
-            <b-form-datepicker id="example-datepicker" v-model="value" class="mb-0"></b-form-datepicker>
+            <b-form-datepicker id="example-datepicker" v-model="ondate" class="mb-0"></b-form-datepicker>
             <button type="submit" v-on:click="showOutstatus" class="btn btn-primary btn-block ms-2"><b>가입</b></button>
           </div>
 
@@ -21,9 +21,9 @@
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
             <input class="form-control form-control" type="date" ref="date">
-            <!-- <h6 class="text-muted m-0 px-3">
+            <!--<h6 class="text-muted m-0 px-3">
               {{ondate}}
-            </h6> -->
+            </h6>-->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-chevron-right ms-4" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -302,11 +302,11 @@ export default {
       async function getsoliderpromise(base = getbasepromise()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}`));
+          const snapshot = await get(child(db, `base/${base}/byuser`));
           if (snapshot.exists()) {
             console.log(snapshot.val())
             const soliderarr = snapshot.val()
-            console.log('arr[0]: ' + soliderarr[0])
+            console.log(soliderarr)
             return soliderarr;
           }
           else {
@@ -318,19 +318,9 @@ export default {
       }
 
       getbasepromise().then((base) => {
-        console.log("base : " + base)
-        return base
-      })
-      
-
-
-
-      getbasepromise().then((base) => {
-        console.log("base : " + base)
         getsoliderpromise(base).then((soliderarr) => {
-          console.log("solider" + soliderarr)
+          console.log(soliderarr)
           var soliderarray = soliderarr
-
         })
       })
 
