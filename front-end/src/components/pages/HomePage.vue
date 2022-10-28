@@ -12,11 +12,6 @@
             </div>
           </h1>
 
-          <div>
-            <!--<b-form-datepicker id="example-datepicker" v-model="ondate" class="mb-0"></b-form-datepicker>-->
-            <button type="submit" v-on:click="showOutstatus" class="btn btn-primary btn-block ms-2"><b>TEST</b></button>
-          </div>
-
           <div class="d-flex justify-content-center align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
               class="bi bi-chevron-left me-4" viewBox="0 0 16 16">
@@ -68,7 +63,7 @@
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="my-0">열외내용</b-card-text>
             </div>
-            <b-progress class="mt-2" :max="max">
+            <b-progress class="mt-2" :max=out_num>
               <b-progress-bar :style="{ 'background-color': '#FF9754' }" :value="value_vacation_start">휴가복귀</b-progress-bar>
               <b-progress-bar :style="{ 'background-color': '#FF7262' }" :value="value_vacation_going">휴가 중</b-progress-bar>
               <b-progress-bar :style="{ 'background-color': '#E84D65' }" :value="value_vacation_end">휴가 복귀</b-progress-bar>
@@ -199,8 +194,9 @@ export default {
       total_num: 0,
       out_num: 0,
       current_num: 0,
-      max: '',
+      max: 0,
       basenum: '',
+      sum_value : 0,
       /* 계급 (영문명)
       이병 : PVT, 일병 : PFC, 상병 : CPL, 병장 : SGT
       하사 : SSG, 중사 : SFC, 상사 : FSG, 원사 : SGM
@@ -310,6 +306,7 @@ export default {
           console.log(vacstart)
           this.vacation_start_list = vacstart
           this.value_vacation_start = vacstart.length
+          this.sum_value += vacstart.length
         })
       }) 
 ////////////////////////////////////////////////////////////
@@ -344,6 +341,7 @@ export default {
           console.log(vacgoing)
           this.vacation_going_list = vacgoing
           this.value_vacation_going = vacgoing.length
+          this.sum_value += vacgoing.length
         })
       })  
 ////////////////////////////////////////////////////////////
@@ -379,6 +377,7 @@ export default {
           console.log(vacend)
           this.vacation_end_list = vacend
           this.value_vacation_end = vacend.length
+          this.sum_value += vacend.length
         })
       })  
 ////////////////////////////////////////////////////////////
@@ -414,6 +413,7 @@ async function get_wishdate_outing(base=getbase()) {
           console.log(outing)
           this.outing_list = outing
           this.value_outing = outing.length
+          this.sum_value += outing.length
         })
       })  
 ////////////////////////////////////////////////////////////
@@ -449,6 +449,7 @@ async function get_wishdate_staystart(base=getbase()) {
           console.log(staystart)
           this.stayovn_start_list = staystart
           this.value_stayovn_start = staystart.length
+          this.sum_value += staystart.length
         })
       })  
 ////////////////////////////////////////////////////////////
@@ -484,6 +485,7 @@ async function get_wishdate_stayend(base=getbase()) {
           console.log(stayend)
           this.stayovn_end_list = stayend
           this.value_stayovn_end = stayend.length
+          this.sum_value += stayend.length
         })
       })  
 ////////////////////////////////////////////////////////////
@@ -518,6 +520,7 @@ async function get_wishdate_etc(base=getbase()) {
           console.log(etc)
           this.etc_list = etc
           this.value_etc = etc.length
+          this.sum_value += etc.length
         })
       })  
 ////////////////////////////////////////////////////////////
@@ -560,91 +563,9 @@ async function get_totalnum(base=getbase()) {
 
     },
 
-
-
-
     onContext(ctx) {
       this.context = ctx
     },
-
-
-
-    showOutstatus(){
-      var uid = (firebase.auth().currentUser.uid)
-
-      /*async function getlevelpromise() {
-        try{
-          const db = ref(getDatabase())
-          const snapshot = await get(child(db, `user/${uid}/level`));
-          if (snapshot.exists()) {
-            console.log(snapshot.val());
-            const level = snapshot.val()
-            return level;
-          }
-          else {
-            console.log("No data available");
-          }
-        }catch(error) {
-          console.error(error);
-        }
-      }
-      getlevelpromise().then((level) => {
-        console.log("user level : " + level)
-      })*/
-
-      async function getbasepromise() {
-        try{
-          const db = ref(getDatabase())
-          const snapshot = await get(child(db, `user/${uid}/base`));
-          if (snapshot.exists()) {
-            console.log(snapshot.val());
-            const base = snapshot.val()
-            return base;
-          }
-          else {
-            console.log("No data available");
-          }
-        }catch(error) {
-          console.error(error);
-        }
-      }
-
-      async function getsoliderpromise(base = getbasepromise()) {
-        try{
-          const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/byuser/`));
-          if (snapshot.exists()) {
-            console.log(snapshot.val())
-            const soliderarr = snapshot.val()
-            console.log(soliderarr)
-            return soliderarr;
-          }
-          else {
-            console.log("No data available");
-          }
-        }catch(error) {
-          console.error(error);
-        }
-      }
-
-      getbasepromise().then((base) => {
-        getsoliderpromise(base).then((soliderarr) => {
-          console.log(soliderarr)
-          var total = Object.keys(soliderarr).length
-          console.log("total : " + total)
-          var member = []
-          for(var temp of Object.keys(soliderarr)){
-            console.log(temp)
-            member.push(temp)
-          }
-          for(var temp of member){
-            console.log(Object.values(soliderarr))
-          }
-        })
-      })
-
-
-    }
   }
 };
 </script>
