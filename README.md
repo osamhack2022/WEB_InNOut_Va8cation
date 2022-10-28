@@ -3,7 +3,7 @@
 # IN&OUT
 ![Logo](https://user-images.githubusercontent.com/55483479/192314612-2734729e-9ff9-4002-927f-2aeb55418a77.png)
 
-온라인 장병출타현황 IN&OUT
+온라인 출타장병현황 IN&OUT
 
 🔗[프로토타입 링크](https://www.figma.com/proto/ZBQGCSNfXec9rmCk9Wa9fe/IN%26OUT?node-id=20%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=20%3A2)
 
