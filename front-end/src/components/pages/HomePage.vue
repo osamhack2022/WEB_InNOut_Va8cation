@@ -6,7 +6,10 @@
       <div>
         <div class="headline p-4">
           <h1>
-            <b>5678부대</b>
+            <Base v-model="basenum"></Base>
+            <div class="result">
+              <b>{{basenum}}</b>
+            </div>
           </h1>
 
           <div>
@@ -39,7 +42,7 @@
               <b-card-text class="m-0">총원</b-card-text>
             </div>
             <b-card-text class="text-primary fs-3">
-              <b>157</b>
+              <b>{{total_num}}</b>
             </b-card-text>
           </b-card>
           <b-card class="shadow">
@@ -47,15 +50,15 @@
               <b-card-text class="my-0">열외</b-card-text>
             </div>
             <b-card-text class="text-danger fs-3">
-              <b>23</b>
+              <b>{{out_num}}</b>
             </b-card-text>
           </b-card>
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="my-0">현재원</b-card-text>
-            </div>
+            </div> 
             <b-card-text class="text-success fs-3">
-              <b>134</b>
+              <b>{{current_num}}</b>
             </b-card-text>
           </b-card>
         </b-card-group>
@@ -180,20 +183,24 @@ import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 
 export default {
   name: "HomePage",
-  components: { 
+  components:{ 
     AppHeader,
   },
   data() {
     return {
       wishdate: '',
-      value_outing: 4,
-      value_stayovn_start: 3,
-      value_stayovn_end: 2,
-      value_vacation_start: 5,
-      value_vacation_going: 6,
-      value_vacation_end: 3,
-      value_etc: 2,
-      max: 23,
+      value_outing: 0,
+      value_stayovn_start: 0,
+      value_stayovn_end: 0,
+      value_vacation_start: 0,
+      value_vacation_going: 0,
+      value_vacation_end: 0,
+      value_etc: 0,
+      total_num: 0,
+      out_num: 0,
+      current_num: 0,
+      max: '',
+      basenum: '',
       /* 계급 (영문명)
       이병 : PVT, 일병 : PFC, 상병 : CPL, 병장 : SGT
       하사 : SSG, 중사 : SFC, 상사 : FSG, 원사 : SGM
@@ -201,69 +208,25 @@ export default {
       소령 : MAJ, 중령 : LCL, 대령 : COL
       */
       // 휴가 출발
-      vacation_start_list: [
-        { rank: "1LT", name: "문선재" },
-        { rank: "SGT", name: "추시경" },
-        { rank: "CPL", name: "송우민" },
-        { rank: "PFC", name: "류서준" },
-        { rank: "PVT", name: "김지용" }
-      ],
+      vacation_start_list: [],
       // 휴가 중
-      vacation_going_list: [
-        { rank: "CPT", name: "정선우" },
-        { rank: "SSG", name: "황현철" },
-        { rank: "CPL", name: "장주환" },
-        { rank: "CPL", name: "손원주" },
-        { rank: "PFC", name: "윤성호" },
-        { rank: "PVT", name: "신종현" }
-      ],
+      vacation_going_list: [],
       // 휴가 복귀
-      vacation_end_list: [
-        { rank: "MAJ", name: "김규연" },
-        { rank: "2LT", name: "고철순" },
-        { rank: "SGT", name: "박남규" },
-      ],
+      vacation_end_list: [],
       // 외박 출발
-      stayovn_start_list: [
-        { rank: "SGT", name: "이동건" },
-        { rank: "CPL", name: "최장규" },
-        { rank: "PFC", name: "김민겸" },
-      ],
+      stayovn_start_list: [],
       // 외박 복귀
-      stayovn_end_list: [
-        { rank: "SGT", name: "김남우" },
-        { rank: "PFC", name: "정철민" },
-        { rank: "PFC", name: "민규성" },
-      ],
+      stayovn_end_list: [],
       // 외출 
-      outing_list: [
-        { rank: "CPL", name: "김노을" },
-        { rank: "CPL", name: "최장규" },
-        { rank: "PFC", name: "정찬민" },
-        { rank: "PVT", name: "이정호" }
-      ],
+      outing_list: [],
       // 기타
-      etc_list: [
-        { rank: "CPL", name: "류민철" },
-        { rank: "PFC", name: "강건호" }
-      ],
+      etc_list: [],
     };
   },
-  props: {
-    msg: String,
-  },
-  methods: {   
-    getValue: function (value) {
-      return value;
-    },
-
-
-
-
-    setDate(){
+  mounted() {
       var uid = (firebase.auth().currentUser.uid)
-      var todate = this.wishdate
-      async function getbase() {
+      
+      async function getpromise() {
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
@@ -279,14 +242,50 @@ export default {
           console.error(error);
         }
       }
+
+      getpromise().then((base) => {
+        console.log("base : " + base)
+        this.basenum= base+'부대'
+    })
+
+  },
+
+  props: {
+    msg: String,
+  },
+
+  methods: {   
+    getValue: function (value) {
+      return value;
+    },
+
+    setDate(){
+      var uid = (firebase.auth().currentUser.uid)
+      var todate = this.wishdate
+      async function getbase() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/base`));
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const base = snapshot.val()
+            return base;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
 ////////////////////////////////////////////////////////////
       async function get_wishdate_vacstart(base=getbase()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_start`));
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_start/`));
           console.log("vacation start")
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             const arr = snapshot.val()
             return arr;
           }
@@ -300,17 +299,27 @@ export default {
 
       getbase().then((base) => {
         get_wishdate_vacstart(base).then((arr) => {
-          console.log(arr)
+          //console.log(arr)
+          if(arr != null){
+            var vacstart = Object.values(arr)
+          } 
+          else{
+            var vacstart = []
+          }
+          console.log("arr")
+          console.log(vacstart)
+          this.vacation_start_list = vacstart
+          this.value_vacation_start = vacstart.length
         })
       }) 
 ////////////////////////////////////////////////////////////
       async function get_wishdate_vacgoing(base = getbase()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_going`));
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_going/`));
           console.log("vacation going")
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             const arr = snapshot.val()
             return arr;
           }
@@ -324,17 +333,27 @@ export default {
 
       getbase().then((base) => {
         get_wishdate_vacgoing(base).then((arr) => {
-          console.log(arr)
+          //console.log(arr)
+          if(arr != null){
+            var vacgoing = Object.values(arr)
+          } 
+          else{
+            var vacgoing = []
+          }
+          console.log("arr")
+          console.log(vacgoing)
+          this.vacation_going_list = vacgoing
+          this.value_vacation_going = vacgoing.length
         })
       })  
 ////////////////////////////////////////////////////////////
       async function get_wishdate_vacend(base=getbase()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_end`));
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_end/`));
           console.log("vacation end")
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             const arr = snapshot.val()
             return arr;
           }
@@ -348,17 +367,28 @@ export default {
 
       getbase().then((base) => {
         get_wishdate_vacend(base).then((arr) => {
-          console.log(arr)
+          //console.log(arr)
+          if(arr != null){
+            var vacend = Object.values(arr)
+          } 
+          else{
+            var vacend = []
+          }
+
+          console.log("arr")
+          console.log(vacend)
+          this.vacation_end_list = vacend
+          this.value_vacation_end = vacend.length
         })
       })  
 ////////////////////////////////////////////////////////////
 async function get_wishdate_outing(base=getbase()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/outing`));
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/outing/`));
           console.log("outing")
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             const arr = snapshot.val()
             return arr;
           }
@@ -372,17 +402,28 @@ async function get_wishdate_outing(base=getbase()) {
 
       getbase().then((base) => {
         get_wishdate_outing(base).then((arr) => {
-          console.log(arr)
+          //console.log(arr)
+          if(arr != null){
+            var outing = Object.values(arr)
+          } 
+          else{
+            var outing = []
+          }
+          
+          console.log("arr")
+          console.log(outing)
+          this.outing_list = outing
+          this.value_outing = outing.length
         })
       })  
 ////////////////////////////////////////////////////////////
 async function get_wishdate_staystart(base=getbase()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_start`));
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_start/`));
           console.log("stayovn start")
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             const arr = snapshot.val()
             return arr;
           }
@@ -396,17 +437,28 @@ async function get_wishdate_staystart(base=getbase()) {
 
       getbase().then((base) => {
         get_wishdate_staystart(base).then((arr) => {
-          console.log(arr)
+          //console.log(arr)
+          if(arr != null){
+            var staystart = Object.values(arr)
+          } 
+          else{
+            var staystart = []
+          }
+
+          console.log("arr")
+          console.log(staystart)
+          this.stayovn_start_list = staystart
+          this.value_stayovn_start = staystart.length
         })
       })  
 ////////////////////////////////////////////////////////////
 async function get_wishdate_stayend(base=getbase()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_end`));
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_end/`));
           console.log("stayovn end")
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             const arr = snapshot.val()
             return arr;
           }
@@ -420,17 +472,28 @@ async function get_wishdate_stayend(base=getbase()) {
 
       getbase().then((base) => {
         get_wishdate_stayend(base).then((arr) => {
-          console.log(arr)
+          //console.log(arr)
+          if(arr != null){
+            var stayend = Object.values(arr)
+          } 
+          else{
+            var stayend = []
+          }
+          
+          console.log("arr")
+          console.log(stayend)
+          this.stayovn_end_list = stayend
+          this.value_stayovn_end = stayend.length
         })
       })  
 ////////////////////////////////////////////////////////////
 async function get_wishdate_etc(base=getbase()) {
         try{
           const db = ref(getDatabase())
-          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/etc`));
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/etc/`));
           console.log("etc")
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             const arr = snapshot.val()
             return arr;
           }
@@ -444,9 +507,55 @@ async function get_wishdate_etc(base=getbase()) {
 
       getbase().then((base) => {
         get_wishdate_etc(base).then((arr) => {
-          console.log(arr)
+          //console.log(arr)
+          if(arr != null){
+            var etc = Object.values(arr)
+          } 
+          else{
+            var etc = []
+          }
+          console.log("arr")
+          console.log(etc)
+          this.etc_list = etc
+          this.value_etc = etc.length
         })
       })  
+////////////////////////////////////////////////////////////
+async function get_totalnum(base=getbase()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/byuser/`));
+          console.log("etc")
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_totalnum(base).then((arr) => {
+          //console.log(arr)
+          if(arr != null){
+            var total = Object.values(arr)
+          } 
+          else{
+            var total = []
+          }
+          console.log("arr")
+          console.log(total)
+          this.total_num = total.length
+        })
+      }) 
+      setTimeout(() => this.out_num = this.value_outing + this.value_stayovn_start + this.value_stayovn_end +
+      this.value_vacation_start + this.value_vacation_going + this.value_vacation_end + this.value_etc, 400)
+      setTimeout(() => this.current_num = this.total_num - this.out_num, 410)
 
 
     },

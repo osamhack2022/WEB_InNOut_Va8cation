@@ -188,6 +188,7 @@ export default {
       
       var uid = (firebase.auth().currentUser.uid)
       
+
       async function getpromise() {
         try{
           const db = ref(getDatabase())
@@ -269,6 +270,8 @@ export default {
         }
 
       })
+      alert('출타 입력 완료!')
+      this.$router.go();
 
     }
   },
