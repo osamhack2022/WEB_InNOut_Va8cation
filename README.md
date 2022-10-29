@@ -57,7 +57,7 @@
 
 ## 설치 안내 (Installation Process)
 ```
-$ git clone git주소
+$ git clone https://github.com/osamhack2022-v2/WEB_InNOut_Va8cation.git
 $ yarn or npm install
 $ yarn run dev or npm run serve
 ```
