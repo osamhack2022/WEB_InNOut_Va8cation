@@ -16,13 +16,14 @@
             <router-link to="/inputpoint" class="a nav-link">상점입력/조회</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">환경설정</a>
+            <router-link to="/settings" class="nav-link">환경설정</router-link>
           </li>
         </ul>
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
           <b-badge variant="success">관리자</b-badge>
-          <b-button class="ms-4" v-on:click="logout">로그아웃</b-button>       
+
+          <button v-on:click="logout" class="btn btn-primary btn-block"><b>로그아웃</b></button>      
         </div>
       </div>
     </nav>
@@ -50,4 +51,8 @@ methods: {
 </script>
 
 <style scoped lang="scss">
+.logout {
+  width: "50%";
+  font-size: "5px"
+}
 </style>

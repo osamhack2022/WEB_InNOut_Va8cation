@@ -15,7 +15,7 @@
             <thead>
               <tr>
                 <!-- <th class="index">순서</th> -->
-                <th class="name">성명</th>
+                <th>성명</th>
                 <th class="rank">계급</th>
                 <th class="number">군번</th>
                 <th class="date">일시</th>
@@ -30,55 +30,55 @@
                 <!-- <td>
                   {{index+1}}
                 </td> -->
-                <td>
+                <th>
                   <input class="form-control form-control-sm" v-model="name" type="text" ref="name">
-                </td>
-                <td>
+                </th>
+                <th>
                   <b-form-select v-model="rank" :options="rank_options" size="sm"></b-form-select>
-                </td>
-                <td>
+                </th>
+                <th>
                   <input v-model="armynum" class="form-control form-control-sm" type="select" ref="armynum">
-                </td>
-                <td>
+                </th>
+                <th>
                   <input v-model="date" class="form-control form-control-sm" type="date" ref="date">
-                </td>
-                <td>
+                </th>
+                <th>
                   <b-form-select v-model="rule" :options="rules" size="sm"></b-form-select>
-                </td>
-                <td>
+                </th>
+                <th>
                   <input v-model="point" class="form-control form-control-sm" type="number" ref="point">
-                </td>
-                <td>
+                </th>
+                <th>
                   <input v-model="manager" class="form-control form-control-sm" type="text" ref="manager">
-                </td>
-                <td>
+                </th>
+                <th>
                   <button v-on:click="inputpoint" class="btn btn-primary btn-sm"><b>추가</b></button>
                   <!-- <button class="btn btn-primary btn-sm" @click="addRow(index)"><b>추가</b></button> -->
                   <!-- <button class="btn btn-danger btn-sm" @click="removeRow(index)"><b>제거</b></button> -->
-                </td>
+                </th>
 
               </tr>
               <tr v-for="item in point_list" v-bind:key="item" class="text-muted ms-2">
                 <td>
-                  <span v-html="item.name"></span>
+                  <c>{{item.name}}</c>
                 </td>
                 <td>
-                  <span v-html="item.rank"></span>
+                  <c>{{item.rank}}</c>
                 </td>
                 <td>
-                  <span v-html="item.armynum"></span>
+                  <c>{{item.armynum}}</c>
                 </td>
                 <td>
-                  <span v-html="item.date"></span>
+                  <c>{{item.date}}</c>
                 </td>
                 <td>
-                  <span v-html="item.rule"></span>
+                  <c>{{item.rule}}</c>
                 </td>
                 <td>
-                  <span v-html="item.point"></span>
+                  <c>{{item.point}}</c>
                 </td>
                 <td>
-                  <span v-html="item.manager"></span>
+                  <c>{{item.manager}}</c>
                 </td>
               </tr>
             </tbody>
@@ -340,6 +340,10 @@ export default {
 th {
   margin: 4px;
   text-align: center;
+<<<<<<< HEAD
+=======
+  vertical-align: middle;
+>>>>>>> aef25ca5ccb22594d2dc58b13517c356865ab5c5
 }
 
 td {
@@ -373,5 +377,16 @@ table {
 .headline {
   text-align: center;
   // h3 > b {color: $color-secondary-orange;}
+}
+
+.middle {
+  display: flex;
+  align-items: center;
+  height: 100px;
+}
+
+c {
+  color:black;
+  font-weight: "normal";
 }
 </style>
