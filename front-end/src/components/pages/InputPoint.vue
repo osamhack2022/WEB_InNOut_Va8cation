@@ -10,7 +10,7 @@
         </h1>
       </div>
       <b-card class="shadow my-4">
-        <div class="container-fluid p-0 d-flex justify-content-between" v-if="level=='admin' || level=='officer'">
+        <div class="container-fluid p-0 d-flex justify-content-between">
           <table>
             <thead>
               <tr>
@@ -26,7 +26,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(row, index) in rows" :key="index">
+              <tr v-for="(row, index) in rows" :key="index" v-if="level=='admin' || level=='officer'">
                 <!-- <td>
                   {{index+1}}
                 </td> -->
