@@ -76,7 +76,6 @@
             
           })
           function loginSuccess(firebaseUser){
-            alert('Login!');
             //this.$router.push("/home")
             window.location.href = "/home"
           }

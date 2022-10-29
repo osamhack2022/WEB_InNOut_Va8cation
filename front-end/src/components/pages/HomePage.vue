@@ -242,7 +242,7 @@ export default {
         const db = ref(getDatabase())
         const snapshot = await get(child(db, `user/${uid}/level`));
         if (snapshot.exists()) {
-          console.log(snapshot.val());
+          
           const level = snapshot.val()
           return level;
         }
@@ -255,7 +255,7 @@ export default {
     }
 
     getlevelpromise().then((level) => {
-      console.log("level : " + level)
+      
       this.level = level
     })
   },
@@ -267,7 +267,7 @@ export default {
         const db = ref(getDatabase())
         const snapshot = await get(child(db, `user/${uid}/base`));
         if (snapshot.exists()) {
-          console.log(snapshot.val());
+          
           const base = snapshot.val()
           return base;
         }
@@ -280,7 +280,7 @@ export default {
     }
 
     getpromise().then((base) => {
-      console.log("base : " + base)
+      
       this.basenum = base + '부대'
     })
 
@@ -319,7 +319,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_start/`));
-          console.log("vacation start")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -342,8 +342,7 @@ export default {
           else {
             var vacstart = []
           }
-          console.log("arr")
-          console.log(vacstart)
+          
           this.vacation_start_list = vacstart
           this.value_vacation_start = vacstart.length
           this.sum_value += vacstart.length
@@ -354,7 +353,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_going/`));
-          console.log("vacation going")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -377,8 +376,7 @@ export default {
           else {
             var vacgoing = []
           }
-          console.log("arr")
-          console.log(vacgoing)
+          
           this.vacation_going_list = vacgoing
           this.value_vacation_going = vacgoing.length
           this.sum_value += vacgoing.length
@@ -389,7 +387,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_end/`));
-          console.log("vacation end")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -413,8 +411,7 @@ export default {
             var vacend = []
           }
 
-          console.log("arr")
-          console.log(vacend)
+          
           this.vacation_end_list = vacend
           this.value_vacation_end = vacend.length
           this.sum_value += vacend.length
@@ -425,7 +422,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/outing/`));
-          console.log("outing")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -449,8 +446,7 @@ export default {
             var outing = []
           }
 
-          console.log("arr")
-          console.log(outing)
+          
           this.outing_list = outing
           this.value_outing = outing.length
           this.sum_value += outing.length
@@ -461,7 +457,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_start/`));
-          console.log("stayovn start")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -485,8 +481,7 @@ export default {
             var staystart = []
           }
 
-          console.log("arr")
-          console.log(staystart)
+          
           this.stayovn_start_list = staystart
           this.value_stayovn_start = staystart.length
           this.sum_value += staystart.length
@@ -497,7 +492,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_end/`));
-          console.log("stayovn end")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -521,8 +516,7 @@ export default {
             var stayend = []
           }
 
-          console.log("arr")
-          console.log(stayend)
+          
           this.stayovn_end_list = stayend
           this.value_stayovn_end = stayend.length
           this.sum_value += stayend.length
@@ -533,7 +527,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/etc/`));
-          console.log("etc")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -556,8 +550,7 @@ export default {
           else {
             var etc = []
           }
-          console.log("arr")
-          console.log(etc)
+          
           this.etc_list = etc
           this.value_etc = etc.length
           this.sum_value += etc.length
@@ -568,7 +561,7 @@ export default {
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/byuser/`));
-          console.log("etc")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -591,8 +584,7 @@ export default {
           else {
             var total = []
           }
-          console.log("arr")
-          console.log(total)
+          
           this.total_num = total.length
         })
       })

@@ -152,7 +152,7 @@ export default {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            
             const base = snapshot.val()
             return base;
           }
@@ -169,7 +169,7 @@ export default {
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bypoint/`));
-          console.log("point arr")
+          
           if (snapshot.exists()) {
             //console.log(snapshot.val());
             const arr = snapshot.val()
@@ -192,8 +192,7 @@ export default {
           else{
             var point = []
           }
-          console.log("arr")
-          console.log(point)
+          
           this.point_list = point
           this.value_point = point.length
         })
@@ -207,7 +206,7 @@ export default {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/level`));
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            
             const level = snapshot.val()
             return level;
           }
@@ -220,7 +219,7 @@ export default {
       }
 
       getlevelpromise().then((level) => {
-        console.log("level : " + level)
+        
         this.level= level
     })
 
@@ -280,7 +279,7 @@ export default {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
           if (snapshot.exists()) {
-            console.log(snapshot.val());
+            
             const base = snapshot.val()
             return base;
           }
@@ -293,7 +292,7 @@ export default {
       }
 
       getpromise().then((base) => {
-        console.log("base : " + base)
+        
         var today = new Date();
 
         set(ref(getDatabase(), 'base/' + base + '/dashboard/bypoint/' + 
