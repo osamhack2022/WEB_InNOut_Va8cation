@@ -309,11 +309,23 @@ export default {
 
 
 <style scoped lang="scss">
-.th {
+th {
   margin: 4px;
+  text-align: center;
 }
 
-;
+td {
+  text-align: center;
+}
+
+.form-control {
+  text-align: center
+}
+
+.form-select {
+  text-align: center
+}
+
 
 table {
   width: 100%;
