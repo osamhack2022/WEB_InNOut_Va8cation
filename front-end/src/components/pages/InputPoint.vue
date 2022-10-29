@@ -340,10 +340,6 @@ export default {
 th {
   margin: 4px;
   text-align: center;
-<<<<<<< HEAD
-=======
-  vertical-align: middle;
->>>>>>> aef25ca5ccb22594d2dc58b13517c356865ab5c5
 }
 
 td {
