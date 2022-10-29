@@ -1,5 +1,7 @@
 <template>
-  <AppHeader />
+  <div v-if="level=='user'"> <AppHeader-soldier /> </div>
+  <div v-if="level=='admin'"> <AppHeader-admin /> </div>
+  <div v-if="level=='officer'"> <AppHeader /> </div>
   <div class="container-fluid col-8">
 
     <main>
@@ -218,6 +220,31 @@ export default {
       // 기타
       etc_list: [],
     };
+  },
+  created(){
+    var uid = (firebase.auth().currentUser.uid)
+    
+    async function getlevelpromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/level`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const level = snapshot.val()
+            return level;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getlevelpromise().then((level) => {
+        console.log("level : " + level)
+        this.level= level
+    })
   },
   mounted() {
       var uid = (firebase.auth().currentUser.uid)

@@ -1,5 +1,7 @@
 <template>
-  <AppHeader />
+  <div v-if="level=='user'"> <AppHeader-soldier /> </div>
+  <div v-if="level=='admin'"> <AppHeader-admin /> </div>
+  <div v-if="level=='officer'"> <AppHeader /> </div>
   <div class="container-fluid col-8">
     <main>
       <div class="headline p-4">
@@ -29,28 +31,28 @@
                   {{index+1}}
                 </td> -->
                 <td>
-                  <input class="form-control form-control-sm" v-model="row.name" type="text" ref="name">
+                  <input class="form-control form-control-sm" v-model="name" type="text" ref="name">
                 </td>
                 <td>
-                  <b-form-select v-model="row.rank" :options="rank_options" size="sm"></b-form-select>
+                  <b-form-select v-model="rank" :options="rank_options" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <input v-model="row.armynum" class="form-control form-control-sm" type="select" ref="armynum">
+                  <input v-model="armynum" class="form-control form-control-sm" type="select" ref="armynum">
                 </td>
                 <td>
-                  <input v-model="row.date" class="form-control form-control-sm" type="date" ref="date">
+                  <input v-model="date" class="form-control form-control-sm" type="date" ref="date">
                 </td>
                 <td>
-                  <b-form-select v-model="row.rule" :options="rules" size="sm"></b-form-select>
+                  <b-form-select v-model="rule" :options="rules" size="sm"></b-form-select>
                 </td>
                 <td>
-                  <input v-model="row.point" class="form-control form-control-sm" type="number" ref="point">
+                  <input v-model="point" class="form-control form-control-sm" type="number" ref="point">
                 </td>
                 <td>
-                  <input v-model="row.manager" class="form-control form-control-sm" type="text" ref="manager">
+                  <input v-model="manager" class="form-control form-control-sm" type="text" ref="manager">
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-sm"><b>추가</b></button>
+                  <button v-on:click="inputpoint" class="btn btn-primary btn-sm"><b>추가</b></button>
                   <!-- <button class="btn btn-primary btn-sm" @click="addRow(index)"><b>추가</b></button> -->
                   <!-- <button class="btn btn-danger btn-sm" @click="removeRow(index)"><b>제거</b></button> -->
                 </td>
@@ -79,13 +81,18 @@
 
 
 <script>
-import AppHeader from '../AppHeader.vue';
+import AppHeader from '@/components/AppHeader';
+// eslint-disable-next-line no-unused-vars
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 export default {
   name: "InputPoint",
   data() {
     return {
       rows: [
-        { name: "굳건이", rank: "SGT", armynum: "21-1234567", date: "2022-10-28", rule: "1-1", point: 3, manager: "문규성" }
+        { name: "", rank: "", armynum: "", date: "", rule: "", point: 0, manager: "" }
       ],
       rank: null, outtype: null,
       rank_options: [
@@ -96,8 +103,35 @@ export default {
         { value: "1-2", text: '머시기 우수' },
         { value: "2-1", text: '근무 태도 우수' },
         { value: "3-1", text: '어쩌구 저쩌구 우수' },
-      ]
+      ],
+      level: '',
     }
+  },
+  created(){
+    var uid = (firebase.auth().currentUser.uid)
+    
+    async function getlevelpromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/level`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const level = snapshot.val()
+            return level;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getlevelpromise().then((level) => {
+        console.log("level : " + level)
+        this.level= level
+    })
+
   },
   methods: {
     addRow: function (index) {
@@ -107,10 +141,86 @@ export default {
         console.log(e);
       }
     },
+
+
+
     removeRow: function (index) {
       this.rows.splice(index, 1)
+    },
+
+
+    inputpoint() {
+      if(!this.name) {
+        alert("입력된 이름이 없습니다.");
+        return;
+      }
+      if(!this.rank) {
+        alert("입력된 계급이 없습니다.");
+        return;
+      }
+      if(!this.armynum) {
+        alert("입력된 군번이 없습니다.");
+        return;
+      }
+      if(!this.date) {
+        alert("입력된 일시가 없습니다.");
+        return;
+      }
+      if(!this.rule) {
+        alert("입력된 기준이 없습니다.");
+        return;
+      }
+      if(!this.manager) {
+        alert("입력된 담당간부가 없습니다.");
+        return;
+      }
+      var date = new Date()
+      
+      var uid = (firebase.auth().currentUser.uid)
+      
+
+      async function getpromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/base`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const base = snapshot.val()
+            return base;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getpromise().then((base) => {
+        console.log("base : " + base)
+        var today = new Date();
+
+        set(ref(getDatabase(), 'base/' + base + '/point/' + this.armynum + '/' + 
+        date.getFullYear() + ':' + (date.getMonth() + 1) + ':' + date.getDate() + 
+        date.getHours + ':' + date.getMinutes() + ':' + date.getSeconds()), {
+          name : this.name,
+          rank : this.rank,
+          armynum : this.armynum,
+          date : this.date,
+          rule : this.rule,
+          point : this.point,
+          manager : this.manager,
+        })
+
+
+      })
+      alert('상점 입력 완료!')
+      this.$router.go();
+
     }
+
   },
+
   components: { AppHeader }
 };
 </script>

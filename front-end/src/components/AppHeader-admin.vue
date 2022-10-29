@@ -21,7 +21,8 @@
         </ul>
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
-          <b-badge variant="success">관리자</b-badge>       
+          <b-badge variant="success">관리자</b-badge>
+          <b-button class="ms-4" v-on:click="logout">로그아웃</b-button>       
         </div>
       </div>
     </nav>
@@ -29,8 +30,22 @@
 </template>
 
 <script>
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
   export default {
     name: 'AppHeader-admin',
+    data(){
+
+},
+
+methods: {
+  logout: function(){
+    firebase.auth().signOut().then(() => {
+      this.$router.replace('/')
+    })
+  }
+}
   };
 </script>
 
