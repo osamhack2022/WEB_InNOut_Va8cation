@@ -9,9 +9,9 @@
           <li class="nav-item active">
             <router-link to="/home" class="a nav-link">출타현황</router-link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">휴가조회</a>
-          </li>
+          <!--<li class="nav-item">
+            <router-link to="/inputvacation" class="a nav-link">휴가조회</router-link>
+          </li>-->
           <li class="nav-item">
             <router-link to="/inputpoint" class="a nav-link">상점조회</router-link>
           </li>

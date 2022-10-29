@@ -130,12 +130,12 @@ methods: {
           battalion = '2BN'
         } 
         else if(this.code == "5678user@1"){
-          type = "solider"
+          type = "soldier"
           base = '5678'  
           battalion = '1BN'
         }
         else if(this.code == "5678user@2"){
-          type = "solider"
+          type = "soldier"
           base = '5678'
           battalion = '2BN'
         }

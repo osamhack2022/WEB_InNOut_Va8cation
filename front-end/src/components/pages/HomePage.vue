@@ -1,5 +1,5 @@
 <template>
-  <div v-if="level=='user'"> <AppHeader-soldier /> </div>
+  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>
   <div v-if="level=='admin'"> <AppHeader-admin /> </div>
   <div v-if="level=='officer'"> <AppHeader /> </div>
   <div class="container-fluid col-8">
@@ -65,7 +65,7 @@
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="my-0">열외내용</b-card-text>
             </div>
-            <b-progress class="mt-2" :max=out_num>
+            <b-progress class="mt-2" :max=out_num :key="max_component_key">
               <b-progress-bar :style="{ 'background-color': '#FF9754' }" :value="value_vacation_start">휴가복귀</b-progress-bar>
               <b-progress-bar :style="{ 'background-color': '#FF7262' }" :value="value_vacation_going">휴가 중</b-progress-bar>
               <b-progress-bar :style="{ 'background-color': '#E84D65' }" :value="value_vacation_end">휴가 복귀</b-progress-bar>
@@ -198,7 +198,8 @@ export default {
       current_num: 0,
       max: 0,
       basenum: '',
-      sum_value : 0,
+      sum_value: 0,
+      max_component_key: 0,
       /* 계급 (영문명)
       이병 : PVT, 일병 : PFC, 상병 : CPL, 병장 : SGT
       하사 : SSG, 중사 : SFC, 상사 : FSG, 원사 : SGM
@@ -586,7 +587,7 @@ async function get_totalnum(base=getbase()) {
       setTimeout(() => this.out_num = this.value_outing + this.value_stayovn_start + this.value_stayovn_end +
       this.value_vacation_start + this.value_vacation_going + this.value_vacation_end + this.value_etc, 400)
       setTimeout(() => this.current_num = this.total_num - this.out_num, 410)
-
+      setTimeout(() => this.max_component_key += 1, 420)
 
     },
 

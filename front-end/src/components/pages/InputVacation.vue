@@ -1,5 +1,5 @@
 <template>
-  <div v-if="level=='user'"> <AppHeader-soldier /> </div>
+  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>
   <div v-if="level=='admin'"> <AppHeader-admin /> </div>
   <div v-if="level=='officer'"> <AppHeader /> </div>
   <div class="container-fluid col-8">
@@ -9,7 +9,7 @@
           <b>출타입력</b>
         </h1>
       </div>
-      <b-card class="shadow my-4">
+      <b-card class="shadow my-4" v-if="level=='admin' || level=='officer'" >
         <div class="container-fluid p-0 d-flex justify-content-between">
           <table>
             <thead>

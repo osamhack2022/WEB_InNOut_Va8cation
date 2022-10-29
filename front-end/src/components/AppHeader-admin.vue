@@ -10,7 +10,7 @@
             <router-link to="/home" class="a nav-link">출타현황</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">휴가입력/조회</a>
+            <router-link to="/inputvacation" class="a nav-link" >출타입력</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/inputpoint" class="a nav-link">상점입력/조회</router-link>

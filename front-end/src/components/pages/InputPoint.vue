@@ -1,5 +1,5 @@
 <template>
-  <div v-if="level=='user'"> <AppHeader-soldier /> </div>
+  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>
   <div v-if="level=='admin'"> <AppHeader-admin /> </div>
   <div v-if="level=='officer'"> <AppHeader /> </div>
   <div class="container-fluid col-8">
@@ -10,7 +10,7 @@
         </h1>
       </div>
       <b-card class="shadow my-4">
-        <div class="container-fluid p-0 d-flex justify-content-between">
+        <div class="container-fluid p-0 d-flex justify-content-between" v-if="level=='admin' || level=='officer'">
           <table>
             <thead>
               <tr>
@@ -56,6 +56,30 @@
                   <!-- <button class="btn btn-primary btn-sm" @click="addRow(index)"><b>추가</b></button> -->
                   <!-- <button class="btn btn-danger btn-sm" @click="removeRow(index)"><b>제거</b></button> -->
                 </td>
+
+              </tr>
+              <tr v-for="item in point_list" v-bind:key="item" class="text-muted ms-2">
+                <td>
+                  <span v-html="item.name"></span>
+                </td>
+                <td>
+                  <span v-html="item.rank"></span>
+                </td>
+                <td>
+                  <span v-html="item.armynum"></span>
+                </td>
+                <td>
+                  <span v-html="item.date"></span>
+                </td>
+                <td>
+                  <span v-html="item.rule"></span>
+                </td>
+                <td>
+                  <span v-html="item.point"></span>
+                </td>
+                <td>
+                  <span v-html="item.manager"></span>
+                </td>
               </tr>
             </tbody>
             <!-- <tbody>
@@ -74,6 +98,10 @@
             </tbody> -->
           </table>
         </div>
+
+
+
+
       </b-card>
     </main>
   </div>
@@ -96,16 +124,80 @@ export default {
       ],
       rank: null, outtype: null,
       rank_options: [
-        { value: "PVT", text: '이병' }, { value: "PFC", text: '일병' }, { value: "CPL", text: '상병' }, { value: "SGT", text: '병장' },
+        //{ value: "PVT", text: '이병' }, { value: "PFC", text: '일병' }, { value: "CPL", text: '상병' }, { value: "SGT", text: '병장' },
+        { value: "이병", text: '이병' }, { value: "일병", text: '일병' }, { value: "상병", text: '상병' }, { value: "병장", text: '병장' },
       ],
       rules: [
-        { value: "1-1", text: '생활관 정리정돈 우수' },
-        { value: "1-2", text: '머시기 우수' },
-        { value: "2-1", text: '근무 태도 우수' },
-        { value: "3-1", text: '어쩌구 저쩌구 우수' },
+        //{ value: "1-1", text: '생활관 정리정돈 우수' }, 
+        //{ value: "1-2", text: '머시기 우수' },
+        //{ value: "2-1", text: '근무 태도 우수' },
+        //{ value: "3-1", text: '어쩌구 저쩌구 우수' },
+        { value: "생활관 정리정돈 우수", text: '생활관 정리정돈 우수' },
+        { value: "모범사례 식별", text: '모범사례 식별' },
+        { value: "근무 태도 우수", text: '근무 태도 우수' }, 
+        { value: "휴대폰 부정 사용 보고", text: '휴대폰 부정 사용 보고' },
       ],
       level: '',
+      point_list: [],
+      value_point : '',
     }
+  },
+  mounted(){
+
+    var uid = (firebase.auth().currentUser.uid)
+      
+
+      async function getpromise() {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `user/${uid}/base`));
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const base = snapshot.val()
+            return base;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+
+    async function get_pointarr(base = getpromise()) {
+        try{
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bypoint/`));
+          console.log("point arr")
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        }catch(error) {
+          console.error(error);
+        }
+      }
+
+      getpromise().then((base) => {
+        get_pointarr(base).then((arr) => {
+          //console.log(arr)
+          if(arr != null){
+            var point = Object.values(arr)
+          } 
+          else{
+            var point = []
+          }
+          console.log("arr")
+          console.log(point)
+          this.point_list = point
+          this.value_point = point.length
+        })
+      })  
   },
   created(){
     var uid = (firebase.auth().currentUser.uid)
@@ -134,6 +226,10 @@ export default {
 
   },
   methods: {
+    getValue: function (value) {
+      return value;
+    },
+    
     addRow: function (index) {
       try {
         this.rows.splice(index + 1, 0, {});
@@ -200,9 +296,21 @@ export default {
         console.log("base : " + base)
         var today = new Date();
 
-        set(ref(getDatabase(), 'base/' + base + '/point/' + this.armynum + '/' + 
+        set(ref(getDatabase(), 'base/' + base + '/dashboard/bypoint/' + 
         date.getFullYear() + ':' + (date.getMonth() + 1) + ':' + date.getDate() + 
-        date.getHours + ':' + date.getMinutes() + ':' + date.getSeconds()), {
+        '-' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()), {
+          name : this.name,
+          rank : this.rank,
+          armynum : this.armynum,
+          date : this.date,
+          rule : this.rule,
+          point : this.point,
+          manager : this.manager,
+        })
+
+        set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/point/' + 
+        date.getFullYear() + ':' + (date.getMonth() + 1) + ':' + date.getDate() + 
+        '-' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()), {
           name : this.name,
           rank : this.rank,
           armynum : this.armynum,
@@ -217,7 +325,9 @@ export default {
       alert('상점 입력 완료!')
       this.$router.go();
 
-    }
+    },
+
+
 
   },
 
