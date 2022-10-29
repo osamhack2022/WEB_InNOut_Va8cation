@@ -318,6 +318,23 @@ td {
   text-align: center;
 }
 
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #1291E6;
+  --bs-btn-border-color: #1291E6;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #0872FC;
+  --bs-btn-hover-border-color: #0872FC;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0872FC;
+  --bs-btn-active-border-color: #0872FC;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #08C3FC;
+  --bs-btn-disabled-border-color: #08C3FC;
+}
+
 .form-control {
   text-align: center
 }

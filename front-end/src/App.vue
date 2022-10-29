@@ -1,15 +1,5 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">MyLogin</router-link> |
-      <router-link to="/join">JoinPage</router-link> |
-      <router-link to="/joininfo">JoinInfo</router-link> |
-      <router-link to="/passwordreset">PasswordReset</router-link> |
-      <router-link to="/home">HomePage</router-link> |
-      <router-link to="/inputpoint">InputPoint</router-link> |
-      <router-link to="/inputvacation">InputVacation</router-link> |
-      <router-link to="/settings">Settings</router-link>
-    </nav>
     <router-view />
   </div>
 </template>

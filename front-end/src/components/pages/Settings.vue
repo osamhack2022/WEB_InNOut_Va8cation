@@ -1,15 +1,24 @@
 <template>
-  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>
-  <div v-if="level=='admin'"> <AppHeader-admin /> </div>
-  <div v-if="level=='officer'"> <AppHeader /> </div>
+  <div v-if="level == 'soldier'">
+    <AppHeader-soldier />
+  </div>
+  <div v-if="level == 'admin'">
+    <AppHeader-admin />
+  </div>
+  <div v-if="level == 'officer'">
+    <AppHeader />
+  </div>
   <div class="container-fluid col-8">
     <main>
-      <div class="headline p-4" v-if="level=='admin'">
+      <div class="headline p-4" v-if="level == 'admin'">
         <h1>
           <b>환경설정</b>
         </h1>
       </div>
       <b-card class="shadow my-4">
+        <div class="container-fluid p-0 d-flex justify-content-center mb-2">
+          <h5><b>장병 정보추가</b></h5>
+        </div>
         <div class="container-fluid p-0 d-flex justify-content-between">
           <table>
             <thead>
@@ -64,34 +73,34 @@ export default {
   data() {
     return {
       rows: [
-        {name: "", armynum: "", battalion: ""}
+        { name: "", armynum: "", battalion: "" }
       ],
       level: '',
     }
   },
-  created(){
+  created() {
     var uid = (firebase.auth().currentUser.uid)
-    
-    async function getlevelpromise() {
-        try{
-          const db = ref(getDatabase())
-          const snapshot = await get(child(db, `user/${uid}/level`));
-          if (snapshot.exists()) {
-            console.log(snapshot.val());
-            const level = snapshot.val()
-            return level;
-          }
-          else {
-            console.log("No data available");
-          }
-        }catch(error) {
-          console.error(error);
-        }
-      }
 
-      getlevelpromise().then((level) => {
-        console.log("level : " + level)
-        this.level= level
+    async function getlevelpromise() {
+      try {
+        const db = ref(getDatabase())
+        const snapshot = await get(child(db, `user/${uid}/level`));
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          const level = snapshot.val()
+          return level;
+        }
+        else {
+          console.log("No data available");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getlevelpromise().then((level) => {
+      console.log("level : " + level)
+      this.level = level
     })
   },
   methods: {
@@ -102,31 +111,31 @@ export default {
         console.log(e);
       }
     },
-    removeRow: function(index) {
-      this.rows.splice(index,1)
+    removeRow: function (index) {
+      this.rows.splice(index, 1)
     },
-    
+
     inputsoldier() {
-      if(!this.name) {
+      if (!this.name) {
         alert("입력된 이름이 없습니다.");
         return;
       }
-      if(!this.armynum) {
+      if (!this.armynum) {
         alert("입력된 군번이 없습니다.");
         return;
       }
-      if(!this.battalion) {
+      if (!this.battalion) {
         alert("입력된 대대가 없습니다.");
         return;
       }
 
       var date = new Date()
-      
+
       var uid = (firebase.auth().currentUser.uid)
-      
+
 
       async function getpromise() {
-        try{
+        try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
           if (snapshot.exists()) {
@@ -137,7 +146,7 @@ export default {
           else {
             console.log("No data available");
           }
-        }catch(error) {
+        } catch (error) {
           console.error(error);
         }
       }
@@ -145,9 +154,9 @@ export default {
       getpromise().then((base) => {
         console.log("base : " + base)
         set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/profile'), {
-          name : this.name,
-          armynum : this.armynum,
-          battalion : this.battalion
+          name: this.name,
+          armynum: this.armynum,
+          battalion: this.battalion
         })
       })
       alert('장병 정보 입력 완료!')
@@ -161,11 +170,31 @@ export default {
 
 
 <style scoped lang="scss">
-.th {
+th {
   margin: 4px;
+  text-align: center;
 }
 
-;
+td {
+  text-align: center;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #1291E6;
+  --bs-btn-border-color: #1291E6;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #0872FC;
+  --bs-btn-hover-border-color: #0872FC;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0872FC;
+  --bs-btn-active-border-color: #0872FC;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #08C3FC;
+  --bs-btn-disabled-border-color: #08C3FC;
+}
 
 table {
   width: 100%;

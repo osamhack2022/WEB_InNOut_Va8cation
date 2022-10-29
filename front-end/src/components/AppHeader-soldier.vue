@@ -19,7 +19,7 @@
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
           <b-badge variant="secondary">용사</b-badge>
-          <button v-on:click="logout" class="btn btn-primary btn-sm" >로그아웃</button> 
+          <a v-on:click="logout" class="header-button ms-4">로그아웃</a>   
         </div>
       </div>
     </nav>
@@ -47,4 +47,13 @@ methods: {
 </script>
 
 <style scoped lang="scss">
+.header-button {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+}
+
+.header-button:hover {
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+}
 </style>
