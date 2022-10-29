@@ -15,7 +15,7 @@
         <form class>
           <div class="form-group mb-4">
             <label class="el-checkbox">
-              <input type="checkbox" class="checkbox-inner" id="checkbox" v-model="checked" />
+              <input type="checkbox" class="checkbox-inner" name="check" v-on:click="selectAll(this)" />
               <label for="checkbox">{{ checked }}</label>
               <label for="exampleInputEmail1">이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</label>
             </label>
@@ -148,7 +148,7 @@
                 <h6>부칙</h6>
                 <p>본 약관은 2022년 10월 18일부터 적용한다.</p>
               </div>
-              <input type="checkbox" class="checkbox-inner" id="checkbox" v-model="checked" />
+              <input type="checkbox" class="checkbox-inner" name="check" />
               <label for="checkbox">{{ checked }}</label>
               <label for="exampleInputEmail1">이용약관에 모두 동의합니다.</label>
             </section>
@@ -252,7 +252,7 @@
                     사이트에 링크되어 있는 웹사이트들이 개인정보를 수집하는 행위에 대해서는 본 "개인정보취급방침"이 적용되지 않음을 알려 드립니다.
                   </p>
               </div>
-              <input type="checkbox" class="checkbox-inner" id="checkbox" v-model="checked" />
+              <input type="checkbox" class="checkbox-inner" name="check" />
               <label for="checkbox">{{ checked }}</label>
               <label for="exampleInputEmail1">개인정보 수집 및 이용에 대한 안내에 동의합니다.</label>
             </section>
@@ -271,8 +271,23 @@
 
 <script>
 export default {
-  name: "PasswordReset",
+  name: "joinPage",
   data() {
+    return{
+      checked: '',
+      check1:'',
+      check2:'',
+    }
+  },
+  methods:{
+    selectAll(selectAll){
+      const checkboxes 
+       = document.getElementsByName('check');
+  
+     checkboxes.forEach((checkbox) => {
+        checkbox.checked = selectAll.checked;
+      })
+    },
   }
 };
 </script>
