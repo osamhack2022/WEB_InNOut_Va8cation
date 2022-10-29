@@ -78,6 +78,3 @@ Team Va8cation
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
 This project is licensed under the terms of the MIT license.
-
-
-![Footer](https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=footer)
