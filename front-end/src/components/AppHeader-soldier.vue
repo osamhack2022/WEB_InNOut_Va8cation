@@ -19,7 +19,7 @@
         <div class="Header-item position-relative">
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
           <b-badge variant="secondary">용사</b-badge>
-          <b-button class="ms-4" v-on:click="logout">로그아웃</b-button> 
+          <button v-on:click="logout" class="btn btn-primary btn-sm" >로그아웃</button> 
         </div>
       </div>
     </nav>
