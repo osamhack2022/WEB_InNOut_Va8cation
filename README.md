@@ -146,5 +146,5 @@ _IN&OUT 서비스는 계정레벨, 부대번호, 대대번호를 식별하기 �
 - Front-end, Design
 - Contact : (mgs4786@naver.com)
 
-## 저작권 및 사용권 정보 (Copyleft / End User License)
+## 📚저작권 및 사용권 정보 (Copyleft / End User License)
 This project is licensed under the terms of the MIT license.
