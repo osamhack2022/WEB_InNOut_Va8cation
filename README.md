@@ -140,7 +140,7 @@ _IN&OUT 서비스는 계정레벨, 부대번호, 대대번호를 식별하기 �
 ### **Team 🏖Va8cation🏖**
 ### 👤 팀원 소개
 #### 팀장 | Lee Dong Hyeop([labyrinth03](https://github.com/labyrinth03)) 
-- Team leader, DB
+- Team leader, Front-end, DB
 - Contact : (leedong1003@naver.com)
 #### 팀원 | Moon Gyu Seong([Betadoggy](https://github.com/Betadoggy))
 - Front-end, Design
