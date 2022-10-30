@@ -1,4 +1,4 @@
-<template>
+<template>                                                        <!--홈페이지(출타현황조회)-->
   <div v-if="level == 'soldier'">
     <AppHeader-soldier />
   </div>
@@ -14,15 +14,15 @@
       <div>
         <div class="headline p-4">
           <h1 :key="date_component_key">
-            <Base v-model="basenum">
+            <Base v-model="basenum">                                <!-- 부대 번호 출력 -->
             </Base>
             <div class="result">
               <b>{{ basenum }}</b>
             </div>
-            <Base v-model="changed_date" :key="date_component_key">
+            <Base v-model="changed_date" :key="date_component_key"> <!-- 현재 조회하고 있는 날짜 출력-->
             </Base>
-            <div class="result">
-              <b>{{ changed_date }}</b>
+            <div class="result text-muted mt-4">
+              <h4>{{ changed_date }}</h4>                           
             </div>            
           </h1>
 
@@ -32,7 +32,7 @@
               <path fill-rule="evenodd"
                 d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
             </svg>
-            <input class="form-control form-control" v-model='wishdate' type="date" ref="date">
+            <input class="form-control form-control" v-model='wishdate' type="date" ref="date">                         <!-- 조회하고자 하는 날짜 데이트피커 설정 -->
             <button type="submit" v-on:click="setDate" class="btn btn-primary btn-block ms-2"><b>날짜설정</b></button>
             <!--<h6 class="text-muted m-0 px-3">
               {{ondate}}
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <b-card-group deck>
+        <b-card-group deck>                                                     <!-- 총원, 열외, 현재원 명수 출력-->
           <b-card class="shadow">
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="m-0">총원</b-card-text>
@@ -77,7 +77,7 @@
             <div class="container-fluid p-0 d-flex justify-content-between">
               <b-card-text class="my-0">열외내용</b-card-text>
             </div>
-            <b-progress class="mt-2" :max=out_num :key="max_component_key">
+            <b-progress class="mt-2" :max=out_num :key="max_component_key">                                       <!--열외내용 디자인 폼-->
               <b-progress-bar :style="{ 'background-color': '#FF9754' }" :value="value_vacation_start">휴가복귀
               </b-progress-bar>
               <b-progress-bar :style="{ 'background-color': '#FF7262' }" :value="value_vacation_going">휴가 중
@@ -93,7 +93,7 @@
               <b-progress-bar :style="{ 'background-color': '#57606A' }" :value="value_etc">기타
               </b-progress-bar>
             </b-progress>
-            <div class="px-0 pt-4 d-flex flex-column">
+            <div class="px-0 pt-4 d-flex flex-column">                                                            <!--각 열외내용 인원 계급 성명 출력-->
               <div class="mr-3">
                 <svg :style="{ 'fill': '#FF9754' }" height="16" viewBox="0 0 16 16" width="16"
                   class="octicon octicon-dot-fill my-1 mr-2">
@@ -202,7 +202,7 @@ export default {
   components: {
     AppHeader,
   },
-  data() {
+  data() {                                            // 사용되는 변수들
     return {
       wishdate: null,
       value_outing: 0,
@@ -247,7 +247,7 @@ export default {
   created() {
     var uid = (firebase.auth().currentUser.uid)
 
-    async function getlevelpromise() {
+    async function getlevelpromise() {                              //계정레벨에 따른 헤더 출력 변화를 위한 계정레벨 획득 부분
       try {
         const db = ref(getDatabase())
         const snapshot = await get(child(db, `user/${uid}/level`));
@@ -278,7 +278,7 @@ export default {
   mounted() {
     var uid = (firebase.auth().currentUser.uid)
 
-    async function getpromise() {
+    async function getpromise() {                                   // 부대번호 획득 부분
       try {
         const db = ref(getDatabase())
         const snapshot = await get(child(db, `user/${uid}/base`));
@@ -330,7 +330,7 @@ export default {
 
 
 
-    async function get_wishdate_vacstart(base = getbase()) {
+    async function get_wishdate_vacstart(base = getbase()) {                                      //휴가 시작 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/vacation_start/`));
@@ -348,7 +348,7 @@ export default {
         }
       }
 
-      getbase().then((base) => {
+      getbase().then((base) => {                                                                  //비동기 처리로 얻은 배열 인원수 획득 및 리스트 획득
         get_wishdate_vacstart(base).then((arr) => {
           //console.log(arr)
           if (arr != null) {
@@ -364,7 +364,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_vacgoing(base = getbase()) {
+      async function get_wishdate_vacgoing(base = getbase()) {                                    //휴가 중 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/vacation_going/`));
@@ -398,7 +398,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_vacend(base = getbase()) {
+      async function get_wishdate_vacend(base = getbase()) {                                      //휴가 종료 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/vacation_end/`));
@@ -433,7 +433,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_outing(base = getbase()) {
+      async function get_wishdate_outing(base = getbase()) {                              //외출 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/outing/`));
@@ -468,7 +468,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_staystart(base = getbase()) {
+      async function get_wishdate_staystart(base = getbase()) {                             //외박 시작 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/stayovn_start/`));
@@ -503,7 +503,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_stayend(base = getbase()) {
+      async function get_wishdate_stayend(base = getbase()) {                               //외박 종료 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/stayovn_end/`));
@@ -538,7 +538,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_etc(base = getbase()) {
+      async function get_wishdate_etc(base = getbase()) {                             //기타 출타 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/etc/`));
@@ -573,7 +573,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_totalnum(base = getbase()) {
+      async function get_totalnum(base = getbase()) {                             //총원 수 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/byuser/`));
@@ -605,15 +605,15 @@ export default {
           this.total_num = total.length
         })
       })
-      
-      setTimeout(() => this.out_num = this.value_outing + this.value_stayovn_start + this.value_stayovn_end +
-        this.value_vacation_start + this.value_vacation_going + this.value_vacation_end + this.value_etc, 800)
-      setTimeout(() => console.log("열외" + this.out_num), 810 )
-      setTimeout(() => this.current_num = this.total_num - this.out_num, 810)
-      setTimeout(() => console.log("현재원" + this.current_num), 820 )
-      setTimeout(() => this.max_component_key += 1, 820)
-      setTimeout(() => this.date_component_key += 1, 870)
-      setTimeout(() => this.changed_date = wishdate, 900)
+                                                                                                                    //열외, 총원, 상단 표시 날짜 변경을 위한 시간 지연 메소드
+      setTimeout(() => this.out_num = this.value_outing + this.value_stayovn_start + this.value_stayovn_end +                       
+        this.value_vacation_start + this.value_vacation_going + this.value_vacation_end + this.value_etc, 900)
+      setTimeout(() => console.log("열외" + this.out_num), 910 )
+      setTimeout(() => this.current_num = this.total_num - this.out_num, 910)
+      setTimeout(() => console.log("현재원" + this.current_num), 920 )
+      setTimeout(() => this.max_component_key += 1, 920)
+      setTimeout(() => this.date_component_key += 1, 970)
+      setTimeout(() => this.changed_date = wishdate, 1000)
   },
 
   props: {
@@ -625,7 +625,7 @@ export default {
       return value;
     },
 
-    setDate() {
+    setDate() {                                                                     //데이트 피커로 얻은 날짜로 해당 날짜의 출타 인원 조회하는 메소드
       var uid = (firebase.auth().currentUser.uid)
       var todate = this.wishdate
       async function getbase() {
@@ -645,7 +645,7 @@ export default {
         }
       }
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_vacstart(base = getbase()) {
+      async function get_wishdate_vacstart(base = getbase()) {                    //휴가 시작 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_start/`));
@@ -679,7 +679,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_vacgoing(base = getbase()) {
+      async function get_wishdate_vacgoing(base = getbase()) {                            //휴가 중 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_going/`));
@@ -713,7 +713,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_vacend(base = getbase()) {
+      async function get_wishdate_vacend(base = getbase()) {                  //휴가 복귀 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/vacation_end/`));
@@ -748,7 +748,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_outing(base = getbase()) {
+      async function get_wishdate_outing(base = getbase()) {                //외출 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/outing/`));
@@ -783,7 +783,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_staystart(base = getbase()) {
+      async function get_wishdate_staystart(base = getbase()) {               //외박 출발 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_start/`));
@@ -818,7 +818,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_stayend(base = getbase()) {
+      async function get_wishdate_stayend(base = getbase()) {             //외박 복귀 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/stayovn_end/`));
@@ -853,7 +853,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_wishdate_etc(base = getbase()) {
+      async function get_wishdate_etc(base = getbase()) {                   //기타 출타 인원 배열 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${todate}/etc/`));
@@ -887,7 +887,7 @@ export default {
         })
       })
       ////////////////////////////////////////////////////////////
-      async function get_totalnum(base = getbase()) {
+      async function get_totalnum(base = getbase()) {                   //총원 수 획득
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/byuser/`));
@@ -917,7 +917,7 @@ export default {
           
           this.total_num = total.length
         })
-      })
+      })                                                                                                        //열외, 총원, 상단 조회 날짜 출력을 위한 작동지연함수
       setTimeout(() => this.out_num = this.value_outing + this.value_stayovn_start + this.value_stayovn_end +
         this.value_vacation_start + this.value_vacation_going + this.value_vacation_end + this.value_etc, 400)
       setTimeout(() => this.current_num = this.total_num - this.out_num, 410)

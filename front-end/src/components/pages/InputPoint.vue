@@ -1,5 +1,5 @@
-<template>
-  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>
+<template>                                                                                                <!-- 용사 상점 등록 페이지 -->
+  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>                                              <!--계정레벨마다 헤더를 상이하게 보이기 위한 if문-->
   <div v-if="level=='admin'"> <AppHeader-admin /> </div>
   <div v-if="level=='officer'"> <AppHeader /> </div>
   <div class="container-fluid col-8">
@@ -14,7 +14,7 @@
           <table>
             <thead>
               <tr>
-                <!-- <th class="index">순서</th> -->
+                <!-- <th class="index">순서</th> -->                                                        <!--상점 입력 창의 상단 기준-->
                 <th>성명</th>
                 <th class="rank">계급</th>
                 <th class="number">군번</th>
@@ -26,12 +26,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(row, index) in rows" :key="index" v-if="level=='admin' || level=='officer'">
+              <tr v-for="(row, index) in rows" :key="index" v-if="level=='admin' || level=='officer'">    <!--계정레벨 인사간부, 간부만 입력할 수 있게 하는 if문-->
                 <!-- <td>
                   {{index+1}}
                 </td> -->
                 <th>
-                  <input class="form-control form-control-sm" v-model="name" type="text" ref="name">
+                  <input class="form-control form-control-sm" v-model="name" type="text" ref="name">       <!-- 상점 추가에 필요한 정보들을 입력-->
                 </th>
                 <th>
                   <b-form-select v-model="rank" :options="rank_options" size="sm"></b-form-select>
@@ -58,7 +58,7 @@
                 </th>
 
               </tr>
-              <tr v-for="item in point_list" v-bind:key="item" class="text-muted ms-2">
+              <tr v-for="item in point_list" v-bind:key="item" class="text-muted ms-2">                       <!-- 입력 창 하단에 표시되는 추가된 목록들-->
                 <td>
                   <c>{{item.name}}</c>
                 </td>
@@ -117,7 +117,7 @@ import 'firebase/compat/firestore';
 import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 export default {
   name: "InputPoint",
-  data() {
+  data() {                                                                                  // 상점입력페이지에 사용되는 변수들
     return {
       rows: [
         { name: "", rank: "", armynum: "", date: "", rule: "", point: 0, manager: "" }
@@ -147,7 +147,7 @@ export default {
     var uid = (firebase.auth().currentUser.uid)
       
 
-      async function getpromise() {
+      async function getpromise() {                                                       //상점을 입력받는 용사가 속한 부대의 번호를 조회
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
@@ -165,7 +165,7 @@ export default {
       }
 
 
-    async function get_pointarr(base = getpromise()) {
+    async function get_pointarr(base = getpromise()) {                                      //해당 부대에서 입력된 상점 추가 목록(배열)을 불러옴
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `base/${base}/dashboard/bypoint/`));
@@ -201,7 +201,7 @@ export default {
   created(){
     var uid = (firebase.auth().currentUser.uid)
     
-    async function getlevelpromise() {
+    async function getlevelpromise() {                                                            //계정 레벨에 따른 상단 헤더 표시 상이를 위한 계정 레벨 조회
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/level`));
@@ -244,8 +244,8 @@ export default {
     },
 
 
-    inputpoint() {
-      if(!this.name) {
+    inputpoint() {                                                                            //상점 추가 함수
+      if(!this.name) {                                                                        //각 정보들이 입력되지 않으면 상점 추가를 금지
         alert("입력된 이름이 없습니다.");
         return;
       }
@@ -274,7 +274,7 @@ export default {
       var uid = (firebase.auth().currentUser.uid)
       
 
-      async function getpromise() {
+      async function getpromise() {                                                   // 사용자의 부대 번호를 조회
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
@@ -293,7 +293,7 @@ export default {
 
       getpromise().then((base) => {
         
-        var today = new Date();
+        var today = new Date();                                     
 
         set(ref(getDatabase(), 'base/' + base + '/dashboard/bypoint/' + 
         date.getFullYear() + ':' + (date.getMonth() + 1) + ':' + date.getDate() + 
@@ -305,7 +305,7 @@ export default {
           rule : this.rule,
           point : this.point,
           manager : this.manager,
-        })
+        })                                                                                    //입력된 상점 이력을 부대 상점 부여 이력에 저장
 
         set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/point/' + 
         date.getFullYear() + ':' + (date.getMonth() + 1) + ':' + date.getDate() + 
@@ -317,12 +317,12 @@ export default {
           rule : this.rule,
           point : this.point,
           manager : this.manager,
-        })
+        })                                                                                    //입력된 상점 이력을 개인 상점 부여 이력에 저장
 
 
       })
       alert('상점 입력 완료!')
-      this.$router.go();
+      this.$router.go();                                                                      //성공적으로 상점을 입력하면 페이지 리로드
 
     },
 

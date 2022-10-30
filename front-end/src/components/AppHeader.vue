@@ -1,4 +1,4 @@
-<template>
+<template>                                                                          <!--계정레벨 간부에게 표시되는 헤더-->
   <header>
     <nav class="navbar navbar-expand navbar-dark bg-dark py-3 px-4">
       <a class="navbar-brand" href="#">
@@ -16,12 +16,12 @@
             <router-link to="/inputpoint" class="a nav-link">상점입력/조회</router-link>
           </li>
         </ul>
-        <div class="Header-item position-relative">
+        <div class="Header-item position-relative">               <!--접속한 계정의 부대번호, 이름, 계정레벨 표시-->
           <b class="grey"> {{base}} </b>
           <b class="grey"> {{name}} </b>
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
           <b-badge variant="primary">간부</b-badge>   
-          <a v-on:click="logout" class="header-button ms-4">로그아웃</a>   
+          <a v-on:click="logout" class="header-button ms-4">로그아웃</a>   <!--로그아웃 버튼-->
         </div>
       </div>
     </nav>
@@ -45,7 +45,7 @@ export default {
   created() {
     var uid = (firebase.auth().currentUser.uid)
 
-    async function getbasepromise() {
+    async function getbasepromise() {                                   //현 접속 계정의 부대번호 조회
       try {
         const db = ref(getDatabase())
         const snapshot = await get(child(db, `user/${uid}/base`));
@@ -68,7 +68,7 @@ export default {
     })
 
 
-    async function getnamepromise() {
+    async function getnamepromise() {                                 //현 접속 계정의 이름 조회
       try {
         const db = ref(getDatabase())
         const snapshot = await get(child(db, `user/${uid}/name`));
@@ -91,9 +91,9 @@ export default {
     })
   },
   methods: {
-    logout: function(){
+    logout: function(){                                               //로그아웃 함수
       firebase.auth().signOut().then(() => {
-        this.$router.replace('/')
+        this.$router.replace('/')                                      //로그아웃 시 로그인 페이지로 이동
       })
     }
   }

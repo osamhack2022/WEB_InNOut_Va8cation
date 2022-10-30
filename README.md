@@ -26,11 +26,11 @@
 1. 당직근무자가 부대의 출타현황을 한눈에 알아보기 쉬운 서비스를 제작.
 2. 출타정보와 상점부여기록을 DB에 정교하게 저장하여 쉽게 조회할 수 있는 서비스를 제작.
 
-## 🖥 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
+## 🖥 지원 브라우저 안내 (Supproted Browsers)
 - Internet Explorer 8 이상 버전(Internet Explorer 11 제외)
 - ECMAScript5 지원 브라우저(ex. Firefox, Chrome, Safari)
 
-## 📘 기술 스택 (Technique Used) 
+## 📘 기술 스택 (Tech Stack) 
 
 ### DB
 <img src="https://img.shields.io/badge/firebase-FFFFFF?style=for-the-badge&logo=firebase&logoColor=orange"/>
@@ -140,7 +140,7 @@ _IN&OUT 서비스는 계정레벨, 부대번호, 대대번호를 식별하기 �
 ### **Team 🏖Va8cation🏖**
 ### 👤 팀원 소개
 #### 팀장 | Lee Dong Hyeop([labyrinth03](https://github.com/labyrinth03)) 
-- Team leader, DB
+- Team leader, Front-end, DB
 - Contact : (leedong1003@naver.com)
 #### 팀원 | Moon Gyu Seong([Betadoggy](https://github.com/Betadoggy))
 - Front-end, Design

@@ -1,4 +1,4 @@
-<template>
+<template>                                                                                  <!--회원가입 약관동의 페이지-->
   <div class="text-center pt-5 pb-4">
     <a href="#">
       <img src="@/assets/images/logo_32_blue.svg" width="64" height="64" alt="">
@@ -15,9 +15,9 @@
         <form class>
           <div class="form-group mb-4">
             <label class="el-checkbox">
-              <input type="checkbox" class="checkbox-inner" v-model="checkall" name="check" v-on:click="checkall" />
+              <input type="checkbox" class="checkbox-inner" v-model="checkall" name="check" v-on:click="checkall" />        <!-- 모두 동의 함수-->
               <!--<label for="checkbox">{{ checked }}</label>-->
-              <label for="exampleInputEmail1">이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</label>
+              <label for="exampleInputEmail1">이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</label>                        <!-- 약관들-->
             </label>
             <section class="group">
               <h6><b>이용약관</b></h6>
@@ -259,8 +259,8 @@
             <span class="text-muted"></span>
           </div>
           <div class="d-flex">
-            <router-link to="/" class="btn btn-secondary btn-block"><b>취소</b></router-link>
-            <button class="btn btn-primary btn-block ms-2" v-on:click="checklist"><b>다음</b></button>
+            <router-link to="/" class="btn btn-secondary btn-block"><b>취소</b></router-link>             <!-- 취소를 누르면 로그인 페이지로-->
+            <button class="btn btn-primary btn-block ms-2" v-on:click="checklist"><b>다음</b></button>   <!-- 다음을 누르면 회원 가입 정보 입력 페이지로-->
           </div>
         </form>
         
@@ -272,32 +272,24 @@
 <script>
 export default {
   name: "joinPage",
-  data() {
+  data() {                                                                                                // 약관 동의 유무 변수
     return{
       check1: false,
       check2: false,
     }
   },
   methods:{
-    selectAll(selectAll)  {
-      const checkboxes 
-       = document.getElementsByName('check');
-  
-      checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked;
-      })
-    },
-    checklist(){
+    checklist(){                                                                                            //전체 동의 됐을 경우 회원가입 정보 입력 페이지로 이동
       if(this.check1 == true && this.check2 == true){
         this.$router.push("/joininfo")
       }
-      else{
+      else{                                                                                                 //하나라도 동의하지 않으면 이동 불가
         alert("모든 항목에 동의하셔야 합니다.")
       }
     }
   },
   computed: {
-    checkall: {
+    checkall: {                                                                                             //전체 체크 함수
       get: function() {
         return this.check1 + ',' + this.check2
       },

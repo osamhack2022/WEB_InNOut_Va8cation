@@ -1,5 +1,5 @@
-<template>
-  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>
+<template>                                                                                                   <!-- 출타 정보 입력 페이지-->
+  <div v-if="level=='soldier'"> <AppHeader-soldier /> </div>                                                <!-- 계정 레벨에 따른 상단 표시 헤더 상이를 위한 if 문-->
   <div v-if="level=='admin'"> <AppHeader-admin /> </div>
   <div v-if="level=='officer'"> <AppHeader /> </div>
   <div class="container-fluid col-8">
@@ -9,12 +9,12 @@
           <b>출타입력</b>
         </h1>
       </div>
-      <b-card class="shadow my-4" v-if="level=='admin' || level=='officer'" >
+      <b-card class="shadow my-4" v-if="level=='admin' || level=='officer'" >                                 <!--계정 레벨이 인사간부 혹은 간부가 아니면 출타 입력을 막음-->
         <div class="container-fluid p-0 d-flex justify-content-between">
           <table>
             <thead>
               <tr>
-                <!-- <th class="index">순서</th> -->
+                <!-- <th class="index">순서</th> -->                                                            <!-- 출타 입력에 필요한 정보들 기준-->
                 <th class="name">성명</th>
                 <th class="rank">계급</th>
                 <th class="number">군번</th>
@@ -25,7 +25,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(row, index) in rows" :key="index">
+              <tr v-for="(row, index) in rows" :key="index">                                                      <!-- 출타 정보 입력 구간-->
                 <!-- <td>
                   {{index+1}}
                 </td> -->
@@ -69,7 +69,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 
-        function to_date(date_str)
+        function to_date(date_str)                                              // yyyymmdd 형식을 date형식으로 변환
       {
         var yyyyMMdd = String(date_str);
         var sYear = yyyyMMdd.substring(0,4);
@@ -79,17 +79,17 @@ import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
         return new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
       }
 
-        function to_date2(date_str) // yyyy-mm-dd -> date()
+        function to_date2(date_str)                      // yyyy-mm-dd 형식을 date형식으로 변환
       {
         var yyyyMMdd = String(date_str);
         var sYear = yyyyMMdd.substring(0,4);
         var sMonth = yyyyMMdd.substring(5,7);
         var sDate = yyyyMMdd.substring(8,10);
 
-        //alert("sYear :"+sYear +"   sMonth :"+sMonth + "   sDate :"+sDate);
+        
         return new Date(Number(sYear), Number(sMonth)-1, Number(sDate));
       }
-      function between_date(date1, date2)
+      function between_date(date1, date2)                                       // 입력된 두 date 값의 차이를 구함
       {   
         var y1970 = new Date(1970, 0, 1).getTime();
         var time1 = null;
@@ -105,11 +105,11 @@ import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
         else
             time2 = to_date(date2).getTime() - y1970;
 
-        var per_day = 1000 * 60 * 60 * 24;              // 1일 밀리초
+        var per_day = 1000 * 60 * 60 * 24;              
 
         return Math.floor(time1/per_day) - Math.floor(time2/per_day);
       }
-      function get_date_str(date)//Date -> yyyy-mm-dd trans
+      function get_date_str(date)                                             //date값을 yyyy-mm-dd로 변환
       {
         var sYear = date.getFullYear();
         var sMonth = date.getMonth() + 1;
@@ -119,7 +119,7 @@ import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
         sDate  = sDate > 9 ? sDate : "0" + sDate;
         return sYear +'-'+ sMonth +'-'+ sDate;
       }
-      function get_tomorrow(date, num)
+      function get_tomorrow(date, num)                                        //date 값의 내일 date값을 반환
       {
         var newdate = new Date(date.getFullYear(), date.getMonth(), date.getDate())
         newdate.setDate(newdate.getDate() + num)
@@ -129,7 +129,7 @@ import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 
 export default {
   name: "InputPoint",
-  data() {
+  data() {                                            // 해당페이지에 사용되는 변수들
     return {
       rows: [
         {name: "", rank: "", armynum: "", outtype: "", outdate: "", indate: ""}
@@ -153,7 +153,7 @@ export default {
   created(){
     var uid = (firebase.auth().currentUser.uid)
     
-    async function getlevelpromise() {
+    async function getlevelpromise() {                     // 상단 헤더 표시 상이를 위한 계정 레벨 획득 메소드
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/level`));
@@ -187,8 +187,8 @@ export default {
       this.rows.splice(index,1)
     },
     
-    inputvacation() {
-      if(!this.name) {
+    inputvacation() {                                               //휴가 입력 함수
+      if(!this.name) {                                              //각 항목 중 입력되지 않은 항목이 있으면 휴가 입력 불가
         alert("입력된 이름이 없습니다.");
         return;
       }
@@ -217,7 +217,7 @@ export default {
       var uid = (firebase.auth().currentUser.uid)
       
 
-      async function getpromise() {
+      async function getpromise() {                                             // 사용자의 부대 db에 접근하기 위해 사용자의 부대 번호 조회
         try{
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
@@ -235,7 +235,7 @@ export default {
       }
 
       getpromise().then((base) => {
-        
+                                                                                    //출타 등록 현황을 개인 db에 저장
         set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/outstatus/' + this.outdate + '~' + this.indate), {
           name : this.name,
           rank : this.rank,
@@ -254,7 +254,7 @@ export default {
 
 
 
-        if(this.outtype == 'outing'){
+        if(this.outtype == 'outing'){                                                                                         //각 출타 현황별로 각 일자의 db에 분류하여 저장
           set(ref(getDatabase(), 'base/' + base + '/dashboard/bydate/' + (this.outdate) +'/outing/' + this.armynum), {
           name : this.name,
           rank : this.rank
@@ -299,7 +299,7 @@ export default {
 
       })
       alert('출타 입력 완료!')
-      this.$router.go();
+      this.$router.go();                                                                          //출타 입력이 완료되면 페이지를 리로드
 
     }
   },

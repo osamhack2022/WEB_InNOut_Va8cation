@@ -1,4 +1,4 @@
-<template>
+<template>                                                                                        <!--회원가입 정보 입력 페이지-->
   <div class="text-center pt-5 pb-4">
     <a href="#">
       <img src="@/assets/images/logo_32_blue.svg" width="64" height="64" alt="">
@@ -13,7 +13,7 @@
       </div>
       <div class="form mt-4 p-4">
         
-          <div class="form-group">
+          <div class="form-group">                                                                  <!-- 회원가입에 필요한 각각의 정보 입력 구간-->
             <label for="InputEmail"><b>이메일</b></label>
             <input type="text" v-model="email" class="form-control" id="InputEmail" placeholder="이메일 입력">
           </div>
@@ -41,8 +41,8 @@
 
           <div class="d-flex">
             <!-- <button type="submit" class="btn btn-secondary btn-block"><b>취소</b></button> -->
-            <router-link to="/join" class="btn btn-secondary btn-block"><b>취소</b></router-link>
-            <button type="submit" v-on:click="signUp" class="btn btn-primary btn-block ms-2"><b>가입</b></button>
+            <router-link to="/join" class="btn btn-secondary btn-block"><b>취소</b></router-link>                 <!-- 취소하면 이전 약관동의 페이지로-->
+            <button type="submit" v-on:click="signUp" class="btn btn-primary btn-block ms-2"><b>가입</b></button> <!-- 가입을 누르면 가입 함수 실행-->
           </div>
         
       </div>
@@ -60,7 +60,7 @@ import { get } from 'lodash';
 export default {
 
   name: "signUp",
-  data() {
+  data() {                                        //해당 페이지에 사용되는 변수
     return {
       email:'',
       password:'',
@@ -73,10 +73,10 @@ export default {
 
 
 methods: {
-    signUp() {
+    signUp() {                                      //회원가입 함수
       console.log("Signup", this.email, this.password, this.confirm, this.code, this.name);
 
-      if(!this.name) {
+      if(!this.name) {                                                                          //회원가입에 필요한 정보들 중 어떠한 것이라도 누락되면 가입 불가 조치
         alert("입력된 이름이 없습니다.");
         return;
       }
@@ -106,7 +106,7 @@ methods: {
         return;
       }
  
-      if(this.password != this.confirm) {
+      if(this.password != this.confirm) {                                                               //비밀번호와 비밀번호 확인이 일치하지 않으면 함수 종료
         alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         return;
       }
@@ -115,10 +115,10 @@ methods: {
       var battalion = ''
 
 
-      // 확인코드와 해당 코드에 할당되는 계정레벨, 부대번호, 대대번호를 하단에 작성해주시면 됩니다.
+      // 확인코드와 해당 코드에 할당되는 계정레벨, 부대번호, 대대번호를 하단에 if문으로 작성해주시면 됩니다.
 
       
-        if(this.code == "5678admin%"){
+        if(this.code == "5678admin%"){                                        //확인코드로 계정레벨, 부대번호, 대대번호를 정하는 구간
           alert("관리자 계정입니다.")
           type = 'admin'
           base = '5678'
@@ -145,13 +145,13 @@ methods: {
           battalion = '2BN'
         }
         else{
-          alert("유효하지 않은 코드입니다.")
+          alert("유효하지 않은 코드입니다.")                                        //유효하지 않은코드일 경우 가입 불가
           return;
         }      
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)   //파이어베이스에 이메일과 비밀번호로 가입정보를 저장하는 함수
       .then((userCredential)=> {
         const db = getDatabase()
-        set(ref(db, 'user/'+ userCredential.user.uid), {
+        set(ref(db, 'user/'+ userCredential.user.uid), {                          //파이어베이스 실시간데이터베이스에 '부모값을 사용자의 uid, 자식값을 가입 필수 정보'를 등록
           name : this.name,
           email : this.email,
           base : base,
@@ -161,9 +161,9 @@ methods: {
         })
 
         alert('가입 완료');
-        this.$router.push("/")
+        this.$router.push("/")                                                    //가입 완료 시 로그인 페이지로 이동
       })
-      .catch((error)=> {
+      .catch((error)=> {                                                          //회원 가입 오류 처리
        // Handle Errors here.
        var errorCode = error.code;
        var errorMessage = error.message;
