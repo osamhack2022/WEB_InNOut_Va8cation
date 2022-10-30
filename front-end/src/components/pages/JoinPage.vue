@@ -15,7 +15,7 @@
         <form class>
           <div class="form-group mb-4">
             <label class="el-checkbox">
-              <input type="checkbox" class="checkbox-inner" v-model="selectall" name="check" v-on:click="selectAll(this)" />
+              <input type="checkbox" class="checkbox-inner" v-model="checkall" name="check" v-on:click="checkall" />
               <!--<label for="checkbox">{{ checked }}</label>-->
               <label for="exampleInputEmail1">이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</label>
             </label>
@@ -148,7 +148,7 @@
                 <h6>부칙</h6>
                 <p>본 약관은 2022년 10월 18일부터 적용한다.</p>
               </div>
-              <input type="checkbox" class="checkbox-inner" v-model="first_agree" true-value="agree" false-value="disagree" name="check"  />
+              <input type="checkbox" class="checkbox-inner" v-model="check1" name="check"  />
               <!--<label for="checkbox">{{ checked }}</label>-->
               <label for="exampleInputEmail1">이용약관에 모두 동의합니다.</label>
             </section>
@@ -252,7 +252,7 @@
                     사이트에 링크되어 있는 웹사이트들이 개인정보를 수집하는 행위에 대해서는 본 "개인정보취급방침"이 적용되지 않음을 알려 드립니다.
                   </p>
               </div>
-              <input type="checkbox" class="checkbox-inner" v-model="second_agree" true-value="agree" false-value="disagree" name="check"  />
+              <input type="checkbox" class="checkbox-inner" v-model="check2" name="check"  />
               <!--<label for="checkbox">{{ checked }}</label>-->
               <label for="exampleInputEmail1">개인정보 수집 및 이용에 대한 안내에 동의합니다.</label>
             </section>
@@ -260,7 +260,7 @@
           </div>
           <div class="d-flex">
             <router-link to="/" class="btn btn-secondary btn-block"><b>취소</b></router-link>
-            <router-link to="/joininfo" class="btn btn-primary btn-block ms-2"><b>다음</b></router-link>
+            <button class="btn btn-primary btn-block ms-2" v-on:click="checklist"><b>다음</b></button>
           </div>
         </form>
         
@@ -274,9 +274,8 @@ export default {
   name: "joinPage",
   data() {
     return{
-      selectall: false,
-      first_agree: false,
-      second_agree: false,
+      check1: false,
+      check2: false,
     }
   },
   methods:{
@@ -287,6 +286,31 @@ export default {
       checkboxes.forEach((checkbox) => {
         checkbox.checked = selectAll.checked;
       })
+    },
+    checklist(){
+      if(this.check1 == true && this.check2 == true){
+        this.$router.push("/joininfo")
+      }
+      else{
+        alert("모든 항목에 동의하셔야 합니다.")
+      }
+    }
+  },
+  computed: {
+    checkall: {
+      get: function() {
+        return this.check1 + ',' + this.check2
+      },
+      set: function(e) {
+        if(e===true) {
+          this.check1 = true
+          this.check2 = true
+        }
+        else{
+          this.check1 = false
+          this.check2 = false
+        }
+      }
     }
   }
 };

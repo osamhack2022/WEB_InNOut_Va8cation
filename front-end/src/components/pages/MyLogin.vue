@@ -16,16 +16,15 @@
           <div class="form-group">
             <label for="exampleInputEmail1"><b>아이디</b></label>
             <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              placeholder="username">
+              placeholder="e-mail">
           </div>
           <div class="form-group">
             <div class="d-flex justify-content-between">
               <label for="exampleInputPassword1"><b>비밀번호</b></label>
-              <router-link to="/passwordreset" class="a">비밀번호 찾기</router-link>
+              <router-link to="/passwordreset" class="a">비밀번호 초기화</router-link>
             </div>
             <input type="password" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="password">
           </div>
-          <!-- <button type="submit" class="btn btn-primary btn-block"><b>로그인</b></button> -->
           <router-link to="/" v-on:click="signIn" class="btn btn-primary btn-block">로그인</router-link>
         </form>
       </div>
@@ -68,7 +67,7 @@
             var errorMessage = error.message;
 
             if (errorCode === 'auth/wrong-password') {
-              alert('Wrong password.');
+              alert('비밀번호가 일치하지 않습니다.');
               
             } 
             alert(errorMessage);

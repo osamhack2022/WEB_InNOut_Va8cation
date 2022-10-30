@@ -15,27 +15,27 @@
         
           <div class="form-group">
             <label for="InputEmail"><b>이메일</b></label>
-            <input type="text" v-model="email" class="form-control" id="InputEmail">
+            <input type="text" v-model="email" class="form-control" id="InputEmail" placeholder="이메일 입력">
           </div>
           <div class="form-group">
             <label for="InputPassword"><b>비밀번호</b></label>
-            <input type="password" v-model="password" class="form-control" id="InputPassword">
+            <input type="password" v-model="password" class="form-control" id="InputPassword" placeholder="최소 6자리 이상 입력">
           </div>
           <div class="form-group">
             <label for="InputPassword2"><b>비밀번호 확인</b></label>
-            <input type="password" v-model="confirm" class="form-control" id="InputPassword2">
+            <input type="password" v-model="confirm" class="form-control" id="InputPassword2" placeholder="최소 6자리 이상 입력">
           </div>
           <div class="form-group">
             <label for="InputName"><b>성명</b></label>
-            <input type="name" v-model="name" class="form-control" id="InputName">
+            <input type="name" v-model="name" class="form-control" id="InputName" placeholder="성명 입력">
           </div>
           <div class="form-group">
             <label for="InputName"><b>군번</b></label>
-            <input type="name" v-model="solnum" class="form-control" id="InputName">
+            <input type="name" v-model="solnum" class="form-control" id="InputName" placeholder="군번 입력">
           </div>
           <div class="form-group">
             <label for="InputAuthcode"><b>확인코드</b></label>
-            <input type="name" v-model="code" class="form-control" id="InputAuthcode">
+            <input type="name" v-model="code" class="form-control" id="InputAuthcode" placeholder="부대에서 발급받은 코드 입력">
           </div>
 
 
@@ -113,6 +113,11 @@ methods: {
       var type = ''
       var base = ''
       var battalion = ''
+
+
+      // 확인코드와 해당 코드에 할당되는 계정레벨, 부대번호, 대대번호를 하단에 작성해주시면 됩니다.
+
+      
         if(this.code == "5678admin%"){
           alert("관리자 계정입니다.")
           type = 'admin'

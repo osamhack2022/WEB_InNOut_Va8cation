@@ -13,12 +13,17 @@
     <main>
       <div>
         <div class="headline p-4">
-          <h1>
+          <h1 :key="date_component_key">
             <Base v-model="basenum">
             </Base>
             <div class="result">
               <b>{{ basenum }}</b>
             </div>
+            <Base v-model="changed_date" :key="date_component_key">
+            </Base>
+            <div class="result">
+              <b>{{ changed_date }}</b>
+            </div>            
           </h1>
 
           <div class="d-flex justify-content-center align-items-center">
@@ -83,8 +88,10 @@
               </b-progress-bar>
               <b-progress-bar :style="{ 'background-color': '#6046E8' }" :value="value_stayovn_end">외박복귀
               </b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#0ACF83' }" :value="value_outing">외출</b-progress-bar>
-              <b-progress-bar :style="{ 'background-color': '#57606A' }" :value="value_etc">기타</b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#0ACF83' }" :value="value_outing">외출
+              </b-progress-bar>
+              <b-progress-bar :style="{ 'background-color': '#57606A' }" :value="value_etc">기타
+              </b-progress-bar>
             </b-progress>
             <div class="px-0 pt-4 d-flex flex-column">
               <div class="mr-3">
@@ -197,7 +204,7 @@ export default {
   },
   data() {
     return {
-      wishdate: '',
+      wishdate: null,
       value_outing: 0,
       value_stayovn_start: 0,
       value_stayovn_end: 0,
@@ -232,6 +239,9 @@ export default {
       outing_list: [],
       // 기타
       etc_list: [],
+      todate: '',
+      date_component_key: 0,
+      changed_date: '',
     };
   },
   created() {
@@ -258,6 +268,12 @@ export default {
       
       this.level = level
     })
+
+
+  
+
+
+
   },
   mounted() {
     var uid = (firebase.auth().currentUser.uid)
@@ -280,10 +296,324 @@ export default {
     }
 
     getpromise().then((base) => {
-      
       this.basenum = base + '부대'
     })
 
+
+    //오늘날짜 구하는 메소드
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var date = today.getDate();
+
+    var wishdate = year + '-' + month + '-' + date
+    
+
+    async function getbase() {
+      try {
+        const db = ref(getDatabase())
+        const snapshot = await get(child(db, `user/${uid}/base`));
+        if (snapshot.exists()) {
+          //console.log(snapshot.val());
+          const base = snapshot.val()
+          return base;
+        }
+        else {
+          console.log("No data available");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+
+
+
+
+    async function get_wishdate_vacstart(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/vacation_start/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_vacstart(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var vacstart = Object.values(arr)
+          }
+          else {
+            var vacstart = []
+          }
+          
+          this.vacation_start_list = vacstart
+          this.value_vacation_start = vacstart.length
+          this.sum_value += vacstart.length
+        })
+      })
+      ////////////////////////////////////////////////////////////
+      async function get_wishdate_vacgoing(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/vacation_going/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_vacgoing(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var vacgoing = Object.values(arr)
+          }
+          else {
+            var vacgoing = []
+          }
+          
+          this.vacation_going_list = vacgoing
+          this.value_vacation_going = vacgoing.length
+          this.sum_value += vacgoing.length
+        })
+      })
+      ////////////////////////////////////////////////////////////
+      async function get_wishdate_vacend(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/vacation_end/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_vacend(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var vacend = Object.values(arr)
+          }
+          else {
+            var vacend = []
+          }
+
+          
+          this.vacation_end_list = vacend
+          this.value_vacation_end = vacend.length
+          this.sum_value += vacend.length
+        })
+      })
+      ////////////////////////////////////////////////////////////
+      async function get_wishdate_outing(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/outing/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_outing(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var outing = Object.values(arr)
+          }
+          else {
+            var outing = []
+          }
+
+          
+          this.outing_list = outing
+          this.value_outing = outing.length
+          this.sum_value += outing.length
+        })
+      })
+      ////////////////////////////////////////////////////////////
+      async function get_wishdate_staystart(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/stayovn_start/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_staystart(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var staystart = Object.values(arr)
+          }
+          else {
+            var staystart = []
+          }
+
+          
+          this.stayovn_start_list = staystart
+          this.value_stayovn_start = staystart.length
+          this.sum_value += staystart.length
+        })
+      })
+      ////////////////////////////////////////////////////////////
+      async function get_wishdate_stayend(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/stayovn_end/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_stayend(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var stayend = Object.values(arr)
+          }
+          else {
+            var stayend = []
+          }
+
+          
+          this.stayovn_end_list = stayend
+          this.value_stayovn_end = stayend.length
+          this.sum_value += stayend.length
+        })
+      })
+      ////////////////////////////////////////////////////////////
+      async function get_wishdate_etc(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/dashboard/bydate/${wishdate}/etc/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_wishdate_etc(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var etc = Object.values(arr)
+            
+          }
+          else {
+            var etc = []
+          }
+          
+          this.etc_list = etc
+          this.value_etc = etc.length
+          this.sum_value += etc.length
+        })
+      })
+      ////////////////////////////////////////////////////////////
+      async function get_totalnum(base = getbase()) {
+        try {
+          const db = ref(getDatabase())
+          const snapshot = await get(child(db, `base/${base}/byuser/`));
+          
+          if (snapshot.exists()) {
+            //console.log(snapshot.val());
+            const arr = snapshot.val()
+            return arr;
+          }
+          else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      getbase().then((base) => {
+        get_totalnum(base).then((arr) => {
+          //console.log(arr)
+          if (arr != null) {
+            var total = Object.values(arr)
+            
+          }
+          else {
+            var total = []
+          }
+          
+          this.total_num = total.length
+        })
+      })
+      
+      setTimeout(() => this.out_num = this.value_outing + this.value_stayovn_start + this.value_stayovn_end +
+        this.value_vacation_start + this.value_vacation_going + this.value_vacation_end + this.value_etc, 800)
+      setTimeout(() => console.log("열외" + this.out_num), 810 )
+      setTimeout(() => this.current_num = this.total_num - this.out_num, 810)
+      setTimeout(() => console.log("현재원" + this.current_num), 820 )
+      setTimeout(() => this.max_component_key += 1, 820)
+      setTimeout(() => this.date_component_key += 1, 870)
+      setTimeout(() => this.changed_date = wishdate, 900)
   },
 
   props: {
@@ -592,7 +922,8 @@ export default {
         this.value_vacation_start + this.value_vacation_going + this.value_vacation_end + this.value_etc, 400)
       setTimeout(() => this.current_num = this.total_num - this.out_num, 410)
       setTimeout(() => this.max_component_key += 1, 420)
-
+      setTimeout(() => this.date_component_key += 1, 420)
+      setTimeout(() => this.changed_date = this.wishdate, 440)
     },
 
     onContext(ctx) {

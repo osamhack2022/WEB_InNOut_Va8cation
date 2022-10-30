@@ -20,6 +20,8 @@
           </li>
         </ul>
         <div class="Header-item position-relative">
+          <b class="grey"> {{base}} </b>
+          <b class="grey"> {{name}} </b>
           <b-avatar class="me-2" variant="secondary" size="2rem"></b-avatar>
           <b-badge variant="success">관리자</b-badge>
           <a v-on:click="logout" class="header-button ms-4">로그아웃</a>   
@@ -33,12 +35,64 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-  export default {
-    name: 'AppHeader-admin',
-    data(){
+import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
+export default {
+  name: 'AppHeader-admin',
+  data(){
+    return{
+      base:'',
+      name:''
+    }
 
-},
+  },
+  created() {
+    var uid = (firebase.auth().currentUser.uid)
 
+    async function getbasepromise() {
+      try {
+        const db = ref(getDatabase())
+        const snapshot = await get(child(db, `user/${uid}/base`));
+        if (snapshot.exists()) {
+          
+          const base = snapshot.val()
+          return base;
+        }
+        else {
+          console.log("No data available");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getbasepromise().then((base) => {
+      
+      this.base = base + '부대 '
+    })
+
+
+    async function getnamepromise() {
+      try {
+        const db = ref(getDatabase())
+        const snapshot = await get(child(db, `user/${uid}/name`));
+        if (snapshot.exists()) {
+          
+          const name = snapshot.val()
+          return name;
+        }
+        else {
+          console.log("No data available");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getnamepromise().then((name) => {
+      
+      this.name = name + '님 환영합니다.  '
+    })
+  },
 methods: {
   logout: function(){
     firebase.auth().signOut().then(() => {
@@ -49,7 +103,8 @@ methods: {
   };
 </script>
 
-<style scoped lang="scss">.header-button {
+<style scoped lang="scss">
+.header-button {
   color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
 }
@@ -57,5 +112,9 @@ methods: {
 .header-button:hover {
   color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
+}
+
+.grey{
+  color: rgba(255, 255, 255, 0.75);
 }
 </style>
