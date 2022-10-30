@@ -1,4 +1,4 @@
-
+![header](https://capsule-render.vercel.app/api?type=waving&color=#08C3FC&text=IN&OUT)
 
 # IN&OUT
 ![Logo](https://user-images.githubusercontent.com/55483479/192314612-2734729e-9ff9-4002-927f-2aeb55418a77.png)
@@ -24,6 +24,7 @@
 온라인 출타장병현황 ‘IN&OUT’를 기획하게 되었습니다.
 
 ### 프로젝트 개발 목표
+팀 Va8cation의 프로젝트 IN&OUT의 개발목표는 다음과 같습니다.
 
 
 ## 기능 설명
