@@ -27,7 +27,8 @@
 2. 출타정보와 상점부여기록을 DB에 정교하게 저장하여 쉽게 조회할 수 있는 서비스를 제작.
 
 ## 🖥 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
-
+- Internet Explorer 8 이상 버전(Internet Explorer 11 제외)
+- ECMAScript5 지원 브라우저
 
 ## 📘 기술 스택 (Technique Used) 
 
