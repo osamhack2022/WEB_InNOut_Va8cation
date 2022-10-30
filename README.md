@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=50:#08C3FC&text='IN&OUT')
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:#08C3FC&text='IN&OUT')
 
 # IN&OUT
 ![Logo](https://user-images.githubusercontent.com/55483479/192314612-2734729e-9ff9-4002-927f-2aeb55418a77.png)
