@@ -28,7 +28,7 @@
 
 ## 🖥 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
 - Internet Explorer 8 이상 버전(Internet Explorer 11 제외)
-- ECMAScript5 지원 브라우저
+- ECMAScript5 지원 브라우저(ex. Firefox, Chrome, Safari)
 
 ## 📘 기술 스택 (Technique Used) 
 
