@@ -23,7 +23,8 @@
 
 ### 프로젝트 개발 목표
 팀 Va8cation의 프로젝트 IN&OUT의 개발목표는 다음과 같습니다.
-
+1. 당직근무자가 부대의 출타현황을 한눈에 알아보기 쉬운 서비스를 제작.
+2. 출타정보와 상점부여기록을 DB에 정교하게 저장하여 쉽게 조회할 수 있는 서비스를 제작.
 
 ## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
 
@@ -39,7 +40,7 @@
 ### Design
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
-## 설치 안내 (Installation Process)
+## 설치 안내 (How to Install)
 ```
 $ git clone https://github.com/osamhack2022-v2/WEB_InNOut_Va8cation.git
 $ yarn or npm install
