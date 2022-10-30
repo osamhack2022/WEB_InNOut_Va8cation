@@ -21,8 +21,8 @@
             </div>
             <Base v-model="changed_date" :key="date_component_key">
             </Base>
-            <div class="result">
-              <b>{{ changed_date }}</b>
+            <div class="result text-muted mt-4">
+              <h4>{{ changed_date }}</h4>
             </div>            
           </h1>
 
