@@ -29,7 +29,7 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+const firebaseConfig = {                                                  //파이어베이스 db 설정을 위한 값 입력
   apiKey: "AIzaSyD5PQPd-5UQrD1_UhylsQihrJ7ajwLXM1Y",
   authDomain: "inandout-8434d.firebaseapp.com",
   databaseURL: "https://inandout-8434d-default-rtdb.firebaseio.com",

@@ -1,5 +1,5 @@
-<template>
-  <div v-if="level == 'soldier'">
+<template>                                                            <!--인사간부 계정 부대 환경설정 페이지-->
+  <div v-if="level == 'soldier'">                                     <!--계정 레벨 별 출력 헤더 상이를 위한 if문-->
     <AppHeader-soldier />
   </div>
   <div v-if="level == 'admin'">
@@ -23,7 +23,7 @@
           <table>
             <thead>
               <tr>
-                <!-- <th class="index">순서</th> -->
+                <!-- <th class="index">순서</th> -->                  <!--장병 정보 추가를 위한 입력값 기준-->
                 <th class="name">성명</th>
                 <th class="number">군번</th>
                 <th class="battalion">대대</th>
@@ -31,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(row, index) in rows" :key="index">
+              <tr v-for="(row, index) in rows" :key="index">                  <!--장병 정보 추가를 위한 입력 창-->
                 <!-- <td>
                   {{index+1}}
                 </td> -->
@@ -45,7 +45,7 @@
                   <input v-model="battalion" class="form-control form-control-sm" type="select" ref="battalion">
                 </td>
                 <td>
-                  <button class="btn btn-primary btn-sm" v-on:click="inputsoldier"><b>추가</b></button>
+                  <button class="btn btn-primary btn-sm" v-on:click="inputsoldier"><b>추가</b></button>   <!--장병 정보 추가 함수-->
                   <!-- <button class="btn btn-primary btn-sm" v-on:click="inputvacation" @click="addRow($index)"><b>추가</b></button> -->
                   <!-- <button class="btn btn-danger btn-sm" @click="removeRow($index)"><b>제거</b></button> -->
                 </td>
@@ -70,7 +70,7 @@ import { getDatabase, set, ref, get, child, onValue } from "firebase/database"
 
 export default {
   name: "Settings",
-  data() {
+  data() {                                              //환경설정에 사용되는 변수
     return {
       rows: [
         { name: "", armynum: "", battalion: "" }
@@ -81,7 +81,7 @@ export default {
   created() {
     var uid = (firebase.auth().currentUser.uid)
 
-    async function getlevelpromise() {
+    async function getlevelpromise() {                  //계정 레벨 조회
       try {
         const db = ref(getDatabase())
         const snapshot = await get(child(db, `user/${uid}/level`));
@@ -104,19 +104,19 @@ export default {
     })
   },
   methods: {
-    addRow: function (index) {
+    addRow: function (index) {                        //입력 창 열 추가(추후 구현 예정)
       try {
         this.rows.splice(index + 1, 0, {});
       } catch (e) {
         console.log(e);
       }
     },
-    removeRow: function (index) {
+    removeRow: function (index) {                     //입력 창 열 제거(추후 구현 예정)
       this.rows.splice(index, 1)
     },
 
-    inputsoldier() {
-      if (!this.name) {
+    inputsoldier() {                                  //장병 추가 함수
+      if (!this.name) {                               //입력되지 않은 값이 존재할 경우 함수 return
         alert("입력된 이름이 없습니다.");
         return;
       }
@@ -134,7 +134,7 @@ export default {
       var uid = (firebase.auth().currentUser.uid)
 
 
-      async function getpromise() {
+      async function getpromise() {                   //현재접속 계정 부대번호 조회
         try {
           const db = ref(getDatabase())
           const snapshot = await get(child(db, `user/${uid}/base`));
@@ -153,14 +153,14 @@ export default {
 
       getpromise().then((base) => {
         
-        set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/profile'), {
+        set(ref(getDatabase(), 'base/' + base + '/byuser/' + this.armynum + '/profile'), {        //해당 부대의 db에 장병 정보 추가
           name: this.name,
           armynum: this.armynum,
           battalion: this.battalion
         })
       })
       alert('장병 정보 입력 완료!')
-      this.$router.go();
+      this.$router.go();                                                                          //정보 입력 성공시 페이지 리로드
 
     }
   },
