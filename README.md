@@ -27,7 +27,8 @@
 2. 출타정보와 상점부여기록을 DB에 정교하게 저장하여 쉽게 조회할 수 있는 서비스를 제작.
 
 ## 🖥 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
-
+- Internet Explorer 8 이상 버전(Internet Explorer 11 제외)
+- ECMAScript5 지원 브라우저(ex. Firefox, Chrome, Safari)
 
 ## 📘 기술 스택 (Technique Used) 
 
@@ -145,5 +146,5 @@ _IN&OUT 서비스는 계정레벨, 부대번호, 대대번호를 식별하기 �
 - Front-end, Design
 - Contact : (mgs4786@naver.com)
 
-## 저작권 및 사용권 정보 (Copyleft / End User License)
+## 📚저작권 및 사용권 정보 (Copyleft / End User License)
 This project is licensed under the terms of the MIT license.
